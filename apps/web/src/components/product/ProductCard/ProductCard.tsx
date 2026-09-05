@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { clsx } from 'clsx'
 import styles from './ProductCard.module.css'
 import type { Product } from '../../../types'
@@ -14,6 +14,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, variant = 'grid' }: ProductCardProps) {
+  const navigate = useNavigate()
   const [expanded, setExpanded] = useState(false)
   const [imgError, setImgError] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null)
@@ -24,17 +25,17 @@ export function ProductCard({ product, variant = 'grid' }: ProductCardProps) {
   const handleClick = (e: React.MouseEvent) => {
     const isTouchDevice = window.matchMedia('(hover: none)').matches
     if (isTouchDevice) {
-      window.location.href = `/laptops/${product.slug}`
+      navigate(`/laptops/${product.slug}`)
       return
     }
     e.preventDefault()
-    window.location.href = `/laptops/${product.slug}`
+    navigate(`/laptops/${product.slug}`)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
-      window.location.href = `/laptops/${product.slug}`
+      navigate(`/laptops/${product.slug}`)
     }
   }
 

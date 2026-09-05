@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import styles from './Home.module.css'
 import { Button } from '../../components/ui/Button'
 import { ProductCard } from '../../components/product/ProductCard'
@@ -64,6 +64,7 @@ function ProofItem({ units, client, location, year }: ProofItemProps) {
 }
 
 export default function Home() {
+  const navigate = useNavigate()
   const statsRef = useRef<HTMLDivElement>(null)
   const [statsVisible, setStatsVisible] = useState(false)
 
@@ -98,10 +99,10 @@ export default function Home() {
               report. Buy with confidence, delivered to your door.
             </p>
             <div className={styles.heroCtas}>
-              <Button variant="primary" size="lg" onClick={() => window.location.href = '/laptops'}>
+              <Button variant="primary" size="lg" onClick={() => navigate('/laptops')}>
                 Browse laptops
               </Button>
-              <Button variant="ghost" size="lg" onClick={() => window.location.href = '/bulk'}>
+              <Button variant="ghost" size="lg" onClick={() => navigate('/bulk')}>
                 Bulk &amp; Govt enquiry
               </Button>
             </div>
@@ -285,7 +286,7 @@ export default function Home() {
             <ProofItem units={60} client="State Health &amp; Family Welfare" location="Raipur" year={2025} />
           </div>
           <div className={styles.proofCta}>
-            <Button variant="outline" onClick={() => window.location.href = '/government'}>
+            <Button variant="outline" onClick={() => navigate('/government')}>
               View government supply credentials
             </Button>
           </div>
