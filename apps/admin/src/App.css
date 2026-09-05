@@ -293,7 +293,8 @@ body {
   vertical-align: middle;
   overflow: visible;
   flex-shrink: 0;
-  transition: transform 0.2s ease;
+  color: #ef4444;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .door-panel {
@@ -307,6 +308,10 @@ body {
   border-color: #ef4444;
   color: #dc2626;
   box-shadow: 0 2px 10px rgba(239, 68, 68, 0.25);
+}
+
+.logout-btn:hover .door-icon {
+  color: #dc2626;
 }
 
 .logout-btn:hover .door-panel {
