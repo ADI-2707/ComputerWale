@@ -1,13 +1,14 @@
 .block {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: 3px;
 }
 
 .priceRow {
   display: flex;
-  align-items: baseline;
-  gap: var(--space-3);
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 28px;
   flex-wrap: wrap;
 }
 
@@ -38,15 +39,43 @@
   border-radius: var(--radius-pill);
 }
 
+.brandNewBadge {
+  font-size: 11px;
+  font-weight: var(--weight-bold);
+  color: #0284c7;
+  background: #e0f2fe;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(2, 132, 199, 0.25);
+  display: inline-flex;
+  align-items: center;
+}
+
+.subPriceRow {
+  display: flex;
+  align-items: center;
+  min-height: 18px;
+}
+
 .savings {
   font-size: var(--text-xs);
   color: var(--color-success);
   font-weight: var(--weight-medium);
   margin: 0;
+  line-height: 18px;
+}
+
+.verifiedPrice {
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+  font-weight: var(--weight-medium);
+  margin: 0;
+  line-height: 18px;
 }
 
 .emi {
   font-size: var(--text-xs);
   color: var(--color-graphite);
-  margin: var(--space-1) 0 0;
+  margin: 2px 0 0;
+  line-height: 16px;
 }

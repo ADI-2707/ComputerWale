@@ -20,16 +20,24 @@ export function PriceBlock({ mrp, price, condition, emiMonths = 12, size = 'md' 
     <div className={`${styles.block} ${styles[size]}`}>
       <div className={styles.priceRow}>
         <span className={styles.price}>{formatPrice(price)}</span>
-        {hasDiscount && (
+        {hasDiscount ? (
           <>
             <span className={styles.mrp}>{formatPrice(mrp)}</span>
             <span className={styles.discountBadge}>{discount}% off</span>
           </>
+        ) : (
+          <span className={styles.brandNewBadge}>Brand New · Sealed</span>
         )}
       </div>
-      {hasDiscount && (
-        <p className={styles.savings}>You save {formatPrice(savings)}</p>
-      )}
+
+      <div className={styles.subPriceRow}>
+        {hasDiscount ? (
+          <p className={styles.savings}>You save {formatPrice(savings)}</p>
+        ) : (
+          <p className={styles.verifiedPrice}>100% Genuine · 1 Yr Warranty</p>
+        )}
+      </div>
+
       <p className={styles.emi}>
         EMI from {formatPrice(emi)}/mo · No-cost EMI available
       </p>
