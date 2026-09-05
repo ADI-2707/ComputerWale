@@ -1,0 +1,73 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  border: var(--border-width) solid var(--color-line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  width: fit-content;
+}
+
+.btn {
+  width: 44px;
+  height: 44px;
+  background: var(--color-surface-alt);
+  border: none;
+  cursor: pointer;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--duration-base), color var(--duration-base);
+  flex-shrink: 0;
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--color-primary-tint);
+  color: var(--color-primary);
+}
+
+.btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.input {
+  width: 56px;
+  height: 44px;
+  border: none;
+  border-left: var(--border-width) solid var(--color-line);
+  border-right: var(--border-width) solid var(--color-line);
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+  background: var(--color-bg);
+  outline: none;
+  -moz-appearance: textfield;
+}
+
+.input::-webkit-inner-spin-button,
+.input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.bulkNote {
+  font-size: var(--text-sm);
+  color: var(--color-warning);
+  background: var(--color-warning-bg);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  margin: 0;
+  line-height: var(--leading-normal);
+  border: 1px solid rgba(200, 145, 43, 0.3);
+}
