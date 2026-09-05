@@ -1,6 +1,4 @@
-
 :root {
-  
   --blue-50:  #EEF1FD;   
   --blue-100: #DCE3FA;   
   --blue-200: #B9C7F5;   
@@ -19,15 +17,22 @@
   --color-primary-tint-strong:  var(--blue-100);   
   --color-primary-dark:         var(--blue-900);
 
+  --color-brand:                #E04B2B;
+  --color-brand-hover:          #C23E20;
+  --color-brand-light:          #FF8A65;
+  --color-brand-faint:          #FDF2F0;
+
   --color-seal:       #C8912B;
   --color-seal-dark:  #9E721E;
   --color-seal-tint:  #FBF1DF;
 
-  --color-bg:           #FFFFFF;   
-  --color-surface-alt:  #F7F8FC;   
-  --color-line:         #E4E8F4;   
-  --color-graphite:     #4B5568;   
-  --color-ink:          #10162B;   
+  --color-bg:             #FFFFFF;
+  --color-surface:        #FFFFFF;
+  --color-surface-alt:    #F7F8FC;
+  --color-surface-subtle: #F8FAFC;
+  --color-line:           #E4E8F4;
+  --color-graphite:       #4B5568;
+  --color-ink:            #10162B;
 
   --color-success:     #1F8A5B;
   --color-success-bg:  #E7F5EE;

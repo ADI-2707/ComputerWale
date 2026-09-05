@@ -41,8 +41,10 @@ export default function ProductDetail() {
     <div className={styles.container}>
       {}
       {addedToast && (
-        <div className={styles.toast}>
-          <span>✓ Added {quantity} item(s) to cart!</span>
+        <div className={styles.toast} role="status" aria-live="polite">
+          <span className={styles.toastMessage}>
+            <span className={styles.toastCheck}>✓</span> Added {quantity} item(s) to cart!
+          </span>
           <Link to="/cart" className={styles.toastLink}>
             View Cart
           </Link>

@@ -10,18 +10,19 @@
   position: fixed;
   top: 90px;
   right: var(--space-6);
-  background-color: var(--color-ink);
-  color: var(--color-surface);
-  padding: var(--space-3) var(--space-5);
+  background-color: #0f172a;
+  color: #ffffff;
+  padding: 12px 20px;
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.35);
   display: flex;
   align-items: center;
   gap: var(--space-4);
   font-size: var(--text-sm);
   font-weight: var(--weight-medium);
-  z-index: var(--z-toast);
+  z-index: 9999;
   animation: slideIn 0.25s ease-out;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 @keyframes slideIn {
@@ -35,10 +36,29 @@
   }
 }
 
+.toastMessage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  font-weight: var(--weight-medium);
+}
+
+.toastCheck {
+  color: #22c55e;
+  font-weight: var(--weight-bold);
+  font-size: 16px;
+}
+
 .toastLink {
-  color: var(--color-brand-light, #ff8a65);
+  color: #fb923c;
   text-decoration: underline;
   font-weight: var(--weight-bold);
+  white-space: nowrap;
+}
+
+.toastLink:hover {
+  color: #fdba74;
 }
 
 .breadcrumbs {
