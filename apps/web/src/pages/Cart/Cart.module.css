@@ -293,9 +293,13 @@
   border-top: var(--border-width) solid var(--color-line);
 }
 
-@media (max-width: 860px) {
+@media (max-width: 768px) {
   .container {
-    padding: var(--space-6) var(--space-4) var(--space-12);
+    padding: var(--space-6) var(--space-4) var(--space-10);
+  }
+
+  .emptyCard {
+    padding: var(--space-8) var(--space-4);
   }
 
   .cartGrid {

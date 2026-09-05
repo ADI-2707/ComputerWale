@@ -180,12 +180,25 @@
   margin: 0;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 768px) {
   .container {
-    padding: var(--space-6) var(--space-4) var(--space-12);
+    padding: var(--space-6) var(--space-4) var(--space-10);
+    gap: var(--space-6);
   }
 
   .storesGrid {
     grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  .storeCard {
+    padding: var(--space-5);
+  }
+
+  .benchBanner {
+    padding: var(--space-4);
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-3);
   }
 }

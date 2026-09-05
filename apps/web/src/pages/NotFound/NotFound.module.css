@@ -11,6 +11,10 @@
     padding: 0 var(--space-4);
     margin: var(--space-8) auto;
   }
+
+  .card {
+    padding: var(--space-8) var(--space-4);
+  }
 }
 
 .card {

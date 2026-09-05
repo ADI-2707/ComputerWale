@@ -263,14 +263,19 @@
   text-decoration: none;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .container {
-    padding: var(--space-6) var(--space-4) var(--space-12);
+    padding: var(--space-6) var(--space-4) var(--space-10);
+  }
+
+  .resultCard {
+    padding: var(--space-5);
   }
 
   .searchBar {
     flex-direction: column;
   }
+
   .riderBox {
     flex-direction: column;
     align-items: flex-start;

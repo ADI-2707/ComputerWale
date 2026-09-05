@@ -469,7 +469,10 @@
   .inner { padding-bottom: 0; }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .inner { padding: 0 var(--space-4); }
+}
+
+@media (max-width: 480px) {
   .logoText { display: none; }
 }
