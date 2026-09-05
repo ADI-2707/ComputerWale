@@ -88,6 +88,8 @@ export default function ProductDetail() {
     navigate('/checkout')
   }
 
+  const galleryImages = product.images && product.images.length > 0 ? product.images : ['/hero-laptops.jpg']
+
   return (
     <div className={styles.container}>
       {/* Toast Notification */}
@@ -101,27 +103,26 @@ export default function ProductDetail() {
         </div>
       )}
 
-      {}
+      {/* Breadcrumb Navigation */}
       <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
         <Link to="/">Home</Link>
-        <span>/</span>
+        <span className={styles.crumbSep}>/</span>
         <Link to="/laptops">Laptops</Link>
-        <span>/</span>
+        <span className={styles.crumbSep}>/</span>
         <span className={styles.currentCrumb}>
           {product.brand} {product.model}
         </span>
       </nav>
 
       <div className={styles.grid}>
-        {}
+        {/* Left Column: Image Gallery & Trust Card */}
         <div className={styles.galleryCol}>
           <div className={styles.mainImageWrapper}>
             <img
-              src={product.images[activeImgIndex] || product.images[0] || '/hero-laptops.jpg'}
+              src={galleryImages[activeImgIndex] || galleryImages[0]}
               alt={`${product.brand} ${product.model}`}
               className={styles.mainImage}
               onError={(e) => {
-                
                 ;(e.target as HTMLImageElement).src = '/hero-laptops.jpg'
               }}
             />
@@ -130,35 +131,49 @@ export default function ProductDetail() {
             </div>
           </div>
 
-          <div className={styles.thumbnails}>
-            {[product.images[0] || '/hero-laptops.jpg', '/hero-laptops.jpg'].map((img, idx) => (
-              <button
-                key={idx}
-                type="button"
-                className={`${styles.thumbBtn} ${activeImgIndex === idx ? styles.activeThumb : ''}`}
-                onClick={() => setActiveImgIndex(idx)}
-              >
-                <img src={img} alt="" className={styles.thumbImg} />
-              </button>
-            ))}
-          </div>
+          {galleryImages.length > 1 && (
+            <div className={styles.thumbnails}>
+              {galleryImages.map((img, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  className={`${styles.thumbBtn} ${activeImgIndex === idx ? styles.activeThumb : ''}`}
+                  onClick={() => setActiveImgIndex(idx)}
+                  aria-label={`View photo ${idx + 1}`}
+                >
+                  <img src={img} alt="" className={styles.thumbImg} />
+                </button>
+              ))}
+            </div>
+          )}
 
-          {}
+          {/* Local Experience Center Trust Card */}
           <div className={styles.trustCard}>
-            <div className={styles.trustIcon}>🏢</div>
-            <div>
+            <div className={styles.trustIconWrap}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </div>
+            <div className={styles.trustBody}>
               <div className={styles.trustTitle}>Physical Store Unit in Raipur</div>
               <div className={styles.trustSubtitle}>
                 Ready for immediate pickup or same-day dispatch from Shop No. 12, Pandri IT Park Road, Raipur.
               </div>
+              <Link to="/stores" className={styles.trustLink}>
+                Visit Pandri Experience Center →
+              </Link>
             </div>
           </div>
         </div>
 
-        {}
+        {/* Right Column: Information, Pricing & Purchase Actions */}
         <div className={styles.infoCol}>
           <div className={styles.titleSection}>
-            <div className={styles.brandSubtitle}>{product.brand}</div>
+            <div className={styles.brandBadge}>
+              <span className={styles.brandDot} />
+              {product.brand}
+            </div>
             <h1 className={styles.title}>{product.model}</h1>
             <p className={styles.specSummary}>{product.specSummary}</p>
           </div>
@@ -168,22 +183,24 @@ export default function ProductDetail() {
             <StockIndicator stock={product.stock} />
             {product.batteryHealth && (
               <span className={styles.batteryPill}>
-                🔋 Battery: <strong>{product.batteryHealth}% Health</strong>
+                <span className={styles.batteryIcon}>🔋</span> Battery: <strong>{product.batteryHealth}% Health</strong>
               </span>
             )}
           </div>
 
           <div className={styles.priceSection}>
             <PriceBlock mrp={product.mrp} price={product.price} condition={product.condition} size="lg" />
-            <span className={styles.gstNote}>Includes GST & 6-Month Store Warranty</span>
+            <span className={styles.gstNote}>
+              <span className={styles.gstIcon}>✓</span> Includes 18% GST Invoice &amp; Store Warranty
+            </span>
           </div>
 
-          {}
+          {/* Delivery & Pincode Checker */}
           <div className={styles.pincodeSection}>
             <PincodeChecker />
           </div>
 
-          {}
+          {/* CTA & Quantity Actions */}
           <div className={styles.actionSection}>
             <div className={styles.btnRow}>
               <div className={clsx(styles.cartActionWrapper, cartQuantity > 0 && styles.isStepper)}>
@@ -269,6 +286,29 @@ export default function ProductDetail() {
               </Button>
             </div>
 
+            {/* Quick Guarantees Strip */}
+            <div className={styles.guaranteeRow}>
+              <div className={styles.guaranteeItem}>
+                <svg className={styles.guaranteeIcon} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                </svg>
+                <span>Same-Day Raipur Delivery</span>
+              </div>
+              <div className={styles.guaranteeItem}>
+                <svg className={styles.guaranteeIcon} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+                <span>{product.warrantyMonths}-Month Store Warranty</span>
+              </div>
+              <div className={styles.guaranteeItem}>
+                <svg className={styles.guaranteeIcon} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+                <span>Doorstep Inspection</span>
+              </div>
+            </div>
+
             {cartQuantity >= 5 && (
               <div className={styles.bulkCallout}>
                 <span>Ordering {cartQuantity}+ units?</span>
@@ -279,25 +319,42 @@ export default function ProductDetail() {
             )}
           </div>
 
-          {}
+          {/* Warranty & Inclusions Box */}
           <div className={styles.warrantyBox}>
-            <h3 className={styles.warrantyTitle}>What is included:</h3>
+            <h3 className={styles.warrantyTitle}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+              What is included in this package:
+            </h3>
             <ul className={styles.warrantyList}>
-              <li>
-                <strong>{product.warrantyMonths} Months Warranty:</strong> Comprehensive local coverage at our Pandri,
-                Raipur service center.
+              <li className={styles.warrantyListItem}>
+                <span className={styles.warrantyCheck}>✓</span>
+                <div>
+                  <strong>{product.warrantyMonths} Months Warranty:</strong> Comprehensive hardware coverage at our Pandri, Raipur service center.
+                </div>
               </li>
               {product.warrantyIncludes.map((inc, i) => (
-                <li key={i}>{inc}</li>
+                <li key={i} className={styles.warrantyListItem}>
+                  <span className={styles.warrantyCheck}>✓</span>
+                  <div>{inc}</div>
+                </li>
               ))}
-              <li>Original charging adapter & power cord included.</li>
-              <li>Pre-inspected 32-point quality checklist completed before packaging.</li>
+              <li className={styles.warrantyListItem}>
+                <span className={styles.warrantyCheck}>✓</span>
+                <div>Original certified charging adapter &amp; power cord included.</div>
+              </li>
+              <li className={styles.warrantyListItem}>
+                <span className={styles.warrantyCheck}>✓</span>
+                <div>Pre-inspected 32-point engineer quality checklist report included with box.</div>
+              </li>
             </ul>
           </div>
         </div>
       </div>
 
-      {}
+      {/* Technical Specifications Section */}
       <section className={styles.specsSection}>
         <h2 className={styles.sectionHeading}>Technical Specifications</h2>
         <div className={styles.specTableWrap}>
@@ -310,21 +367,23 @@ export default function ProductDetail() {
         </div>
       </section>
 
-      {}
+      {/* Condition & Cosmetic Assessment Section */}
       {product.cosmeticDetails && (
         <section className={styles.cosmeticSection}>
-          <h2 className={styles.sectionHeading}>Condition & Cosmetic Assessment</h2>
+          <h2 className={styles.sectionHeading}>Condition &amp; Cosmetic Assessment</h2>
           <div className={styles.cosmeticCard}>
+            <div className={styles.cosmeticBadge}>
+              <span>✓</span> Inspected Condition
+            </div>
             <p className={styles.cosmeticText}>{product.cosmeticDetails}</p>
             <div className={styles.cosmeticNote}>
-              Each device sold by Computer Wale is individually photographed and physically verified by our engineers in
-              Raipur.
+              Each device sold by Computer Wale is individually photographed, tested, and physically verified by our engineers in Raipur.
             </div>
           </div>
         </section>
       )}
 
-      {}
+      {/* Similar Products */}
       {similarProducts.length > 0 && (
         <section className={styles.similarSection}>
           <h2 className={styles.sectionHeading}>Similar Laptops You Might Like</h2>

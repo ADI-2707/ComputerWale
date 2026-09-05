@@ -3,6 +3,8 @@
   -webkit-overflow-scrolling: touch;
   border: var(--border-width) solid var(--color-line);
   border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
 }
 
 .table {
@@ -22,7 +24,7 @@
 }
 
 .row:hover {
-  background-color: var(--blue-50);
+  background-color: var(--color-primary-tint);
 }
 
 .label {
@@ -30,9 +32,8 @@
   font-weight: var(--weight-semibold);
   color: var(--color-graphite);
   text-align: left;
-  white-space: nowrap;
   width: 180px;
-  vertical-align: top;
+  vertical-align: middle;
   background: var(--color-surface-alt);
 }
 
@@ -40,14 +41,23 @@
   padding: var(--space-3) var(--space-5);
   color: var(--color-ink);
   line-height: var(--leading-normal);
-  vertical-align: top;
+  vertical-align: middle;
+  word-break: break-word;
 }
 
 .healthGood { color: var(--color-success); font-weight: var(--weight-semibold); }
 .healthOk   { color: var(--color-warning); font-weight: var(--weight-semibold); }
 .healthLow  { color: var(--color-error);   font-weight: var(--weight-semibold); }
 
-@media (max-width: 480px) {
-  .label { width: 120px; padding: var(--space-3) var(--space-4); }
-  .value { padding: var(--space-3) var(--space-4); }
+@media (max-width: 600px) {
+  .label {
+    width: 115px;
+    padding: var(--space-3) var(--space-3);
+    font-size: var(--text-xs);
+  }
+  .value {
+    padding: var(--space-3) var(--space-3);
+    font-size: var(--text-xs);
+  }
 }
+
