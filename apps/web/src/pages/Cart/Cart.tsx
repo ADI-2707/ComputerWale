@@ -11,6 +11,7 @@ import { formatPrice } from '../../lib/mockData'
 export default function Cart() {
   const navigate = useNavigate()
   const [hoveredDeleteId, setHoveredDeleteId] = useState<string | null>(null)
+  const [isClearHovered, setIsClearHovered] = useState(false)
   const { items, updateQuantity, removeItem, clearCart, getSubtotal, getItemCount } = useCartStore()
 
   const subtotal = getSubtotal()
@@ -39,8 +40,16 @@ export default function Cart() {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1 className={styles.title}>Shopping Cart ({itemCount} items)</h1>
-        <button type="button" onClick={clearCart} className={styles.clearBtn}>
-          Clear Cart
+        <button
+          type="button"
+          onClick={clearCart}
+          className={styles.clearBtn}
+          onMouseEnter={() => setIsClearHovered(true)}
+          onMouseLeave={() => setIsClearHovered(false)}
+          aria-label="Clear all items from shopping cart"
+        >
+          <TrashIcon size={14} open={isClearHovered} />
+          <span>Clear Cart</span>
         </button>
       </div>
 
