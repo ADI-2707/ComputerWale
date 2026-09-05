@@ -265,6 +265,15 @@ export default function App() {
     }
   })
 
+  // Mobile sidebar open state
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const switchTab = (tab: 'dashboard' | 'orders' | 'inventory' | 'leads') => {
+    setActiveTab(tab)
+    setIsMobileMenuOpen(false)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   const toggleSidebar = () => {
     setIsSidebarCollapsed((prev) => {
       const next = !prev
@@ -496,8 +505,15 @@ export default function App() {
       {/* Toast Notification Pill */}
       {notification && <div className="admin-toast">{notification}</div>}
 
+      {/* Mobile Sidebar Backdrop Overlay */}
+      <div
+        className={`mobile-sidebar-overlay ${isMobileMenuOpen ? 'active' : ''}`}
+        onClick={() => setIsMobileMenuOpen(false)}
+        aria-hidden="true"
+      />
+
       {/* Collapsible Admin Sidebar */}
-      <aside className={`sidebar ${isSidebarCollapsed ? 'collapsed' : ''}`}>
+      <aside className={`sidebar ${isSidebarCollapsed ? 'collapsed' : ''} ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
         <div className="sidebar-brand">
           <div
             className="brand-info"
@@ -515,36 +531,47 @@ export default function App() {
             </div>
           </div>
 
-          {!isSidebarCollapsed && (
+          <div className="sidebar-brand-actions">
+            {!isSidebarCollapsed && (
+              <button
+                type="button"
+                className="collapse-toggle-btn"
+                onClick={toggleSidebar}
+                title="Collapse sidebar"
+                aria-label="Collapse sidebar"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="toggle-chevron"
+                >
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
+            )}
             <button
               type="button"
-              className="collapse-toggle-btn"
-              onClick={toggleSidebar}
-              title="Collapse sidebar"
-              aria-label="Collapse sidebar"
+              className="mobile-sidebar-close-btn"
+              onClick={() => setIsMobileMenuOpen(false)}
+              title="Close Menu"
+              aria-label="Close navigation menu"
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="toggle-chevron"
-              >
-                <polyline points="15 18 9 12 15 6" />
-              </svg>
+              ✕
             </button>
-          )}
+          </div>
         </div>
 
         <nav className="nav-menu">
           <button
             type="button"
             className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
-            onClick={() => setActiveTab('dashboard')}
+            onClick={() => switchTab('dashboard')}
             title="Operations Dashboard"
           >
             <span className="nav-icon">📊</span>
@@ -554,12 +581,12 @@ export default function App() {
           <button
             type="button"
             className={`nav-item ${activeTab === 'orders' ? 'active' : ''}`}
-            onClick={() => setActiveTab('orders')}
+            onClick={() => switchTab('orders')}
             title={`Raipur Orders (${unfulfilledOrdersCount} pending)`}
           >
             <span className="nav-icon">
               📦
-              {isSidebarCollapsed && unfulfilledOrdersCount > 0 && (
+              {unfulfilledOrdersCount > 0 && (
                 <span className="nav-badge-pill">{unfulfilledOrdersCount}</span>
               )}
             </span>
@@ -571,7 +598,7 @@ export default function App() {
           <button
             type="button"
             className={`nav-item ${activeTab === 'inventory' ? 'active' : ''}`}
-            onClick={() => setActiveTab('inventory')}
+            onClick={() => switchTab('inventory')}
             title={`Laptop Inventory (${totalStockUnits} Units)`}
           >
             <span className="nav-icon">💻</span>
@@ -581,7 +608,7 @@ export default function App() {
           <button
             type="button"
             className={`nav-item ${activeTab === 'leads' ? 'active' : ''}`}
-            onClick={() => setActiveTab('leads')}
+            onClick={() => switchTab('leads')}
             title={`Bulk & Tender RFQs (${leads.length})`}
           >
             <span className="nav-icon">🏢</span>
@@ -609,14 +636,27 @@ export default function App() {
       {/* Main Viewport */}
       <main className="main-viewport">
         <header className="topbar">
-          <div>
-            <h1 className="topbar-title">
-              {activeTab === 'dashboard' && 'Daily Operations Overview'}
-              {activeTab === 'orders' && 'Raipur Order Fulfillment'}
-              {activeTab === 'inventory' && 'Store Laptop Inventory Management'}
-              {activeTab === 'leads' && 'Commercial & Government RFQ Leads'}
-            </h1>
-            <div className="topbar-meta">Pandri Dispatch Desk · Raipur, Chhattisgarh</div>
+          <div className="topbar-left">
+            <button
+              type="button"
+              className="mobile-menu-toggle-btn"
+              onClick={() => setIsMobileMenuOpen(true)}
+              aria-label="Open navigation menu"
+              title="Open menu"
+            >
+              <span className="mobile-toggle-line" />
+              <span className="mobile-toggle-line" />
+              <span className="mobile-toggle-line" />
+            </button>
+            <div className="topbar-title-block">
+              <h1 className="topbar-title">
+                {activeTab === 'dashboard' && 'Operations Overview'}
+                {activeTab === 'orders' && 'Raipur Orders'}
+                {activeTab === 'inventory' && 'Laptop Inventory'}
+                {activeTab === 'leads' && 'Commercial RFQ Leads'}
+              </h1>
+              <div className="topbar-meta">Pandri Dispatch Desk · Raipur, CG</div>
+            </div>
           </div>
           <div className="topbar-user">
             <span className="user-badge">Store Manager</span>
@@ -653,39 +693,41 @@ export default function App() {
             <div className="card-panel">
               <div className="panel-header">
                 <h2>Recent Raipur Dispatches</h2>
-                <button type="button" className="link-btn" onClick={() => setActiveTab('orders')}>
+                <button type="button" className="link-btn" onClick={() => switchTab('orders')}>
                   Manage All Orders →
                 </button>
               </div>
 
-              <table className="ops-table">
-                <thead>
-                  <tr>
-                    <th>Order #</th>
-                    <th>Customer</th>
-                    <th>Zone</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                    <th>Rider</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {orders.slice(0, 5).map((order) => (
-                    <tr key={order.id}>
-                      <td><strong>{order.id}</strong></td>
-                      <td>{order.customer}</td>
-                      <td>{order.area}</td>
-                      <td>₹{order.amount.toLocaleString()}</td>
-                      <td>
-                        <span className={`status-badge status-${order.status.toLowerCase().replace(/\s+/g, '-')}`}>
-                          {order.status}
-                        </span>
-                      </td>
-                      <td>{order.rider}</td>
+              <div className="table-responsive-container">
+                <table className="ops-table">
+                  <thead>
+                    <tr>
+                      <th>Order #</th>
+                      <th>Customer</th>
+                      <th>Zone</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                      <th>Rider</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {orders.slice(0, 5).map((order) => (
+                      <tr key={order.id}>
+                        <td><strong>{order.id}</strong></td>
+                        <td>{order.customer}</td>
+                        <td>{order.area}</td>
+                        <td>₹{order.amount.toLocaleString()}</td>
+                        <td>
+                          <span className={`status-badge status-${order.status.toLowerCase().replace(/\s+/g, '-')}`}>
+                            {order.status}
+                          </span>
+                        </td>
+                        <td>{order.rider}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         )}
@@ -732,87 +774,89 @@ export default function App() {
                 </button>
               </div>
 
-              <table className="ops-table">
-                <thead>
-                  <tr>
-                    <th>Order # & Tag</th>
-                    <th>Customer & Phone</th>
-                    <th>Delivery Area & Slot</th>
-                    <th>Amount</th>
-                    <th>Rider Assigned</th>
-                    <th>Fulfillment Status</th>
-                    <th style={{ textAlign: 'right' }}>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredOrders.length === 0 ? (
+              <div className="table-responsive-container">
+                <table className="ops-table">
+                  <thead>
                     <tr>
-                      <td colSpan={7} className="empty-table-cell">
-                        No orders match your search or filter.
-                      </td>
+                      <th>Order # & Tag</th>
+                      <th>Customer & Phone</th>
+                      <th>Delivery Area & Slot</th>
+                      <th>Amount</th>
+                      <th>Rider Assigned</th>
+                      <th>Fulfillment Status</th>
+                      <th style={{ textAlign: 'right' }}>Actions</th>
                     </tr>
-                  ) : (
-                    filteredOrders.map((o) => (
-                      <tr key={o.id}>
-                        <td>
-                          <strong>{o.id}</strong>
-                          {o.label && <span className="order-tag-label">{o.label}</span>}
-                        </td>
-                        <td>
-                          <div>{o.customer}</div>
-                          <small className="text-muted">{o.phone}</small>
-                        </td>
-                        <td>
-                          <div>{o.area}</div>
-                          <small className="text-muted">{o.slot}</small>
-                        </td>
-                        <td>
-                          <strong>₹{o.amount.toLocaleString()}</strong>
-                        </td>
-                        <td>{o.rider}</td>
-                        <td>
-                          <select
-                            value={o.status}
-                            onChange={(e) => handleStatusChange(o.id, e.target.value as Order['status'])}
-                            className={`status-select status-select-${o.status.toLowerCase().replace(/\s+/g, '-')}`}
-                          >
-                            <option value="Confirmed">Confirmed</option>
-                            <option value="Packed">Packed</option>
-                            <option value="Out for Delivery">Out for Delivery</option>
-                            <option value="Delivered">Delivered</option>
-                            <option value="Cancelled">Cancelled</option>
-                          </select>
-                        </td>
-                        <td style={{ textAlign: 'right' }}>
-                          <div className="table-actions">
-                            <button
-                              type="button"
-                              className="action-btn edit-btn"
-                              onClick={() => {
-                                setEditingItem(o)
-                                setActiveModal('edit-order')
-                              }}
-                              title="Edit order details"
-                            >
-                              <PencilIcon size={13} />
-                              <span>Edit</span>
-                            </button>
-                            <button
-                              type="button"
-                              className="action-btn delete-btn"
-                              onClick={() => handleDeleteOrder(o.id)}
-                              title="Delete order"
-                            >
-                              <TrashIcon size={14} />
-                              <span>Delete</span>
-                            </button>
-                          </div>
+                  </thead>
+                  <tbody>
+                    {filteredOrders.length === 0 ? (
+                      <tr>
+                        <td colSpan={7} className="empty-table-cell">
+                          No orders match your search or filter.
                         </td>
                       </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
+                    ) : (
+                      filteredOrders.map((o) => (
+                        <tr key={o.id}>
+                          <td>
+                            <strong>{o.id}</strong>
+                            {o.label && <span className="order-tag-label">{o.label}</span>}
+                          </td>
+                          <td>
+                            <div>{o.customer}</div>
+                            <small className="text-muted">{o.phone}</small>
+                          </td>
+                          <td>
+                            <div>{o.area}</div>
+                            <small className="text-muted">{o.slot}</small>
+                          </td>
+                          <td>
+                            <strong>₹{o.amount.toLocaleString()}</strong>
+                          </td>
+                          <td>{o.rider}</td>
+                          <td>
+                            <select
+                              value={o.status}
+                              onChange={(e) => handleStatusChange(o.id, e.target.value as Order['status'])}
+                              className={`status-select status-select-${o.status.toLowerCase().replace(/\s+/g, '-')}`}
+                            >
+                              <option value="Confirmed">Confirmed</option>
+                              <option value="Packed">Packed</option>
+                              <option value="Out for Delivery">Out for Delivery</option>
+                              <option value="Delivered">Delivered</option>
+                              <option value="Cancelled">Cancelled</option>
+                            </select>
+                          </td>
+                          <td style={{ textAlign: 'right' }}>
+                            <div className="table-actions">
+                              <button
+                                type="button"
+                                className="action-btn edit-btn"
+                                onClick={() => {
+                                  setEditingItem(o)
+                                  setActiveModal('edit-order')
+                                }}
+                                title="Edit order details"
+                              >
+                                <PencilIcon size={13} />
+                                <span>Edit</span>
+                              </button>
+                              <button
+                                type="button"
+                                className="action-btn delete-btn"
+                                onClick={() => handleDeleteOrder(o.id)}
+                                title="Delete order"
+                              >
+                                <TrashIcon size={14} />
+                                <span>Delete</span>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         )}
@@ -857,105 +901,107 @@ export default function App() {
                 </button>
               </div>
 
-              <table className="ops-table">
-                <thead>
-                  <tr>
-                    <th>Model & Code</th>
-                    <th>Condition & Grade</th>
-                    <th>Specifications</th>
-                    <th>Price</th>
-                    <th>Pandri Stock Units</th>
-                    <th>Store Warranty</th>
-                    <th style={{ textAlign: 'right' }}>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredInventory.length === 0 ? (
+              <div className="table-responsive-container">
+                <table className="ops-table">
+                  <thead>
                     <tr>
-                      <td colSpan={7} className="empty-table-cell">
-                        No laptop inventory found matching your criteria.
-                      </td>
+                      <th>Model & Code</th>
+                      <th>Condition & Grade</th>
+                      <th>Specifications</th>
+                      <th>Price</th>
+                      <th>Pandri Stock Units</th>
+                      <th>Store Warranty</th>
+                      <th style={{ textAlign: 'right' }}>Actions</th>
                     </tr>
-                  ) : (
-                    filteredInventory.map((item) => (
-                      <tr key={item.id}>
-                        <td>
-                          <strong>{item.model}</strong>
-                          <div><small className="text-muted">{item.id}</small></div>
-                        </td>
-                        <td>
-                          <span
-                            className={`badge-grade ${
-                              item.condition === 'Brand New' ? 'badge-new' : ''
-                            }`}
-                          >
-                            {item.grade}
-                          </span>
-                          <span className="condition-text">{item.condition}</span>
-                        </td>
-                        <td>{item.specs}</td>
-                        <td>
-                          <strong>₹{item.price.toLocaleString()}</strong>
-                        </td>
-                        <td>
-                          <div className="stock-stepper-cell">
-                            <button
-                              type="button"
-                              className="stock-btn"
-                              onClick={() => handleStockChange(item.id, -1)}
-                              disabled={item.stock <= 0}
-                              title="Decrease stock"
-                            >
-                              −
-                            </button>
-                            <span
-                              className={`stock-count ${
-                                item.stock <= 2 ? 'text-amber font-bold' : 'text-green font-bold'
-                              }`}
-                            >
-                              {item.stock} {item.stock <= 2 ? '(Low)' : 'Units'}
-                            </span>
-                            <button
-                              type="button"
-                              className="stock-btn"
-                              onClick={() => handleStockChange(item.id, 1)}
-                              title="Increase stock"
-                            >
-                              +
-                            </button>
-                          </div>
-                        </td>
-                        <td>{item.warranty}</td>
-                        <td style={{ textAlign: 'right' }}>
-                          <div className="table-actions">
-                            <button
-                              type="button"
-                              className="action-btn edit-btn"
-                              onClick={() => {
-                                setEditingItem(item)
-                                setActiveModal('edit-inventory')
-                              }}
-                              title="Edit item specifications"
-                            >
-                              <PencilIcon size={13} />
-                              <span>Edit</span>
-                            </button>
-                            <button
-                              type="button"
-                              className="action-btn delete-btn"
-                              onClick={() => handleDeleteInventory(item.id, item.model)}
-                              title="Delete laptop from inventory"
-                            >
-                              <TrashIcon size={14} />
-                              <span>Delete</span>
-                            </button>
-                          </div>
+                  </thead>
+                  <tbody>
+                    {filteredInventory.length === 0 ? (
+                      <tr>
+                        <td colSpan={7} className="empty-table-cell">
+                          No laptop inventory found matching your criteria.
                         </td>
                       </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
+                    ) : (
+                      filteredInventory.map((item) => (
+                        <tr key={item.id}>
+                          <td>
+                            <strong>{item.model}</strong>
+                            <div><small className="text-muted">{item.id}</small></div>
+                          </td>
+                          <td>
+                            <span
+                              className={`badge-grade ${
+                                item.condition === 'Brand New' ? 'badge-new' : ''
+                              }`}
+                            >
+                              {item.grade}
+                            </span>
+                            <span className="condition-text">{item.condition}</span>
+                          </td>
+                          <td>{item.specs}</td>
+                          <td>
+                            <strong>₹{item.price.toLocaleString()}</strong>
+                          </td>
+                          <td>
+                            <div className="stock-stepper-cell">
+                              <button
+                                type="button"
+                                className="stock-btn"
+                                onClick={() => handleStockChange(item.id, -1)}
+                                disabled={item.stock <= 0}
+                                title="Decrease stock"
+                              >
+                                −
+                              </button>
+                              <span
+                                className={`stock-count ${
+                                  item.stock <= 2 ? 'text-amber font-bold' : 'text-green font-bold'
+                                }`}
+                              >
+                                {item.stock} {item.stock <= 2 ? '(Low)' : 'Units'}
+                              </span>
+                              <button
+                                type="button"
+                                className="stock-btn"
+                                onClick={() => handleStockChange(item.id, 1)}
+                                title="Increase stock"
+                              >
+                                +
+                              </button>
+                            </div>
+                          </td>
+                          <td>{item.warranty}</td>
+                          <td style={{ textAlign: 'right' }}>
+                            <div className="table-actions">
+                              <button
+                                type="button"
+                                className="action-btn edit-btn"
+                                onClick={() => {
+                                  setEditingItem(item)
+                                  setActiveModal('edit-inventory')
+                                }}
+                                title="Edit item specifications"
+                              >
+                                <PencilIcon size={13} />
+                                <span>Edit</span>
+                              </button>
+                              <button
+                                type="button"
+                                className="action-btn delete-btn"
+                                onClick={() => handleDeleteInventory(item.id, item.model)}
+                                title="Delete laptop from inventory"
+                              >
+                                <TrashIcon size={14} />
+                                <span>Delete</span>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         )}
@@ -1001,88 +1047,131 @@ export default function App() {
                 </button>
               </div>
 
-              <table className="ops-table">
-                <thead>
-                  <tr>
-                    <th>Lead #</th>
-                    <th>Organization & Notes</th>
-                    <th>Enquiry Track</th>
-                    <th>Qty Needed</th>
-                    <th>Contact Officer</th>
-                    <th>Status Label</th>
-                    <th style={{ textAlign: 'right' }}>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredLeads.length === 0 ? (
+              <div className="table-responsive-container">
+                <table className="ops-table">
+                  <thead>
                     <tr>
-                      <td colSpan={7} className="empty-table-cell">
-                        No RFQ leads found matching your search.
-                      </td>
+                      <th>Lead #</th>
+                      <th>Organization & Notes</th>
+                      <th>Enquiry Track</th>
+                      <th>Qty Needed</th>
+                      <th>Contact Officer</th>
+                      <th>Status Label</th>
+                      <th style={{ textAlign: 'right' }}>Actions</th>
                     </tr>
-                  ) : (
-                    filteredLeads.map((l) => (
-                      <tr key={l.id}>
-                        <td><strong>{l.id}</strong></td>
-                        <td>
-                          <div><strong>{l.org}</strong></div>
-                          {l.notes && <small className="text-muted">{l.notes}</small>}
-                        </td>
-                        <td>
-                          <span className={`lead-tag lead-${l.type.toLowerCase()}`}>{l.type}</span>
-                        </td>
-                        <td>
-                          <strong className="text-blue">{l.qty} Units</strong>
-                        </td>
-                        <td>
-                          <div>{l.contact}</div>
-                          <small className="text-muted">{l.date}</small>
-                        </td>
-                        <td>
-                          <select
-                            value={l.status}
-                            onChange={(e) => handleLeadStatusChange(l.id, e.target.value as Lead['status'])}
-                            className="status-select"
-                          >
-                            <option value="Pending Quotation">Pending Quotation</option>
-                            <option value="Under Review">Under Review</option>
-                            <option value="Approved">Approved</option>
-                            <option value="Rejected">Rejected</option>
-                          </select>
-                        </td>
-                        <td style={{ textAlign: 'right' }}>
-                          <div className="table-actions">
-                            <button
-                              type="button"
-                              className="action-btn edit-btn"
-                              onClick={() => {
-                                setEditingItem(l)
-                                setActiveModal('edit-lead')
-                              }}
-                              title="Edit RFQ Lead"
-                            >
-                              <PencilIcon size={13} />
-                              <span>Edit</span>
-                            </button>
-                            <button
-                              type="button"
-                              className="action-btn delete-btn"
-                              onClick={() => handleDeleteLead(l.id, l.org)}
-                              title="Delete RFQ Lead"
-                            >
-                              <TrashIcon size={14} />
-                              <span>Delete</span>
-                            </button>
-                          </div>
+                  </thead>
+                  <tbody>
+                    {filteredLeads.length === 0 ? (
+                      <tr>
+                        <td colSpan={7} className="empty-table-cell">
+                          No RFQ leads found matching your search.
                         </td>
                       </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
+                    ) : (
+                      filteredLeads.map((l) => (
+                        <tr key={l.id}>
+                          <td><strong>{l.id}</strong></td>
+                          <td>
+                            <div><strong>{l.org}</strong></div>
+                            {l.notes && <small className="text-muted">{l.notes}</small>}
+                          </td>
+                          <td>
+                            <span className={`lead-tag lead-${l.type.toLowerCase()}`}>{l.type}</span>
+                          </td>
+                          <td>
+                            <strong className="text-blue">{l.qty} Units</strong>
+                          </td>
+                          <td>
+                            <div>{l.contact}</div>
+                            <small className="text-muted">{l.date}</small>
+                          </td>
+                          <td>
+                            <select
+                              value={l.status}
+                              onChange={(e) => handleLeadStatusChange(l.id, e.target.value as Lead['status'])}
+                              className="status-select"
+                            >
+                              <option value="Pending Quotation">Pending Quotation</option>
+                              <option value="Under Review">Under Review</option>
+                              <option value="Approved">Approved</option>
+                              <option value="Rejected">Rejected</option>
+                            </select>
+                          </td>
+                          <td style={{ textAlign: 'right' }}>
+                            <div className="table-actions">
+                              <button
+                                type="button"
+                                className="action-btn edit-btn"
+                                onClick={() => {
+                                  setEditingItem(l)
+                                  setActiveModal('edit-lead')
+                                }}
+                                title="Edit RFQ Lead"
+                              >
+                                <PencilIcon size={13} />
+                                <span>Edit</span>
+                              </button>
+                              <button
+                                type="button"
+                                className="action-btn delete-btn"
+                                onClick={() => handleDeleteLead(l.id, l.org)}
+                                title="Delete RFQ Lead"
+                              >
+                                <TrashIcon size={14} />
+                                <span>Delete</span>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         )}
+
+        {/* Mobile Quick Thumb Navigation Bar */}
+        <nav className="mobile-admin-bottom-nav" aria-label="Mobile navigation">
+          <button
+            type="button"
+            className={`bottom-nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
+            onClick={() => switchTab('dashboard')}
+          >
+            <span className="bottom-nav-icon">📊</span>
+            <span className="bottom-nav-label">Overview</span>
+          </button>
+          <button
+            type="button"
+            className={`bottom-nav-item ${activeTab === 'orders' ? 'active' : ''}`}
+            onClick={() => switchTab('orders')}
+          >
+            <span className="bottom-nav-icon">
+              📦
+              {unfulfilledOrdersCount > 0 && (
+                <span className="bottom-nav-badge">{unfulfilledOrdersCount}</span>
+              )}
+            </span>
+            <span className="bottom-nav-label">Orders</span>
+          </button>
+          <button
+            type="button"
+            className={`bottom-nav-item ${activeTab === 'inventory' ? 'active' : ''}`}
+            onClick={() => switchTab('inventory')}
+          >
+            <span className="bottom-nav-icon">💻</span>
+            <span className="bottom-nav-label">Inventory</span>
+          </button>
+          <button
+            type="button"
+            className={`bottom-nav-item ${activeTab === 'leads' ? 'active' : ''}`}
+            onClick={() => switchTab('leads')}
+          >
+            <span className="bottom-nav-icon">🏢</span>
+            <span className="bottom-nav-label">Leads</span>
+          </button>
+        </nav>
       </main>
 
       {/* POPUP MODAL DIALOGS */}

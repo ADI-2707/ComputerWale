@@ -283,14 +283,17 @@
   display: none;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 5px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: var(--space-2);
+  padding: 8px;
   border-radius: var(--radius-sm);
   width: 40px;
   height: 40px;
+  overflow: visible;
+  box-sizing: border-box;
 }
 
 .bar {
@@ -312,24 +315,35 @@
 .mobileDrawerOverlay {
   display: none;
   position: fixed;
-  inset: 0;
-  background: rgba(13, 27, 76, 0.3);
-  z-index: 450;
+  top: 64px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(100vh - 64px);
+  height: calc(100dvh - 64px);
+  background: rgba(13, 27, 76, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 480;
 }
 
 .mobileDrawer {
   display: none;
   position: fixed;
-  top: 0;
+  top: 64px;
   right: 0;
   bottom: 0;
+  height: calc(100vh - 64px);
+  height: calc(100dvh - 64px);
   width: min(320px, 85vw);
   background: var(--color-bg);
-  z-index: 460;
+  z-index: 490;
   transform: translateX(100%);
   transition: transform var(--duration-slow) var(--ease-standard);
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   box-shadow: var(--elevation-4);
+  border-top: var(--border-width) solid var(--color-line);
+  box-sizing: border-box;
 }
 
 .mobileDrawerOpen {
@@ -337,11 +351,12 @@
 }
 
 .mobileDrawerInner {
-  padding: var(--space-7) var(--space-5) var(--space-5);
+  padding: var(--space-5) var(--space-5) calc(var(--space-8) + 40px + env(safe-area-inset-bottom, 0px));
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
   min-height: 100%;
+  box-sizing: border-box;
 }
 
 .mobileDeliveryPill {
