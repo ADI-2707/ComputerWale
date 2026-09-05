@@ -1,0 +1,276 @@
+/* ── Card shell ──────────────────────────────────────────────── */
+.card {
+  position: relative;
+  background: var(--color-bg);
+  border: var(--border-width) solid var(--color-line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-1);
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+
+  /* 3D lift transition — 150ms, runs separately from content expansion */
+  transition:
+    transform 150ms var(--ease-standard),
+    box-shadow 150ms var(--ease-standard),
+    border-color 150ms var(--ease-standard);
+
+  /* Contain so expansion doesn't shift neighbours */
+  overflow: visible;
+}
+
+/* ── 3D hover lift (desktop / pointer devices only) ─────────── */
+@media (hover: hover) and (pointer: fine) {
+  .card:hover,
+  .card:focus-visible {
+    transform: perspective(800px) translateY(-4px) rotateX(2deg);
+    box-shadow: var(--elevation-2);
+    border-color: var(--blue-200);
+    z-index: 10;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card:hover,
+  .card:focus-visible {
+    transform: none;
+  }
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Out of stock */
+.outOfStock {
+  opacity: 0.72;
+}
+
+/* ── Image ───────────────────────────────────────────────────── */
+.imageWrap {
+  position: relative;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  overflow: hidden;
+  background: var(--color-surface-alt);
+  aspect-ratio: 4/3;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: var(--space-3);
+  transition: transform 300ms var(--ease-standard);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover .image,
+  .card:focus-visible .image {
+    transform: scale(1.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image { transition: none; }
+}
+
+.imageFallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  height: 100%;
+  color: var(--blue-300);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.badgeOverlay {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+}
+
+.lowStockOverlay {
+  position: absolute;
+  bottom: var(--space-2);
+  right: var(--space-2);
+  background: var(--color-warning-bg);
+  color: var(--color-warning);
+  border: 1px solid var(--color-warning);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-pill);
+}
+
+/* ── Card body ───────────────────────────────────────────────── */
+.body {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.brand {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--color-graphite);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.model {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  color: var(--color-primary-dark);
+  margin: 0;
+  line-height: var(--leading-tight);
+}
+
+.specSummary {
+  font-size: var(--text-sm);
+  color: var(--color-graphite);
+  margin: 0;
+  line-height: var(--leading-normal);
+}
+
+.viewBtn {
+  display: inline-block;
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--duration-base);
+  width: fit-content;
+}
+
+.viewBtn:hover { color: var(--color-primary-hover); }
+
+.notifyBtn {
+  margin-top: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: transparent;
+  border: var(--border-width) solid var(--color-line);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-graphite);
+  cursor: pointer;
+  transition:
+    border-color var(--duration-base),
+    color var(--duration-base),
+    background-color var(--duration-base);
+}
+
+.notifyBtn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: var(--color-primary-tint);
+}
+
+/* ── Expansion panel ─────────────────────────────────────────── */
+.expandPanel {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+
+  /* Content expansion: 300-400ms, separate from the lift transform */
+  transition:
+    max-height 350ms var(--ease-standard),
+    opacity 300ms var(--ease-standard);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover .expandPanel,
+  .card:focus-visible .expandPanel {
+    max-height: 280px;
+    opacity: 1;
+  }
+}
+
+/* Reduced motion: expansion still happens, but no transform */
+@media (prefers-reduced-motion: reduce) {
+  .expandPanel {
+    transition: opacity 200ms ease;
+  }
+  .card:hover .expandPanel,
+  .card:focus-visible .expandPanel {
+    max-height: 280px;
+    opacity: 1;
+  }
+}
+
+.expandInner {
+  padding: 0 var(--space-4) var(--space-4);
+  border-top: var(--border-width) solid var(--color-line);
+  padding-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.expandRow {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.expandLabel {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--color-graphite);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  min-width: 100px;
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+
+.expandValue {
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+  line-height: var(--leading-normal);
+}
+
+.expandDelivery {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-primary);
+  font-weight: var(--weight-medium);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-primary-tint);
+  border-radius: var(--radius-sm);
+}
+
+.conditionReportLink {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--duration-base);
+}
+
+.conditionReportLink:hover { color: var(--color-primary-hover); }
+
+/* ── List variant ────────────────────────────────────────────── */
+.listVariant {
+  flex-direction: row;
+}
+
+.listVariant .imageWrap {
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+  width: 200px;
+  flex-shrink: 0;
+  aspect-ratio: unset;
+}

@@ -1,0 +1,43 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-pill);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.sm {
+  padding: 2px var(--space-2);
+  font-size: var(--text-xs);
+}
+
+.md {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.gradeA {
+  background-color: var(--color-seal-tint);
+  color: var(--color-seal-dark);
+  border-color: var(--color-seal);
+}
+
+.gradeB {
+  background-color: #FEF3E2;
+  color: #8B5E14;
+  border-color: #D4A843;
+}
+
+.gradeC {
+  background-color: #FDF0DC;
+  color: #7A5210;
+  border-color: #C49535;
+}
+
+.new {
+  background-color: var(--blue-50);
+  color: var(--blue-700);
+  border-color: var(--blue-200);
+}

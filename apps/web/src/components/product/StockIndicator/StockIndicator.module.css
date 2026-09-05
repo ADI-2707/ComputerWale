@@ -1,0 +1,33 @@
+.indicator {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.indicator::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.inStock {
+  color: var(--color-success);
+}
+.inStock::before { background: var(--color-success); }
+
+.lowStock {
+  color: var(--color-warning);
+}
+.lowStock::before { background: var(--color-warning); }
+
+.outOfStock {
+  color: var(--color-graphite);
+  opacity: 0.6;
+}
+.outOfStock::before { background: var(--color-graphite); opacity: 0.4; }
