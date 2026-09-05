@@ -28,6 +28,5 @@
       "@tokens/*": ["../../packages/design-tokens/*"]
     }
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src"]
 }
