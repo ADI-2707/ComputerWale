@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { Link } from 'react-router'
+import { useState, useEffect } from 'react'
+import { Link, useParams } from 'react-router'
+import { clsx } from 'clsx'
 import styles from './Account.module.css'
 import { useAuthStore } from '../../state/authStore'
 import { Button } from '../../components/ui/Button'
@@ -7,19 +8,41 @@ import { formatPrice } from '../../lib/mockData'
 
 export default function Account() {
   const { user, isAuthenticated, login, logout, addAddress } = useAuthStore()
+  const { tab } = useParams<{ tab?: string }>()
+
+  const [authMode, setAuthMode] = useState<'signin' | 'signup'>(
+    tab === 'register' || tab === 'signup' ? 'signup' : 'signin'
+  )
+
+  useEffect(() => {
+    if (tab === 'register' || tab === 'signup') {
+      setAuthMode('signup')
+    } else if (tab === 'login') {
+      setAuthMode('signin')
+    }
+  }, [tab])
 
   const [activeTab, setActiveTab] = useState<'profile' | 'orders' | 'addresses'>('orders')
   const [loginEmail, setLoginEmail] = useState('')
-  const [loginName, setLoginName] = useState('')
-  const [loginPhone, setLoginPhone] = useState('')
+  const [loginPassword, setLoginPassword] = useState('')
+  const [signupName, setSignupName] = useState('')
+  const [signupEmail, setSignupEmail] = useState('')
+  const [signupPhone, setSignupPhone] = useState('')
+  const [signupPassword, setSignupPassword] = useState('')
 
   const [newStreet, setNewStreet] = useState('')
   const [newPincode, setNewPincode] = useState('492001')
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault()
     if (!loginEmail.trim()) return
-    login(loginEmail, loginName || 'Rahul Verma', loginPhone || '+91 98765 43210')
+    login(loginEmail, 'Rahul Verma', '+91 98765 43210')
+  }
+
+  const handleSignUp = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!signupEmail.trim() || !signupName.trim()) return
+    login(signupEmail, signupName, signupPhone || '+91 98765 43210')
   }
 
   const handleDemoLogin = () => {
@@ -44,50 +67,132 @@ export default function Account() {
     return (
       <div className={styles.authContainer}>
         <div className={styles.authCard}>
-          <h1 className={styles.authTitle}>Customer Sign In</h1>
-          <p className={styles.authSub}>
-            Sign in to view your orders, store warranty certificates, and saved delivery addresses in Raipur.
-          </p>
+          {/* Segmented Tab Navigation for Sign In / Sign Up */}
+          <div className={styles.authNav} role="tablist" aria-label="Authentication navigation">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={authMode === 'signin'}
+              className={clsx(styles.authTab, authMode === 'signin' && styles.authTabActive)}
+              onClick={() => setAuthMode('signin')}
+            >
+              Sign In
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={authMode === 'signup'}
+              className={clsx(styles.authTab, authMode === 'signup' && styles.authTabActive)}
+              onClick={() => setAuthMode('signup')}
+            >
+              Create Account
+            </button>
+          </div>
 
-          <form onSubmit={handleLogin} className={styles.authForm}>
-            <div className={styles.inputGroup}>
-              <label className={styles.label}>Full Name</label>
-              <input
-                type="text"
-                placeholder="e.g. Rahul Verma"
-                value={loginName}
-                onChange={(e) => setLoginName(e.target.value)}
-                className={styles.input}
-              />
-            </div>
+          <div className={styles.authHeader}>
+            <h1 className={styles.authTitle}>
+              {authMode === 'signin' ? 'Welcome Back' : 'Create an Account'}
+            </h1>
+            <p className={styles.authSub}>
+              {authMode === 'signin'
+                ? 'Sign in to access your orders, warranty certificates, and saved delivery addresses in Raipur.'
+                : 'Join ComputerWale Raipur for fast local delivery, GST invoicing, and warranty registration.'}
+            </p>
+          </div>
 
-            <div className={styles.inputGroup}>
-              <label className={styles.label}>Email Address</label>
-              <input
-                type="email"
-                required
-                placeholder="rahul@example.com"
-                value={loginEmail}
-                onChange={(e) => setLoginEmail(e.target.value)}
-                className={styles.input}
-              />
-            </div>
+          {authMode === 'signin' ? (
+            <form onSubmit={handleSignIn} className={styles.authForm}>
+              <div className={styles.inputGroup}>
+                <label className={styles.label}>Email or Phone Number</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="rahul@example.com or 9876543210"
+                  value={loginEmail}
+                  onChange={(e) => setLoginEmail(e.target.value)}
+                  className={styles.input}
+                  autoComplete="username"
+                />
+              </div>
 
-            <div className={styles.inputGroup}>
-              <label className={styles.label}>Mobile Number</label>
-              <input
-                type="tel"
-                placeholder="+91 98765 43210"
-                value={loginPhone}
-                onChange={(e) => setLoginPhone(e.target.value)}
-                className={styles.input}
-              />
-            </div>
+              <div className={styles.inputGroup}>
+                <div className={styles.labelRow}>
+                  <label className={styles.label}>Password</label>
+                  <span className={styles.faintHint}>Optional for demo</span>
+                </div>
+                <input
+                  type="password"
+                  placeholder="••••••••"
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)}
+                  className={styles.input}
+                  autoComplete="current-password"
+                />
+              </div>
 
-            <Button type="submit" variant="primary" size="lg" fullWidth>
-              Sign In / Register
-            </Button>
-          </form>
+              <Button type="submit" variant="primary" size="lg" fullWidth>
+                Sign In
+              </Button>
+            </form>
+          ) : (
+            <form onSubmit={handleSignUp} className={styles.authForm}>
+              <div className={styles.inputGroup}>
+                <label className={styles.label}>Full Name</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Rahul Verma"
+                  value={signupName}
+                  onChange={(e) => setSignupName(e.target.value)}
+                  className={styles.input}
+                  autoComplete="name"
+                />
+              </div>
+
+              <div className={styles.inputGroup}>
+                <label className={styles.label}>Email Address</label>
+                <input
+                  type="email"
+                  required
+                  placeholder="rahul@example.com"
+                  value={signupEmail}
+                  onChange={(e) => setSignupEmail(e.target.value)}
+                  className={styles.input}
+                  autoComplete="email"
+                />
+              </div>
+
+              <div className={styles.inputGroup}>
+                <label className={styles.label}>Mobile Number (for Raipur delivery updates)</label>
+                <input
+                  type="tel"
+                  required
+                  placeholder="+91 98765 43210"
+                  value={signupPhone}
+                  onChange={(e) => setSignupPhone(e.target.value)}
+                  className={styles.input}
+                  autoComplete="tel"
+                />
+              </div>
+
+              <div className={styles.inputGroup}>
+                <label className={styles.label}>Create Password</label>
+                <input
+                  type="password"
+                  required
+                  placeholder="At least 6 characters"
+                  value={signupPassword}
+                  onChange={(e) => setSignupPassword(e.target.value)}
+                  className={styles.input}
+                  autoComplete="new-password"
+                />
+              </div>
+
+              <Button type="submit" variant="primary" size="lg" fullWidth>
+                Create Account
+              </Button>
+            </form>
+          )}
 
           <div className={styles.divider}>
             <span>OR</span>
@@ -96,6 +201,32 @@ export default function Account() {
           <Button type="button" variant="outline" size="lg" fullWidth onClick={handleDemoLogin}>
             Quick 1-Click Demo Login
           </Button>
+
+          <p className={styles.switchText}>
+            {authMode === 'signin' ? (
+              <>
+                Don't have an account?
+                <button
+                  type="button"
+                  className={styles.switchBtn}
+                  onClick={() => setAuthMode('signup')}
+                >
+                  Create one here
+                </button>
+              </>
+            ) : (
+              <>
+                Already have an account?
+                <button
+                  type="button"
+                  className={styles.switchBtn}
+                  onClick={() => setAuthMode('signin')}
+                >
+                  Sign in here
+                </button>
+              </>
+            )}
+          </p>
         </div>
       </div>
     )
