@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router'
 import { clsx } from 'clsx'
 import styles from './Navbar.module.css'
 import { Button } from '../../ui/Button'
@@ -19,6 +20,7 @@ const NAV_CATEGORIES = [
 const BRANDS = ['Dell', 'HP', 'Lenovo', 'Apple', 'Acer', 'Asus', 'MSI']
 
 export function Navbar({ cartCount }: NavbarProps) {
+  const navigate = useNavigate()
   const storeCount = useCartStore((s) => s.getItemCount())
   const effectiveCartCount = cartCount !== undefined ? cartCount : storeCount
 
@@ -55,15 +57,14 @@ export function Navbar({ cartCount }: NavbarProps) {
         role="banner"
       >
         <div className={styles.inner}>
-          {}
-          <a href="/" className={styles.logo} aria-label="Computer Wale — Home">
+          {/* Brand Logo */}
+          <Link to="/" className={styles.logo} aria-label="Computer Wale — Home">
             <span className={styles.logoMark}>CW</span>
             <span className={styles.logoText}>Computer<strong>Wale</strong></span>
-          </a>
+          </Link>
 
-          {}
+          {/* Desktop Nav */}
           <nav className={styles.desktopNav} aria-label="Main navigation">
-            {}
             <div className={styles.megaTriggerWrap}>
               <button
                 className={clsx(styles.navLink, megaOpen && styles.navLinkActive)}
@@ -86,10 +87,10 @@ export function Navbar({ cartCount }: NavbarProps) {
                       <ul className={styles.megaList}>
                         {NAV_CATEGORIES.map(c => (
                           <li key={c.href}>
-                            <a href={c.href} className={styles.megaItem} onClick={() => setMegaOpen(false)}>
+                            <Link to={c.href} className={styles.megaItem} onClick={() => setMegaOpen(false)}>
                               <span className={styles.megaItemLabel}>{c.label}</span>
                               <span className={styles.megaItemDesc}>{c.desc}</span>
-                            </a>
+                            </Link>
                           </li>
                         ))}
                       </ul>
@@ -99,9 +100,9 @@ export function Navbar({ cartCount }: NavbarProps) {
                       <ul className={styles.megaBrands}>
                         {BRANDS.map(b => (
                           <li key={b}>
-                            <a href={`/laptops?brand=${b}`} className={styles.megaBrandLink} onClick={() => setMegaOpen(false)}>
+                            <Link to={`/laptops?brand=${b}`} className={styles.megaBrandLink} onClick={() => setMegaOpen(false)}>
                               {b}
-                            </a>
+                            </Link>
                           </li>
                         ))}
                       </ul>
@@ -111,13 +112,12 @@ export function Navbar({ cartCount }: NavbarProps) {
               )}
             </div>
 
-            <a href="/bulk" className={styles.navLink}>Bulk &amp; Govt</a>
-            <a href="/track" className={styles.navLink}>Track Order</a>
+            <Link to="/bulk" className={styles.navLink}>Bulk &amp; Govt</Link>
+            <Link to="/track" className={styles.navLink}>Track Order</Link>
           </nav>
 
-          {}
+          {/* Right Controls */}
           <div className={styles.rightSide}>
-            {}
             <span className={styles.deliveryPill} aria-label="Delivering to Raipur">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                 <circle cx="6" cy="5" r="2.5" stroke="currentColor" strokeWidth="1.2"/>
@@ -126,18 +126,18 @@ export function Navbar({ cartCount }: NavbarProps) {
               Raipur
             </span>
 
-            <a href="/account/login" className={styles.signInLink}>Sign in</a>
+            <Link to="/account/login" className={styles.signInLink}>Sign in</Link>
 
-            <a href="/cart" className={styles.cartBtn} aria-label={`Cart — ${effectiveCartCount} item${effectiveCartCount !== 1 ? 's' : ''}`}>
+            <Link to="/cart" className={styles.cartBtn} aria-label={`Cart — ${effectiveCartCount} item${effectiveCartCount !== 1 ? 's' : ''}`}>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                 <path d="M2 2h1.5l2 9h9l1.5-6H5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 <circle cx="8" cy="16" r="1" fill="currentColor"/>
                 <circle cx="14" cy="16" r="1" fill="currentColor"/>
               </svg>
               {effectiveCartCount > 0 && <span className={styles.cartBadge}>{effectiveCartCount}</span>}
-            </a>
+            </Link>
 
-            {}
+            {/* Mobile Hamburger Toggle */}
             <button
               className={styles.hamburger}
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
@@ -152,7 +152,7 @@ export function Navbar({ cartCount }: NavbarProps) {
         </div>
       </header>
 
-      {}
+      {/* Mobile Drawer */}
       {mobileOpen && (
         <div className={styles.mobileDrawerOverlay} onClick={() => setMobileOpen(false)} aria-hidden="true" />
       )}
@@ -174,43 +174,43 @@ export function Navbar({ cartCount }: NavbarProps) {
             <li><p className={styles.mobileNavGroup}>Laptops</p></li>
             {NAV_CATEGORIES.map(c => (
               <li key={c.href}>
-                <a href={c.href} className={styles.mobileNavLink} onClick={() => setMobileOpen(false)}>{c.label}</a>
+                <Link to={c.href} className={styles.mobileNavLink} onClick={() => setMobileOpen(false)}>{c.label}</Link>
               </li>
             ))}
             <li className={styles.mobileDivider} />
-            <li><a href="/bulk" className={styles.mobileNavLink} onClick={() => setMobileOpen(false)}>Bulk &amp; Commercial</a></li>
-            <li><a href="/government" className={styles.mobileNavLink} onClick={() => setMobileOpen(false)}>Government Supply</a></li>
-            <li><a href="/track" className={styles.mobileNavLink} onClick={() => setMobileOpen(false)}>Track Order</a></li>
-            <li><a href="/stores" className={styles.mobileNavLink} onClick={() => setMobileOpen(false)}>Our Stores</a></li>
+            <li><Link to="/bulk" className={styles.mobileNavLink} onClick={() => setMobileOpen(false)}>Bulk &amp; Commercial</Link></li>
+            <li><Link to="/government" className={styles.mobileNavLink} onClick={() => setMobileOpen(false)}>Government Supply</Link></li>
+            <li><Link to="/track" className={styles.mobileNavLink} onClick={() => setMobileOpen(false)}>Track Order</Link></li>
+            <li><Link to="/stores" className={styles.mobileNavLink} onClick={() => setMobileOpen(false)}>Our Stores</Link></li>
           </ul>
 
           <div className={styles.mobileNavCtas}>
-            <Button variant="primary" fullWidth onClick={() => { setMobileOpen(false); window.location.href = '/laptops' }}>
+            <Button variant="primary" fullWidth onClick={() => { setMobileOpen(false); navigate('/laptops') }}>
               Browse Laptops
             </Button>
-            <Button variant="ghost" fullWidth onClick={() => { setMobileOpen(false); window.location.href = '/account/login' }}>
+            <Button variant="ghost" fullWidth onClick={() => { setMobileOpen(false); navigate('/account/login') }}>
               Sign in
             </Button>
           </div>
         </div>
       </nav>
 
-      {}
+      {/* Mobile Bottom Bar (Client-Side Routing) */}
       <div className={styles.mobileBottomBar} role="navigation" aria-label="Quick actions">
-        <a href="/laptops" className={styles.bottomBarItem}>
+        <Link to="/laptops" className={styles.bottomBarItem}>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <rect x="2" y="4" width="16" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
             <path d="M6 18h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
           </svg>
           <span>Laptops</span>
-        </a>
-        <a href="/track" className={styles.bottomBarItem}>
+        </Link>
+        <Link to="/track" className={styles.bottomBarItem}>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <path d="M3 10h14M10 3l7 7-7 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
           <span>Track</span>
-        </a>
-        <a href="/cart" className={styles.bottomBarItem} aria-label={`Cart — ${effectiveCartCount} items`}>
+        </Link>
+        <Link to="/cart" className={styles.bottomBarItem} aria-label={`Cart — ${effectiveCartCount} items`}>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <path d="M2 2h1.5l2 9h9l1.5-6H5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             <circle cx="8" cy="16" r="1" fill="currentColor"/>
@@ -218,7 +218,7 @@ export function Navbar({ cartCount }: NavbarProps) {
           </svg>
           {effectiveCartCount > 0 && <span className={styles.bottomBarBadge}>{effectiveCartCount}</span>}
           <span>Cart</span>
-        </a>
+        </Link>
       </div>
     </>
   )
