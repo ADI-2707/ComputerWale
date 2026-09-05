@@ -9,9 +9,10 @@
   display: flex;
   flex-direction: column;
   transition:
-    transform 160ms var(--ease-standard),
-    box-shadow 160ms var(--ease-standard),
-    border-color 160ms var(--ease-standard);
+    transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 280ms cubic-bezier(0.16, 1, 0.3, 1);
   overflow: visible;
   z-index: 1;
 }
@@ -151,18 +152,24 @@
     left: -1px;
     right: -1px;
     background: var(--color-bg);
-    border: var(--border-width) solid var(--color-brand);
-    border-top: 1px dashed var(--color-line);
+    border: var(--border-width) solid transparent;
+    border-top: 1px dashed transparent;
     border-radius: 0 0 var(--radius-md) var(--radius-md);
-    padding: var(--space-3) var(--space-4) var(--space-4);
-    box-shadow: 0 16px 28px -4px rgba(0, 0, 0, 0.16), 0 6px 12px -2px rgba(0, 0, 0, 0.06);
+    padding: 0 var(--space-4);
+    max-height: 0;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-4px);
+    overflow: hidden;
+    box-shadow: 0 18px 32px -4px rgba(0, 0, 0, 0.16), 0 8px 14px -4px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+    transform-origin: top center;
     transition:
-      opacity 160ms var(--ease-standard),
-      transform 160ms var(--ease-standard),
-      visibility 160ms;
+      max-height 280ms cubic-bezier(0.16, 1, 0.3, 1),
+      padding 280ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 220ms ease,
+      transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 280ms cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 280ms;
     pointer-events: none;
     z-index: 30;
   }
@@ -170,9 +177,13 @@
   .card:hover .hoverDrawer,
   .card:focus-visible .hoverDrawer,
   .card.expanded .hoverDrawer {
+    max-height: 160px;
+    padding: var(--space-3) var(--space-4) var(--space-4);
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+    border-color: var(--color-brand);
+    border-top-color: var(--color-line);
     pointer-events: auto;
   }
 }
