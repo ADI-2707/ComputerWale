@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import styles from './Stores.module.css'
 import { STORES } from '../../lib/mockData'
 import { Button } from '../../components/ui/Button'
@@ -27,9 +28,9 @@ export default function Stores() {
               </div>
               <div className={styles.metaRow}>
                 <span className={styles.metaIcon}>📞</span>
-                <a href={`tel:${store.phone}`} className={styles.metaLink}>
+                <Link to={`tel:${store.phone}`} className={styles.metaLink}>
                   {store.phone}
-                </a>
+                </Link>
               </div>
               <div className={styles.metaRow}>
                 <span className={styles.metaIcon}>🛵</span>
@@ -52,8 +53,8 @@ export default function Stores() {
             </div>
 
             <div className={styles.actionButtons}>
-              <a
-                href={store.mapUrl || 'https://maps.google.com/?q=Raipur+Chhattisgarh'}
+              <Link
+                to={store.mapUrl || 'https://maps.google.com/?q=Raipur+Chhattisgarh'}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ flex: 1 }}
@@ -61,9 +62,9 @@ export default function Stores() {
                 <Button variant="primary" fullWidth>
                   Get Directions
                 </Button>
-              </a>
-              <a
-                href={`https://wa.me/${store.phone.replace(/[^0-9]/g, '')}`}
+              </Link>
+              <Link
+                to={`https://wa.me/${store.phone.replace(/[^0-9]/g, '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ flex: 1 }}
@@ -71,7 +72,7 @@ export default function Stores() {
                 <Button variant="outline" fullWidth>
                   WhatsApp Store
                 </Button>
-              </a>
+              </Link>
             </div>
           </div>
         ))}

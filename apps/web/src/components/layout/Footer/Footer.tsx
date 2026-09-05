@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import styles from './Footer.module.css'
 import { STORES } from '../../../lib/mockData'
 
@@ -25,40 +26,40 @@ export function Footer() {
             <div className={styles.navCol}>
               <p className={styles.colHeading}>Laptops</p>
               <ul className={styles.colList}>
-                <li><a href="/laptops?condition=new" className={styles.colLink}>New Laptops</a></li>
-                <li><a href="/laptops?condition=refurbished&grade=A" className={styles.colLink}>Refurbished Grade A</a></li>
-                <li><a href="/laptops?condition=refurbished&grade=B" className={styles.colLink}>Refurbished Grade B</a></li>
-                <li><a href="/laptops?condition=refurbished&grade=C" className={styles.colLink}>Refurbished Grade C</a></li>
-                <li><a href="/laptops" className={styles.colLink}>All Laptops</a></li>
+                <li><Link to="/laptops?condition=new" className={styles.colLink}>New Laptops</Link></li>
+                <li><Link to="/laptops?condition=refurbished&grade=A" className={styles.colLink}>Refurbished Grade A</Link></li>
+                <li><Link to="/laptops?condition=refurbished&grade=B" className={styles.colLink}>Refurbished Grade B</Link></li>
+                <li><Link to="/laptops?condition=refurbished&grade=C" className={styles.colLink}>Refurbished Grade C</Link></li>
+                <li><Link to="/laptops" className={styles.colLink}>All Laptops</Link></li>
               </ul>
             </div>
 
             <div className={styles.navCol}>
               <p className={styles.colHeading}>Business</p>
               <ul className={styles.colList}>
-                <li><a href="/bulk" className={styles.colLink}>Bulk Orders</a></li>
-                <li><a href="/government" className={styles.colLink}>Government Supply</a></li>
-                <li><a href="/sell" className={styles.colLink}>Sell / Trade-in</a></li>
+                <li><Link to="/bulk" className={styles.colLink}>Bulk Orders</Link></li>
+                <li><Link to="/government" className={styles.colLink}>Government Supply</Link></li>
+                <li><Link to="/sell" className={styles.colLink}>Sell / Trade-in</Link></li>
               </ul>
             </div>
 
             <div className={styles.navCol}>
               <p className={styles.colHeading}>Account</p>
               <ul className={styles.colList}>
-                <li><a href="/account/login" className={styles.colLink}>Sign in</a></li>
-                <li><a href="/account/register" className={styles.colLink}>Register</a></li>
-                <li><a href="/account/orders" className={styles.colLink}>My Orders</a></li>
-                <li><a href="/track" className={styles.colLink}>Track Order</a></li>
+                <li><Link to="/account/login" className={styles.colLink}>Sign in</Link></li>
+                <li><Link to="/account/register" className={styles.colLink}>Register</Link></li>
+                <li><Link to="/account/orders" className={styles.colLink}>My Orders</Link></li>
+                <li><Link to="/track" className={styles.colLink}>Track Order</Link></li>
               </ul>
             </div>
 
             <div className={styles.navCol}>
               <p className={styles.colHeading}>Legal</p>
               <ul className={styles.colList}>
-                <li><a href="/privacy" className={styles.colLink}>Privacy Policy</a></li>
-                <li><a href="/terms" className={styles.colLink}>Terms &amp; Conditions</a></li>
-                <li><a href="/warranty" className={styles.colLink}>Warranty Terms</a></li>
-                <li><a href="/returns" className={styles.colLink}>Return Policy</a></li>
+                <li><Link to="/privacy" className={styles.colLink}>Privacy Policy</Link></li>
+                <li><Link to="/terms" className={styles.colLink}>Terms &amp; Conditions</Link></li>
+                <li><Link to="/warranty" className={styles.colLink}>Warranty Terms</Link></li>
+                <li><Link to="/returns" className={styles.colLink}>Return Policy</Link></li>
               </ul>
             </div>
           </div>
@@ -80,7 +81,7 @@ export function Footer() {
                 </div>
                 <p className={styles.storeAddress}>{store.address}</p>
                 <p className={styles.storeHours}>{store.hours}</p>
-                <a href={`tel:${store.phone}`} className={styles.storePhone}>{store.phone}</a>
+                <Link to={`tel:${store.phone}`} className={styles.storePhone}>{store.phone}</Link>
                 {!store.deliveryAvailable && (
                   <p className={styles.walkinNote}>
                     No online ordering or delivery — visit the store in person.

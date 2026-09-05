@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useSearchParams } from 'react-router'
+import { Link, useSearchParams } from 'react-router'
 import styles from './TrackOrder.module.css'
 import { Button } from '../../components/ui/Button'
 
@@ -103,9 +103,9 @@ export default function TrackOrder() {
               <div className={styles.riderName}>Rider: Ramesh Sahu</div>
               <div className={styles.riderMeta}>Computer Wale Store Dispatch Rider · Raipur Pandri Hub</div>
             </div>
-            <a href="tel:+919876500123" className={styles.callRiderBtn}>
+            <Link to="tel:+919876500123" className={styles.callRiderBtn}>
               📞 Call Rider
-            </a>
+            </Link>
           </div>
 
           {}
@@ -122,9 +122,9 @@ export default function TrackOrder() {
 
           <div className={styles.supportFoot}>
             <span>Need help with this delivery?</span>
-            <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className={styles.supportLink}>
+            <Link to="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className={styles.supportLink}>
               Chat with Raipur Store Support on WhatsApp →
-            </a>
+            </Link>
           </div>
         </div>
       )}

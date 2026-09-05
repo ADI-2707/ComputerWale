@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router'
 import styles from './Home.module.css'
 import { Button } from '../../components/ui/Button'
 import { ProductCard } from '../../components/product/ProductCard'
@@ -34,7 +35,7 @@ interface TrackCardProps {
 
 function TrackCard({ icon, title, description, cta, href, highlight }: TrackCardProps) {
   return (
-    <a href={href} className={styles.trackCard}>
+    <Link to={href} className={styles.trackCard}>
       <div className={styles.trackIcon}>{icon}</div>
       <div className={styles.trackContent}>
         {highlight && <span className={styles.trackHighlight}>{highlight}</span>}
@@ -42,7 +43,7 @@ function TrackCard({ icon, title, description, cta, href, highlight }: TrackCard
         <p className={styles.trackDesc}>{description}</p>
       </div>
       <span className={styles.trackCta}>{cta} →</span>
-    </a>
+    </Link>
   )
 }
 
@@ -175,7 +176,7 @@ export default function Home() {
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>Featured laptops</h2>
-            <a href="/laptops" className={styles.sectionLink}>View all {340}+ laptops →</a>
+            <Link to="/laptops" className={styles.sectionLink}>View all {340}+ laptops →</Link>
           </div>
           <div className={styles.productGrid}>
             {FEATURED_PRODUCTS.slice(0, 8).map(product => (

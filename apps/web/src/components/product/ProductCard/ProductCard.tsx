@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { Link } from 'react-router'
 import { clsx } from 'clsx'
 import styles from './ProductCard.module.css'
 import type { Product } from '../../../types'
@@ -110,8 +111,8 @@ export function ProductCard({ product, variant = 'grid' }: ProductCardProps) {
         </div>
 
         {!isOutOfStock ? (
-          <a
-            href={`/laptops/${product.slug}`}
+          <Link
+            to={`/laptops/${product.slug}`}
             className={styles.viewBtn}
             onClick={e => {
               e.stopPropagation()
@@ -120,7 +121,7 @@ export function ProductCard({ product, variant = 'grid' }: ProductCardProps) {
           >
             <span>View details</span>
             <span className={styles.arrowIcon}>→</span>
-          </a>
+          </Link>
         ) : (
           <button
             className={styles.notifyBtn}
