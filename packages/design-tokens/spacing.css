@@ -1,20 +1,55 @@
-
 :root {
-  --space-1:  4px;    
-  --space-2:  8px;    
-  --space-3:  12px;   
-  --space-4:  16px;   
-  --space-5:  24px;   
-  --space-6:  32px;   
-  --space-7:  48px;   
-  --space-8:  64px;   
-  --space-9:  96px;   
+  --space-1:   4px;    
+  --space-2:   8px;    
+  --space-3:   12px;   
+  --space-4:   16px;   
+  --space-5:   24px;   
+  --space-6:   32px;   
+  --space-7:   48px;   
+  --space-8:   64px;   
+  --space-9:   80px;   
+  --space-10:  80px;   
+  --space-12:  96px;   
+  --space-16:  128px;  
+  --space-20:  160px;  
+  --space-24:  192px;  
 
   --gutter-mobile:  var(--space-4);   
+  --gutter-tablet:  var(--space-5);
   --gutter-desktop: var(--space-6);   
 
   --max-width-content: 1280px;
   --container-max:     1280px;
   --max-width-admin:   1440px;
   --max-width-prose:   720px;
+
+  /* Layout Container & Section Tokens */
+  --page-px: var(--space-6);
+  --page-pt: var(--space-8);
+  --page-pb: var(--space-16);
+  --page-gap: var(--space-10);
+  --section-py: var(--space-12);
+  --card-padding: var(--space-8);
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --page-px: var(--space-5);
+    --page-pt: var(--space-6);
+    --page-pb: var(--space-12);
+    --page-gap: var(--space-8);
+    --section-py: var(--space-8);
+    --card-padding: var(--space-6);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --page-px: var(--space-4);
+    --page-pt: var(--space-5);
+    --page-pb: var(--space-10);
+    --page-gap: var(--space-6);
+    --section-py: var(--space-7);
+    --card-padding: var(--space-5);
+  }
 }
