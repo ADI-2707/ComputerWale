@@ -1,0 +1,404 @@
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4) var(--space-16);
+}
+
+.pageTitle {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-6);
+}
+
+.errorAlert {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-6);
+  font-size: var(--text-sm);
+}
+
+.checkoutGrid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: var(--space-8);
+  align-items: flex-start;
+}
+
+.formCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.sectionCard {
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.cardHeading {
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  margin: 0;
+  padding-bottom: var(--space-3);
+  border-bottom: var(--border-width) solid var(--color-line);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.label {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--color-ink);
+}
+
+.input {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  border: var(--border-width) solid var(--color-line);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-surface);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.input:focus {
+  border-color: var(--color-brand);
+}
+
+.inputDisabled {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  border: var(--border-width) solid var(--color-line);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-subtle);
+  color: var(--color-ink-muted);
+  cursor: not-allowed;
+}
+
+.pincodeValid {
+  font-size: var(--text-xs);
+  color: #16a34a;
+  font-weight: var(--weight-medium);
+  margin-top: 2px;
+}
+
+/* Delivery options toggle */
+.deliveryToggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.toggleOption {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: var(--border-width) solid var(--color-line);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background: var(--color-surface);
+  transition: all var(--transition-fast);
+}
+
+.toggleOption strong {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+}
+
+.toggleOption span {
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+}
+
+.toggleActive {
+  border-color: var(--color-brand);
+  background: var(--color-brand-faint);
+}
+
+.addressFields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+}
+
+.slotPicker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  background: var(--color-surface-subtle);
+  padding: var(--space-4);
+  border-radius: var(--radius-sm);
+}
+
+.slotOptions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.slotRadio {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.pickupInfo {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius-sm);
+  padding: var(--space-4);
+  font-size: var(--text-sm);
+  color: #166534;
+  line-height: var(--leading-normal);
+}
+
+/* Payment Radios */
+.paymentMethods {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.paymentRadio {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: var(--border-width) solid var(--color-line);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+
+.paymentRadio strong {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+}
+
+.paymentRadio span {
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+  line-height: var(--leading-normal);
+}
+
+.methodActive {
+  border-color: var(--color-brand);
+  background: var(--color-surface-subtle);
+}
+
+/* Summary Right Column */
+.orderSummaryCol {
+  position: sticky;
+  top: 90px;
+}
+
+.reviewCard {
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.reviewHeading {
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  margin: 0;
+  padding-bottom: var(--space-3);
+  border-bottom: var(--border-width) solid var(--color-line);
+}
+
+.reviewItems {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.reviewItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: var(--text-sm);
+}
+
+.reviewItemTitle {
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+}
+
+.reviewItemMeta {
+  font-size: var(--text-xs);
+  color: var(--color-ink-faint);
+}
+
+.reviewItemPrice {
+  font-weight: var(--weight-semibold);
+  color: var(--color-ink);
+}
+
+.calcRows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: var(--border-width) solid var(--color-line);
+}
+
+.calcRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}
+
+.freeText {
+  color: #16a34a;
+  font-weight: var(--weight-bold);
+}
+
+.totalCalcRow {
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  padding-top: var(--space-2);
+  border-top: var(--border-width) solid var(--color-line);
+}
+
+.trustFooter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+  text-align: center;
+}
+
+/* Success Card */
+.successWrapper {
+  max-width: 600px;
+  margin: var(--space-12) auto;
+  padding: 0 var(--space-4);
+}
+
+.successCard {
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  box-shadow: var(--shadow-sm);
+}
+
+.successIcon {
+  font-size: 52px;
+}
+
+.orderBadge {
+  background: #dcfce7;
+  color: #15803d;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.successTitle {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.successText {
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+  margin: 0;
+  line-height: var(--leading-relaxed);
+}
+
+.successDetails {
+  width: 100%;
+  background: var(--color-surface-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  text-align: left;
+  font-size: var(--text-sm);
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-ink-muted);
+}
+
+.detailRow strong {
+  color: var(--color-ink);
+}
+
+.successActions {
+  display: flex;
+  gap: var(--space-3);
+  width: 100%;
+  margin-top: var(--space-2);
+}
+
+.successActions a {
+  flex: 1;
+  text-decoration: none;
+}
+
+@media (max-width: 860px) {
+  .checkoutGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+}

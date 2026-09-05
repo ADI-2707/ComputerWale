@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { clsx } from 'clsx'
 import styles from './Navbar.module.css'
 import { Button } from '../../ui/Button'
+import { useCartStore } from '../../../state/cartStore'
 
 interface NavbarProps {
   cartCount?: number
@@ -17,7 +18,10 @@ const NAV_CATEGORIES = [
 
 const BRANDS = ['Dell', 'HP', 'Lenovo', 'Apple', 'Acer', 'Asus', 'MSI']
 
-export function Navbar({ cartCount = 0 }: NavbarProps) {
+export function Navbar({ cartCount }: NavbarProps) {
+  const storeCount = useCartStore((s) => s.getItemCount())
+  const effectiveCartCount = cartCount !== undefined ? cartCount : storeCount
+
   const [scrolled, setScrolled] = useState(false)
   const [megaOpen, setMegaOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -126,13 +130,13 @@ export function Navbar({ cartCount = 0 }: NavbarProps) {
 
             <a href="/account/login" className={styles.signInLink}>Sign in</a>
 
-            <a href="/cart" className={styles.cartBtn} aria-label={`Cart — ${cartCount} item${cartCount !== 1 ? 's' : ''}`}>
+            <a href="/cart" className={styles.cartBtn} aria-label={`Cart — ${effectiveCartCount} item${effectiveCartCount !== 1 ? 's' : ''}`}>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                 <path d="M2 2h1.5l2 9h9l1.5-6H5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 <circle cx="8" cy="16" r="1" fill="currentColor"/>
                 <circle cx="14" cy="16" r="1" fill="currentColor"/>
               </svg>
-              {cartCount > 0 && <span className={styles.cartBadge}>{cartCount}</span>}
+              {effectiveCartCount > 0 && <span className={styles.cartBadge}>{effectiveCartCount}</span>}
             </a>
 
             {/* Mobile hamburger */}
@@ -208,13 +212,13 @@ export function Navbar({ cartCount = 0 }: NavbarProps) {
           </svg>
           <span>Track</span>
         </a>
-        <a href="/cart" className={styles.bottomBarItem} aria-label={`Cart — ${cartCount} items`}>
+        <a href="/cart" className={styles.bottomBarItem} aria-label={`Cart — ${effectiveCartCount} items`}>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <path d="M2 2h1.5l2 9h9l1.5-6H5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             <circle cx="8" cy="16" r="1" fill="currentColor"/>
             <circle cx="14" cy="16" r="1" fill="currentColor"/>
           </svg>
-          {cartCount > 0 && <span className={styles.bottomBarBadge}>{cartCount}</span>}
+          {effectiveCartCount > 0 && <span className={styles.bottomBarBadge}>{effectiveCartCount}</span>}
           <span>Cart</span>
         </a>
       </div>

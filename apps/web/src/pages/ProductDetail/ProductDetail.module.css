@@ -1,0 +1,340 @@
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4) var(--space-16);
+  position: relative;
+}
+
+.toast {
+  position: fixed;
+  top: 90px;
+  right: var(--space-6);
+  background-color: var(--color-ink);
+  color: var(--color-surface);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  z-index: var(--z-toast);
+  animation: slideIn 0.25s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.toastLink {
+  color: var(--color-brand-light, #ff8a65);
+  text-decoration: underline;
+  font-weight: var(--weight-bold);
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-ink-faint);
+  margin-bottom: var(--space-6);
+}
+
+.breadcrumbs a {
+  color: var(--color-ink-muted);
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  color: var(--color-brand);
+}
+
+.currentCrumb {
+  color: var(--color-ink);
+  font-weight: var(--weight-medium);
+}
+
+/* Two-column layout */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-10);
+  align-items: flex-start;
+  margin-bottom: var(--space-12);
+}
+
+/* Gallery column */
+.galleryCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.mainImageWrapper {
+  position: relative;
+  background: var(--color-surface-subtle);
+  border: var(--border-width) solid var(--color-line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.badgeOverlay {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+}
+
+.thumbnails {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.thumbBtn {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--color-line);
+  background: var(--color-surface-subtle);
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.thumbBtn.activeThumb {
+  border-color: var(--color-brand);
+}
+
+.thumbImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trustCard {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius-md);
+  margin-top: var(--space-2);
+}
+
+.trustIcon {
+  font-size: 24px;
+}
+
+.trustTitle {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: #166534;
+}
+
+.trustSubtitle {
+  font-size: var(--text-xs);
+  color: #15803d;
+  margin-top: 2px;
+  line-height: var(--leading-normal);
+}
+
+/* Info Column */
+.infoCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.titleSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.brandSubtitle {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-brand);
+}
+
+.title {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.specSummary {
+  font-size: var(--text-base);
+  color: var(--color-ink-muted);
+  margin: 0;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.batteryPill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  background-color: var(--color-surface-subtle);
+  border: 1px solid var(--color-line);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  color: var(--color-ink);
+}
+
+.priceSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4) 0;
+  border-top: var(--border-width) solid var(--color-line);
+  border-bottom: var(--border-width) solid var(--color-line);
+}
+
+.gstNote {
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+}
+
+.pincodeSection {
+  background: var(--color-surface-subtle);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+}
+
+.actionSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.qtyRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.qtyLabel {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+}
+
+.btnRow {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.warrantyBox {
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+.warrantyTitle {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  margin: 0 0 var(--space-2);
+}
+
+.warrantyList {
+  margin: 0;
+  padding-left: var(--space-5);
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  line-height: var(--leading-normal);
+}
+
+/* Lower Sections */
+.specsSection,
+.cosmeticSection,
+.similarSection {
+  margin-top: var(--space-12);
+  padding-top: var(--space-8);
+  border-top: var(--border-width) solid var(--color-line);
+}
+
+.sectionHeading {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--space-4);
+}
+
+.specTableWrap {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+}
+
+.cosmeticCard {
+  background: var(--color-surface-subtle);
+  border: var(--border-width) solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+
+.cosmeticText {
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+  line-height: var(--leading-relaxed);
+  margin: 0 0 var(--space-3);
+}
+
+.cosmeticNote {
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+  font-style: italic;
+}
+
+.similarGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+/* Responsive */
+@media (max-width: 840px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .similarGrid {
+    grid-template-columns: 1fr;
+  }
+}

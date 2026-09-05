@@ -1,0 +1,187 @@
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4) var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.badge {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-brand);
+  background: var(--color-brand-faint);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.title {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: var(--text-base);
+  color: var(--color-ink-muted);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+.storesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+}
+
+.storeCard {
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  box-shadow: var(--shadow-sm);
+}
+
+.storeCityTag {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-brand);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.storeName {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.storeAddress {
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+.metaSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4) 0;
+  border-top: var(--border-width) solid var(--color-line);
+  border-bottom: var(--border-width) solid var(--color-line);
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+}
+
+.metaIcon {
+  font-size: 16px;
+}
+
+.metaLink {
+  color: var(--color-ink);
+  text-decoration: none;
+  font-weight: var(--weight-medium);
+}
+
+.metaLink:hover {
+  color: var(--color-brand);
+}
+
+.servicesBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.servicesTitle {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  color: var(--color-ink);
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.servicesList {
+  margin: 0;
+  padding-left: var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.actionButtons {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: auto;
+}
+
+.actionButtons a {
+  text-decoration: none;
+}
+
+/* Bench banner */
+.benchBanner {
+  background: var(--color-surface-subtle);
+  border: var(--border-width) solid var(--color-line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.bannerIcon {
+  font-size: 40px;
+}
+
+.bannerTitle {
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  margin: 0 0 var(--space-1);
+}
+
+.bannerDesc {
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .storesGrid {
+    grid-template-columns: 1fr;
+  }
+}
