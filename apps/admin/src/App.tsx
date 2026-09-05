@@ -146,6 +146,9 @@ export default function App() {
             onClick={isSidebarCollapsed ? toggleSidebar : undefined}
             style={{ cursor: isSidebarCollapsed ? 'pointer' : 'default' }}
             title={isSidebarCollapsed ? 'Click to expand sidebar' : undefined}
+            role={isSidebarCollapsed ? 'button' : undefined}
+            tabIndex={isSidebarCollapsed ? 0 : undefined}
+            onKeyDown={isSidebarCollapsed ? (e) => e.key === 'Enter' && toggleSidebar() : undefined}
           >
             <span className="brand-logo">CW</span>
             <div className="brand-text">
@@ -153,27 +156,30 @@ export default function App() {
               <div className="brand-sub">Raipur Hub Portal</div>
             </div>
           </div>
-          <button
-            type="button"
-            className="collapse-toggle-btn"
-            onClick={toggleSidebar}
-            title={isSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-            aria-label="Toggle sidebar"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className={`toggle-chevron ${isSidebarCollapsed ? 'collapsed' : ''}`}
+
+          {!isSidebarCollapsed && (
+            <button
+              type="button"
+              className="collapse-toggle-btn"
+              onClick={toggleSidebar}
+              title="Collapse sidebar"
+              aria-label="Collapse sidebar"
             >
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-          </button>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="toggle-chevron"
+              >
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+          )}
         </div>
 
         <nav className="nav-menu">
@@ -245,38 +251,14 @@ export default function App() {
       {/* Main Viewport */}
       <main className="main-viewport">
         <header className="topbar">
-          <div className="topbar-left">
-            <button
-              type="button"
-              className="topbar-sidebar-toggle"
-              onClick={toggleSidebar}
-              title={isSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-              aria-label="Toggle sidebar"
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                <line x1="9" y1="3" x2="9" y2="21" />
-                <path d={isSidebarCollapsed ? 'M14 9l3 3-3 3' : 'M16 15l-3-3 3-3'} />
-              </svg>
-            </button>
-            <div>
-              <h1 className="topbar-title">
-                {activeTab === 'dashboard' && 'Daily Operations Overview'}
-                {activeTab === 'orders' && 'Raipur Order Fulfillment'}
-                {activeTab === 'inventory' && 'Store Laptop Inventory'}
-                {activeTab === 'leads' && 'Commercial & Government RFQ Leads'}
-              </h1>
-              <div className="topbar-meta">Pandri Dispatch Desk · Raipur, Chhattisgarh</div>
-            </div>
+          <div>
+            <h1 className="topbar-title">
+              {activeTab === 'dashboard' && 'Daily Operations Overview'}
+              {activeTab === 'orders' && 'Raipur Order Fulfillment'}
+              {activeTab === 'inventory' && 'Store Laptop Inventory'}
+              {activeTab === 'leads' && 'Commercial & Government RFQ Leads'}
+            </h1>
+            <div className="topbar-meta">Pandri Dispatch Desk · Raipur, Chhattisgarh</div>
           </div>
           <div className="topbar-user">
             <span className="user-badge">Store Manager</span>
