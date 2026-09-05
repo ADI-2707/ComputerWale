@@ -1,0 +1,382 @@
+// =============================================================
+// COMPUTER WALE — Mock Catalog (10 laptops per spec §11)
+// Used by all pages in demo mode.
+// Covers: all conditions, all grades, low-stock item (MacBook),
+//         bulk-friendly item (VivoBook), filter edge cases.
+// =============================================================
+
+import type { Product, GradeDefinition, DeliveryZone, StoreLocation } from '../types'
+
+// ── Mock Products ─────────────────────────────────────────────
+
+export const MOCK_PRODUCTS: Product[] = [
+  {
+    id: 'p1',
+    slug: 'dell-latitude-5420-refurb-a',
+    brand: 'Dell',
+    model: 'Latitude 5420',
+    condition: 'refurbished',
+    grade: 'A',
+    specSummary: 'i5-1135G7 · 16GB · 512GB SSD · 14"',
+    specs: {
+      cpu: 'Intel Core i5-1135G7 (11th Gen)',
+      ram: '16 GB DDR4',
+      storage: '512 GB SSD',
+      display: '14" FHD IPS (1920×1080)',
+      os: 'Windows 11 Pro (licensed)',
+      weight: '1.56 kg',
+    },
+    mrp: 42000,
+    price: 27499,
+    stock: 6,
+    images: ['/assets/products/dell-latitude-5420.jpg'],
+    warrantyMonths: 6,
+    warrantyIncludes: ['Windows 11 Pro licensed', 'Battery health ≥85%', 'Charger included'],
+    batteryHealth: 88,
+    cosmeticDetails: 'Grade A — minimal to no visible scratches, screen pristine, keyboard fully functional',
+    deliveryEligible: true,
+    featured: true,
+  },
+  {
+    id: 'p2',
+    slug: 'dell-vostro-3510-refurb-b',
+    brand: 'Dell',
+    model: 'Vostro 3510',
+    condition: 'refurbished',
+    grade: 'B',
+    specSummary: 'i5-1135G7 · 8GB · 256GB SSD · 15.6"',
+    specs: {
+      cpu: 'Intel Core i5-1135G7 (11th Gen)',
+      ram: '8 GB DDR4',
+      storage: '256 GB SSD',
+      display: '15.6" FHD (1920×1080)',
+      os: 'Windows 11 Home (licensed)',
+      weight: '1.76 kg',
+    },
+    mrp: 38000,
+    price: 21999,
+    stock: 4,
+    images: ['/assets/products/dell-vostro-3510.jpg'],
+    warrantyMonths: 3,
+    warrantyIncludes: ['Windows 11 Home licensed', 'Battery health ≥75%'],
+    batteryHealth: 78,
+    cosmeticDetails: 'Grade B — light cosmetic scratches on lid, screen in good condition, all ports functional',
+    deliveryEligible: true,
+    featured: true,
+  },
+  {
+    id: 'p3',
+    slug: 'hp-elitebook-840-g6-refurb-b',
+    brand: 'HP',
+    model: 'EliteBook 840 G6',
+    condition: 'refurbished',
+    grade: 'B',
+    specSummary: 'i5-8365U · 8GB · 256GB SSD · 14"',
+    specs: {
+      cpu: 'Intel Core i5-8365U (8th Gen)',
+      ram: '8 GB DDR4',
+      storage: '256 GB SSD',
+      display: '14" FHD IPS (1920×1080)',
+      os: 'Windows 11 Pro (licensed)',
+      weight: '1.48 kg',
+    },
+    mrp: 35000,
+    price: 19999,
+    stock: 5,
+    images: ['/assets/products/hp-elitebook-840.jpg'],
+    warrantyMonths: 3,
+    warrantyIncludes: ['Windows 11 Pro licensed', 'Battery health ≥72%'],
+    batteryHealth: 75,
+    cosmeticDetails: 'Grade B — enterprise-used, minor wear on palm rest, display excellent',
+    deliveryEligible: true,
+    featured: true,
+  },
+  {
+    id: 'p4',
+    slug: 'hp-probook-450-g8-refurb-a',
+    brand: 'HP',
+    model: 'ProBook 450 G8',
+    condition: 'refurbished',
+    grade: 'A',
+    specSummary: 'i5-1135G7 · 16GB · 512GB SSD · 15.6"',
+    specs: {
+      cpu: 'Intel Core i5-1135G7 (11th Gen)',
+      ram: '16 GB DDR4',
+      storage: '512 GB SSD',
+      display: '15.6" FHD IPS (1920×1080)',
+      os: 'Windows 11 Pro (licensed)',
+      weight: '1.74 kg',
+    },
+    mrp: 45000,
+    price: 29999,
+    stock: 3,
+    images: ['/assets/products/hp-probook-450.jpg'],
+    warrantyMonths: 6,
+    warrantyIncludes: ['Windows 11 Pro licensed', 'Battery health ≥85%', 'Charger included'],
+    batteryHealth: 90,
+    cosmeticDetails: 'Grade A — like new cosmetics, screen spotless, full keyboard functionality',
+    deliveryEligible: true,
+    featured: true,
+  },
+  {
+    id: 'p5',
+    slug: 'lenovo-thinkpad-e14-new',
+    brand: 'Lenovo',
+    model: 'ThinkPad E14',
+    condition: 'new',
+    grade: null,
+    specSummary: 'Ryzen 5 5625U · 16GB · 512GB SSD · 14"',
+    specs: {
+      cpu: 'AMD Ryzen 5 5625U',
+      ram: '16 GB DDR4',
+      storage: '512 GB SSD',
+      display: '14" FHD IPS (1920×1080)',
+      os: 'Windows 11 Home',
+      weight: '1.58 kg',
+    },
+    mrp: 48990,
+    price: 48990,
+    stock: 10,
+    images: ['/assets/products/lenovo-thinkpad-e14.jpg'],
+    warrantyMonths: 12,
+    warrantyIncludes: ['Lenovo manufacturer warranty (1 year)', 'Windows 11 Home'],
+    deliveryEligible: true,
+    featured: true,
+  },
+  {
+    id: 'p6',
+    slug: 'lenovo-thinkpad-t480-refurb-c',
+    brand: 'Lenovo',
+    model: 'ThinkPad T480',
+    condition: 'refurbished',
+    grade: 'C',
+    specSummary: 'i5-8350U · 8GB · 256GB SSD · 14"',
+    specs: {
+      cpu: 'Intel Core i5-8350U (8th Gen)',
+      ram: '8 GB DDR4',
+      storage: '256 GB SSD',
+      display: '14" FHD IPS (1920×1080)',
+      os: 'Windows 10 Pro (licensed)',
+      weight: '1.58 kg',
+    },
+    mrp: 28000,
+    price: 15499,
+    stock: 7,
+    images: ['/assets/products/lenovo-thinkpad-t480.jpg'],
+    warrantyMonths: 1,
+    warrantyIncludes: ['Windows 10 Pro licensed', 'Battery health ≥60%'],
+    batteryHealth: 63,
+    cosmeticDetails: 'Grade C — visible scratches and wear, fully functional, best value for budget buyers',
+    deliveryEligible: true,
+    featured: false,
+  },
+  {
+    id: 'p7',
+    slug: 'apple-macbook-air-m1-refurb-a',
+    brand: 'Apple',
+    model: 'MacBook Air M1',
+    condition: 'refurbished',
+    grade: 'A',
+    specSummary: 'Apple M1 · 8GB · 256GB SSD · 13"',
+    specs: {
+      cpu: 'Apple M1 (8-core)',
+      ram: '8 GB Unified Memory',
+      storage: '256 GB SSD',
+      display: '13.3" Retina IPS (2560×1600)',
+      os: 'macOS (latest supported)',
+      weight: '1.29 kg',
+    },
+    mrp: 74900,
+    price: 52999,
+    stock: 2,  // LOW STOCK — exercises "Only 2 left" state
+    images: ['/assets/products/apple-macbook-air-m1.jpg'],
+    warrantyMonths: 6,
+    warrantyIncludes: ['Battery health ≥85%', 'Original charger included', 'macOS clean install'],
+    batteryHealth: 87,
+    cosmeticDetails: 'Grade A — minimal marks, display pristine, all ports and keyboard functional',
+    deliveryEligible: true,
+    featured: true,
+  },
+  {
+    id: 'p8',
+    slug: 'acer-aspire-7-new',
+    brand: 'Acer',
+    model: 'Aspire 7',
+    condition: 'new',
+    grade: null,
+    specSummary: 'Ryzen 5 5500U · 8GB · 512GB SSD · 15.6"',
+    specs: {
+      cpu: 'AMD Ryzen 5 5500U',
+      ram: '8 GB DDR4',
+      storage: '512 GB SSD',
+      display: '15.6" FHD IPS (1920×1080)',
+      gpu: 'AMD Radeon Graphics',
+      os: 'Windows 11 Home',
+      weight: '2.1 kg',
+    },
+    mrp: 42990,
+    price: 42990,
+    stock: 8,
+    images: ['/assets/products/acer-aspire-7.jpg'],
+    warrantyMonths: 12,
+    warrantyIncludes: ['Acer manufacturer warranty (1 year)', 'Windows 11 Home'],
+    deliveryEligible: true,
+    featured: false,
+  },
+  {
+    id: 'p9',
+    slug: 'asus-vivobook-15-new',
+    brand: 'Asus',
+    model: 'VivoBook 15',
+    condition: 'new',
+    grade: null,
+    specSummary: 'i3-1215U · 8GB · 512GB SSD · 15.6"',
+    specs: {
+      cpu: 'Intel Core i3-1215U (12th Gen)',
+      ram: '8 GB DDR4',
+      storage: '512 GB SSD',
+      display: '15.6" FHD (1920×1080)',
+      os: 'Windows 11 Home',
+      weight: '1.70 kg',
+    },
+    mrp: 34990,
+    price: 34990,
+    stock: 12,  // HIGH STOCK — bulk / govt favourite
+    images: ['/assets/products/asus-vivobook-15.jpg'],
+    warrantyMonths: 12,
+    warrantyIncludes: ['Asus manufacturer warranty (1 year)', 'Windows 11 Home'],
+    deliveryEligible: true,
+    featured: true,
+  },
+  {
+    id: 'p10',
+    slug: 'msi-modern-14-refurb-a',
+    brand: 'MSI',
+    model: 'Modern 14',
+    condition: 'refurbished',
+    grade: 'A',
+    specSummary: 'i5-1135G7 · 16GB · 512GB SSD · 14"',
+    specs: {
+      cpu: 'Intel Core i5-1135G7 (11th Gen)',
+      ram: '16 GB DDR4',
+      storage: '512 GB SSD',
+      display: '14" FHD IPS (1920×1080)',
+      os: 'Windows 11 Pro (licensed)',
+      weight: '1.40 kg',
+    },
+    mrp: 46000,
+    price: 31499,
+    stock: 3,
+    images: ['/assets/products/msi-modern-14.jpg'],
+    warrantyMonths: 6,
+    warrantyIncludes: ['Windows 11 Pro licensed', 'Battery health ≥85%', 'Charger included'],
+    batteryHealth: 91,
+    cosmeticDetails: 'Grade A — minimal wear, ultraslim form factor, display excellent',
+    deliveryEligible: true,
+    featured: true,
+  },
+]
+
+// ── Grade Definitions (displayed in Grade Explainer section) ──
+
+export const GRADE_DEFINITIONS: GradeDefinition[] = [
+  {
+    grade: 'A',
+    cosmeticCondition: 'Minimal to no visible scratches; screen and keyboard in excellent condition',
+    batteryHealthMin: 85,
+    warranty: '6 months (parts & labour)',
+    typicalSavings: '30–40% vs new',
+  },
+  {
+    grade: 'B',
+    cosmeticCondition: 'Light cosmetic wear on body or palm rest; screen fully functional, no dead pixels',
+    batteryHealthMin: 72,
+    warranty: '3 months (parts & labour)',
+    typicalSavings: '40–55% vs new',
+  },
+  {
+    grade: 'C',
+    cosmeticCondition: 'Visible scratches or dents; fully functional hardware, best value tier',
+    batteryHealthMin: 60,
+    warranty: '1 month (parts)',
+    typicalSavings: '50–65% vs new',
+  },
+]
+
+// ── Raipur Delivery Zones ─────────────────────────────────────
+
+export const RAIPUR_PINCODES: DeliveryZone[] = [
+  { pincode: '492001', area: 'Raipur Central', city: 'Raipur', sameDayAvailable: true },
+  { pincode: '492002', area: 'Pandri', city: 'Raipur', sameDayAvailable: true },
+  { pincode: '492003', area: 'Telibandha', city: 'Raipur', sameDayAvailable: true },
+  { pincode: '492004', area: 'Shankar Nagar', city: 'Raipur', sameDayAvailable: true },
+  { pincode: '492006', area: 'Avanti Vihar', city: 'Raipur', sameDayAvailable: false },
+  { pincode: '492007', area: 'Mowa', city: 'Raipur', sameDayAvailable: false },
+  { pincode: '492008', area: 'Tatibandh', city: 'Raipur', sameDayAvailable: false },
+  { pincode: '492009', area: 'VIP Road', city: 'Raipur', sameDayAvailable: true },
+  { pincode: '492010', area: 'Fafadih', city: 'Raipur', sameDayAvailable: false },
+  { pincode: '492099', area: 'Raipur Outskirts', city: 'Raipur', sameDayAvailable: false },
+]
+
+// ── Store Locations ───────────────────────────────────────────
+
+export const STORES: StoreLocation[] = [
+  {
+    id: 'store-raipur',
+    name: 'Computer Wale Raipur',
+    city: 'Raipur',
+    address: 'Shop No. 12, IT Park Road, Pandri, Raipur, Chhattisgarh — 492002',
+    phone: '+91 98765 43210',
+    hours: 'Mon–Sat 10:00 AM – 7:30 PM · Sun 11:00 AM – 5:00 PM',
+    deliveryAvailable: true,
+    mapUrl: 'https://maps.google.com/?q=Raipur+Chhattisgarh',
+  },
+  {
+    id: 'store-ambikapur',
+    name: 'Computer Wale Ambikapur',
+    city: 'Ambikapur',
+    address: 'Near Gandhi Chowk, Station Road, Ambikapur, Chhattisgarh — 497001',
+    phone: '+91 98765 43211',
+    hours: 'Mon–Sat 10:00 AM – 7:00 PM · Sun Closed',
+    deliveryAvailable: false,
+  },
+]
+
+// ── Helper: get featured products ─────────────────────────────
+
+export const FEATURED_PRODUCTS = MOCK_PRODUCTS.filter(p => p.featured)
+
+// ── Helper: check Raipur pincode ──────────────────────────────
+
+export function checkPincode(pincode: string): {
+  valid: boolean
+  deliverable: boolean
+  sameDay: boolean
+  area?: string
+} {
+  const trimmed = pincode.trim()
+  if (!/^\d{6}$/.test(trimmed)) {
+    return { valid: false, deliverable: false, sameDay: false }
+  }
+  const zone = RAIPUR_PINCODES.find(z => z.pincode === trimmed)
+  if (!zone) {
+    return { valid: true, deliverable: false, sameDay: false }
+  }
+  return { valid: true, deliverable: true, sameDay: zone.sameDayAvailable, area: zone.area }
+}
+
+// ── Helper: format price in Indian Rupees ─────────────────────
+
+export function formatPrice(amount: number): string {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0,
+  }).format(amount)
+}
+
+// ── Helper: discount percentage ──────────────────────────────
+
+export function discountPercent(mrp: number, price: number): number {
+  return Math.round(((mrp - price) / mrp) * 100)
+}

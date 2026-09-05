@@ -1,0 +1,10 @@
+{
+  "name": "@computerwale/design-tokens",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Computer Wale design token CSS custom properties — colors, typography, spacing, effects",
+  "main": "index.css",
+  "files": [
+    "*.css"
+  ]
+}

@@ -1,0 +1,54 @@
+/* =============================================================
+   COMPUTER WALE — COLOR DESIGN TOKENS
+   Single source of truth. Both apps/web and apps/admin import
+   this file via packages/design-tokens/index.css.
+   ALL values derived from logo blue #1E3FD1.
+   ============================================================= */
+:root {
+  /* ── Brand Blue Scale ─────────────────────────────────────── */
+  --blue-50:  #EEF1FD;   /* lightest tint — hover bg ghost/chip */
+  --blue-100: #DCE3FA;   /* active/pressed bg on tinted elements */
+  --blue-200: #B9C7F5;   /* disabled borders, subtle dividers */
+  --blue-300: #8FA3ED;   /* placeholder icons, low-emphasis accents */
+  --blue-400: #5872DE;   /* secondary accents, chart lines */
+  --blue-500: #1E3FD1;   /* PRIMARY — logo blue */
+  --blue-600: #1832A8;   /* hover shade of primary */
+  --blue-700: #132667;   /* active/pressed shade of primary */
+  --blue-800: #101F52;   /* deep panel backgrounds */
+  --blue-900: #0D1B4C;   /* deep ink — headings, dark surfaces */
+
+  /* ── Semantic Aliases ─────────────────────────────────────── */
+  --color-primary:              var(--blue-500);
+  --color-primary-hover:        var(--blue-600);
+  --color-primary-active:       var(--blue-700);
+  --color-primary-tint:         var(--blue-50);    /* ghost/chip hover bg */
+  --color-primary-tint-strong:  var(--blue-100);   /* active bg on tinted */
+  --color-primary-dark:         var(--blue-900);
+
+  /* ── Certification Gold — badges/seals ONLY, never interaction ── */
+  --color-seal:       #C8912B;
+  --color-seal-dark:  #9E721E;
+  --color-seal-tint:  #FBF1DF;
+
+  /* ── Neutrals ─────────────────────────────────────────────── */
+  --color-bg:           #FFFFFF;   /* page background — always white */
+  --color-surface-alt:  #F7F8FC;   /* alternating section bg, faint blue-grey */
+  --color-line:         #E4E8F4;   /* borders, dividers, card outlines */
+  --color-graphite:     #4B5568;   /* secondary/muted body text */
+  --color-ink:          #10162B;   /* primary body text */
+
+  /* ── Semantic States ──────────────────────────────────────── */
+  --color-success:     #1F8A5B;
+  --color-success-bg:  #E7F5EE;
+  --color-warning:     #C8912B;   /* reuses seal gold intentionally */
+  --color-warning-bg:  #FBF1DF;
+  --color-error:       #C0392B;
+  --color-error-bg:    #FBEAE7;
+  --color-info:        var(--blue-500);
+  --color-info-bg:     var(--blue-50);
+
+  /* ── Dark Surfaces (footer, admin sidebar) ────────────────── */
+  --color-dark-surface:  var(--blue-900);
+  --color-dark-line:     #24326E;
+  --color-dark-text:     #C9D1F0;
+}
