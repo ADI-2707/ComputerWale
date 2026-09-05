@@ -1,38 +1,43 @@
-/* =============================================================
-   COMPUTER WALE — TYPOGRAPHY DESIGN TOKENS
-   Display: Space Grotesk (geometric, mechanical — echoes logo)
-   Body/UI: Inter (neutral, legible for spec tables & price grids)
-   ============================================================= */
-
 /* Google Fonts import — loaded here so tokens file is self-contained */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap');
 
 :root {
   /* ── Font Families ────────────────────────────────────────── */
-  --font-display: "Space Grotesk", "Segoe UI", sans-serif;  /* headings */
-  --font-body:    "Inter", "Segoe UI", sans-serif;          /* body, UI */
+  --font-display: "Space Grotesk", "Segoe UI", sans-serif;
+  /* headings */
+  --font-body: "Inter", "Segoe UI", sans-serif;
+  /* body, UI */
 
   /* ── Type Scale (rem) ─────────────────────────────────────── */
-  --text-xs:   0.75rem;    /* 12px — micro labels, timestamps */
-  --text-sm:   0.875rem;   /* 14px — captions, table cells */
-  --text-base: 1rem;       /* 16px — body */
-  --text-md:   1.125rem;   /* 18px — lead paragraph */
-  --text-lg:   1.375rem;   /* 22px — card titles */
-  --text-xl:   1.75rem;    /* 28px — section headings */
-  --text-2xl:  2.25rem;    /* 36px — page headings */
-  --text-3xl:  3rem;       /* 48px — hero (desktop only) */
+  --text-xs: 0.75rem;
+  /* 12px — micro labels, timestamps */
+  --text-sm: 0.875rem;
+  /* 14px — captions, table cells */
+  --text-base: 1rem;
+  /* 16px — body */
+  --text-md: 1.125rem;
+  /* 18px — lead paragraph */
+  --text-lg: 1.375rem;
+  /* 22px — card titles */
+  --text-xl: 1.75rem;
+  /* 28px — section headings */
+  --text-2xl: 2.25rem;
+  /* 36px — page headings */
+  --text-3xl: 3rem;
+  /* 48px — hero (desktop only) */
 
   /* ── Line Heights ─────────────────────────────────────────── */
-  --leading-tight:   1.15;
-  --leading-normal:  1.5;
+  --leading-tight: 1.15;
+  --leading-normal: 1.5;
   --leading-relaxed: 1.7;
 
   /* ── Font Weights ─────────────────────────────────────────── */
-  --weight-regular:  400;
-  --weight-medium:   500;
+  --weight-regular: 400;
+  --weight-medium: 500;
   --weight-semibold: 600;
-  --weight-bold:     700;
+  --weight-bold: 700;
 
   /* ── Max line length for prose ────────────────────────────── */
-  --prose-max-width: 65ch;  /* spec tables ignore this (data, not prose) */
+  --prose-max-width: 65ch;
+  /* spec tables ignore this (data, not prose) */
 }
