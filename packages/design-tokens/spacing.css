@@ -14,6 +14,7 @@
   --gutter-desktop: var(--space-6);   
 
   --max-width-content: 1280px;
+  --container-max:     1280px;
   --max-width-admin:   1440px;
   --max-width-prose:   720px;
 }
