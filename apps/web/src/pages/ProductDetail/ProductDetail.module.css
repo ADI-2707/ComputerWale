@@ -63,7 +63,6 @@
   font-weight: var(--weight-medium);
 }
 
-/* Two-column layout */
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -72,7 +71,6 @@
   margin-bottom: var(--space-12);
 }
 
-/* Gallery column */
 .galleryCol {
   display: flex;
   flex-direction: column;
@@ -157,7 +155,6 @@
   line-height: var(--leading-normal);
 }
 
-/* Info Column */
 .infoCol {
   display: flex;
   flex-direction: column;
@@ -279,7 +276,6 @@
   line-height: var(--leading-normal);
 }
 
-/* Lower Sections */
 .specsSection,
 .cosmeticSection,
 .similarSection {
@@ -327,7 +323,6 @@
   gap: var(--space-5);
 }
 
-/* Responsive */
 @media (max-width: 840px) {
   .grid {
     grid-template-columns: 1fr;

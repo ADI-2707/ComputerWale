@@ -4,7 +4,7 @@ interface QuantityStepperProps {
   value: number
   min?: number
   max?: number
-  bulkThreshold?: number   // If qty > this, CTA swaps to "Request Bulk Quote"
+  bulkThreshold?: number   
   onChange: (value: number) => void
   onBulkMode?: (isBulk: boolean) => void
 }

@@ -44,7 +44,6 @@
   margin: 0;
 }
 
-/* Credentials grid */
 .credentialsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -79,7 +78,6 @@
   margin: 0;
 }
 
-/* Compliance section */
 .complianceSection {
   display: flex;
   flex-direction: column;
@@ -131,7 +129,6 @@
   border-radius: var(--radius-full);
 }
 
-/* Form section */
 .formSection {
   max-width: 800px;
   margin: 0 auto;
@@ -163,7 +160,6 @@
   margin: 0;
 }
 
-/* Nodal card */
 .nodalCard {
   background: #eff6ff;
   border: 1px solid #bfdbfe;
@@ -195,7 +191,6 @@
   color: #1e3a8a;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .credentialsGrid {
     grid-template-columns: repeat(2, 1fr);

@@ -6,7 +6,7 @@
 
 ---
 
-## 🌟 Overview & Product Framing
+## Overview & Product Framing
 
 **Computer Wale** is Chhattisgarh’s trusted laptop specialist, addressing three distinct customer tracks:
 
@@ -18,7 +18,7 @@
 
 ---
 
-## 🏛️ Monorepo Architecture
+## Monorepo Architecture
 
 ```text
 ComputerWale/
@@ -42,7 +42,7 @@ ComputerWale/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - **Node.js**: `>= 22.0.0`
@@ -75,7 +75,7 @@ npm run build
 
 ---
 
-## 🧭 Web Storefront Routes
+## Web Storefront Routes
 
 | Route | Page | Description |
 |---|---|---|
@@ -86,14 +86,14 @@ npm run build
 | `/government` | **Government Supply** | GeM portal registration proof, BIS compliance matrix, institutional tender RFQ |
 | `/cart` | **Shopping Cart** | Item management, QuantityStepper, Raipur local dispatch guarantee, summary sidebar |
 | `/checkout` | **Checkout** | Customer info, Raipur same-day delivery slot selector (morning/evening), COD/UPI |
-| `/track` | **Track Order** | Order search (`CW-98241`), 4-step inspection timeline, Raipur store rider contact |
+| `/track` | **Track Order** | Order search (CW-98241), 4-step inspection timeline, Raipur store rider contact |
 | `/stores` | **Store Locations** | Pandri (Raipur) flagship & Ambikapur branch addresses, timings, and testing bench |
 | `/account` | **Customer Account** | 1-click demo login, live orders, saved addresses, warranty certificate lookup |
 | `*` | **404 Not Found** | Friendly fallback page directing back to catalog |
 
 ---
 
-## 🎨 Design System & Philosophy
+## Design System & Philosophy
 
 - **Color Palette**: Built around trust and clarity — Deep Slate `#0f172a`, International Brand Red-Orange `#e04b2b`, and Raipur verified green `#16a34a`.
 - **Aesthetics**: Glassmorphic headers, card hover lifts, subtle borders, high-contrast typography (Inter / System font stack).
@@ -101,7 +101,7 @@ npm run build
 
 ---
 
-## 🏪 Physical Store Locations
+## Physical Store Locations
 
 - **Raipur Flagship Experience Hub**:  
   Shop No. 12, IT Park Road, Pandri, Raipur, Chhattisgarh — 492002  
@@ -115,5 +115,5 @@ npm run build
 
 ---
 
-## 📄 License
+## License
 Private repository — © Computer Wale. All rights reserved.

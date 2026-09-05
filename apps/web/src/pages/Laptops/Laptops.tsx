@@ -28,36 +28,34 @@ export default function Laptops() {
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
-  // Unique lists from data
   const availableBrands = useMemo(() => {
     return Array.from(new Set(MOCK_PRODUCTS.map((p) => p.brand))).sort()
   }, [])
 
   const availableRams = ['8 GB', '16 GB', '32 GB']
 
-  // Filtered & Sorted products
   const filteredProducts = useMemo(() => {
     return MOCK_PRODUCTS.filter((product) => {
-      // Condition filter
+      
       if (condition.length > 0 && !condition.includes(product.condition)) {
         return false
       }
-      // Brand filter
+      
       if (brands.length > 0 && !brands.includes(product.brand)) {
         return false
       }
-      // Grade filter
+      
       if (grades.length > 0) {
         if (!product.grade || !grades.includes(product.grade)) {
           return false
         }
       }
-      // RAM filter
+      
       if (ramOptions.length > 0) {
         const matchesRam = ramOptions.some((r) => product.specs.ram.includes(r.replace(' ', '')))
         if (!matchesRam) return false
       }
-      // Price filter
+      
       if (product.price < priceRange[0] || product.price > priceRange[1]) {
         return false
       }
@@ -69,7 +67,7 @@ export default function Laptops() {
         const gradeWeight = { A: 1, B: 2, C: 3, null: 0 }
         return (gradeWeight[a.grade ?? 'null'] ?? 9) - (gradeWeight[b.grade ?? 'null'] ?? 9)
       }
-      // newest default
+      
       return 0
     })
   }, [condition, brands, grades, ramOptions, priceRange, sort])
@@ -78,7 +76,7 @@ export default function Laptops() {
 
   return (
     <div className={styles.container}>
-      {/* Breadcrumb & Header */}
+      {}
       <div className={styles.header}>
         <div className={styles.breadcrumbs}>
           <Link to="/">Home</Link>
@@ -124,7 +122,7 @@ export default function Laptops() {
           </div>
         </div>
 
-        {/* Active Filters Pill Bar */}
+        {}
         {activeCount > 0 && (
           <div className={styles.activeBar}>
             <span className={styles.activeLabel}>Active Filters:</span>
@@ -158,7 +156,7 @@ export default function Laptops() {
       </div>
 
       <div className={styles.contentLayout}>
-        {/* Desktop Sidebar Filters */}
+        {}
         <aside className={`${styles.filterRail} ${mobileFiltersOpen ? styles.mobileOpen : ''}`}>
           <div className={styles.railHeader}>
             <h2 className={styles.railTitle}>Filters</h2>
@@ -177,7 +175,7 @@ export default function Laptops() {
             </button>
           </div>
 
-          {/* Condition Filter */}
+          {}
           <div className={styles.filterSection}>
             <h3 className={styles.filterHeading}>Condition Tier</h3>
             <div className={styles.optionList}>
@@ -197,7 +195,7 @@ export default function Laptops() {
             </div>
           </div>
 
-          {/* Grade Filter */}
+          {}
           <div className={styles.filterSection}>
             <h3 className={styles.filterHeading}>Refurbished Grade</h3>
             <div className={styles.optionList}>
@@ -215,7 +213,7 @@ export default function Laptops() {
             </div>
           </div>
 
-          {/* Brand Filter */}
+          {}
           <div className={styles.filterSection}>
             <h3 className={styles.filterHeading}>Brand</h3>
             <div className={styles.optionList}>
@@ -233,7 +231,7 @@ export default function Laptops() {
             </div>
           </div>
 
-          {/* RAM Filter */}
+          {}
           <div className={styles.filterSection}>
             <h3 className={styles.filterHeading}>RAM</h3>
             <div className={styles.optionList}>
@@ -251,7 +249,7 @@ export default function Laptops() {
             </div>
           </div>
 
-          {/* Price Range Slider */}
+          {}
           <div className={styles.filterSection}>
             <div className={styles.priceHeadingRow}>
               <h3 className={styles.filterHeading}>Max Price</h3>
@@ -279,7 +277,7 @@ export default function Laptops() {
           </div>
         </aside>
 
-        {/* Product Grid Area */}
+        {}
         <main className={styles.mainGridArea}>
           <div className={styles.resultsInfo}>
             <span>

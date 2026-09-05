@@ -29,7 +29,7 @@ const STATUS_LABEL: Record<OrderStatus, string> = {
 }
 
 export function Badge({ variant, label, grade, condition, status, className }: BadgeProps) {
-  // Auto-derive variant from grade/condition/status if not passed
+  
   const resolvedVariant: BadgeVariant = variant
     ?? (grade ? GRADE_MAP[grade] : undefined)
     ?? (condition === 'new' ? 'new' : condition ? 'condition' : undefined)

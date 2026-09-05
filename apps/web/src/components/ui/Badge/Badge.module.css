@@ -12,7 +12,6 @@
   border: 1px solid transparent;
 }
 
-/* Grade badges — gold seal (color-seal, NEVER used for interactions) */
 .gradeA {
   background-color: var(--color-seal-tint);
   color: var(--color-seal-dark);
@@ -31,7 +30,6 @@
   border-color: #C49535;
 }
 
-/* Condition badges */
 .new {
   background-color: var(--blue-50);
   color: var(--blue-700);
@@ -44,7 +42,6 @@
   border-color: var(--color-line);
 }
 
-/* Semantic status badges */
 .success {
   background-color: var(--color-success-bg);
   color: var(--color-success);

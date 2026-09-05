@@ -30,7 +30,6 @@
   .dialog::backdrop { animation: none; }
 }
 
-/* Sizes */
 .sm { width: min(400px, 90vw); }
 .md { width: min(560px, 90vw); }
 .lg { width: min(760px, 90vw); }

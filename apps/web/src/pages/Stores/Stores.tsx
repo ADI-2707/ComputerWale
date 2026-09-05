@@ -77,7 +77,7 @@ export default function Stores() {
         ))}
       </div>
 
-      {/* Testing bench promise banner */}
+      {}
       <div className={styles.benchBanner}>
         <div className={styles.bannerIcon}>🔬</div>
         <div className={styles.bannerContent}>

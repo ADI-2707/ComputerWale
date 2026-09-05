@@ -50,7 +50,6 @@
   border-color: var(--color-brand);
 }
 
-/* Result Card */
 .resultCard {
   background: var(--color-surface);
   border: var(--border-width) solid var(--color-line);
@@ -93,7 +92,6 @@
   border-radius: var(--radius-full);
 }
 
-/* Timeline */
 .timeline {
   display: flex;
   flex-direction: column;
@@ -176,7 +174,6 @@
   color: var(--color-ink-muted);
 }
 
-/* Rider Box */
 .riderBox {
   display: flex;
   align-items: center;
@@ -218,7 +215,6 @@
   white-space: nowrap;
 }
 
-/* Package details */
 .packageSummary {
   background: var(--color-surface-subtle);
   border-radius: var(--radius-md);

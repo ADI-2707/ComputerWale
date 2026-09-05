@@ -3,7 +3,6 @@ import { Navbar } from './components/layout/Navbar'
 import { Footer } from './components/layout/Footer'
 import { ScrollToTop } from './components/common/ScrollToTop'
 
-// Pages
 import { Home } from './pages/Home'
 import { Laptops } from './pages/Laptops'
 import { ProductDetail } from './pages/ProductDetail'

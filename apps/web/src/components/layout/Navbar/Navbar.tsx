@@ -32,7 +32,6 @@ export function Navbar({ cartCount }: NavbarProps) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Close mega menu on click outside
   useEffect(() => {
     if (!megaOpen) return
     const close = (e: MouseEvent) => {
@@ -43,7 +42,6 @@ export function Navbar({ cartCount }: NavbarProps) {
     return () => document.removeEventListener('mousedown', close)
   }, [megaOpen])
 
-  // Lock body scroll when mobile nav is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
@@ -57,15 +55,15 @@ export function Navbar({ cartCount }: NavbarProps) {
         role="banner"
       >
         <div className={styles.inner}>
-          {/* Logo */}
+          {}
           <a href="/" className={styles.logo} aria-label="Computer Wale — Home">
             <span className={styles.logoMark}>CW</span>
             <span className={styles.logoText}>Computer<strong>Wale</strong></span>
           </a>
 
-          {/* Desktop Nav */}
+          {}
           <nav className={styles.desktopNav} aria-label="Main navigation">
-            {/* Laptops mega-menu trigger */}
+            {}
             <div className={styles.megaTriggerWrap}>
               <button
                 className={clsx(styles.navLink, megaOpen && styles.navLinkActive)}
@@ -117,9 +115,9 @@ export function Navbar({ cartCount }: NavbarProps) {
             <a href="/track" className={styles.navLink}>Track Order</a>
           </nav>
 
-          {/* Right side */}
+          {}
           <div className={styles.rightSide}>
-            {/* Raipur delivery context pill — always visible, Raipur-first */}
+            {}
             <span className={styles.deliveryPill} aria-label="Delivering to Raipur">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                 <circle cx="6" cy="5" r="2.5" stroke="currentColor" strokeWidth="1.2"/>
@@ -139,7 +137,7 @@ export function Navbar({ cartCount }: NavbarProps) {
               {effectiveCartCount > 0 && <span className={styles.cartBadge}>{effectiveCartCount}</span>}
             </a>
 
-            {/* Mobile hamburger */}
+            {}
             <button
               className={styles.hamburger}
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
@@ -154,7 +152,7 @@ export function Navbar({ cartCount }: NavbarProps) {
         </div>
       </header>
 
-      {/* Mobile Nav Drawer */}
+      {}
       {mobileOpen && (
         <div className={styles.mobileDrawerOverlay} onClick={() => setMobileOpen(false)} aria-hidden="true" />
       )}
@@ -197,7 +195,7 @@ export function Navbar({ cartCount }: NavbarProps) {
         </div>
       </nav>
 
-      {/* Mobile sticky bottom bar */}
+      {}
       <div className={styles.mobileBottomBar} role="navigation" aria-label="Quick actions">
         <a href="/laptops" className={styles.bottomBarItem}>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">

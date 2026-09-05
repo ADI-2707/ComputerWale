@@ -1,12 +1,4 @@
-/* =============================================================
-   COMPUTER WALE — DESIGN TOKENS (index)
-   Import this single file from your app's main entry point.
-   All CSS custom properties will cascade to every component.
 
-   Usage in apps/web/src/main.tsx:
-     import '../../packages/design-tokens/index.css';
-   Or via apps/web/src/styles/tokens.css which re-exports this.
-   ============================================================= */
 @import './colors.css';
 @import './typography.css';
 @import './spacing.css';

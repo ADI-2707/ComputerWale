@@ -148,7 +148,6 @@
   text-decoration: none;
 }
 
-/* Bench banner */
 .benchBanner {
   background: var(--color-surface-subtle);
   border: var(--border-width) solid var(--color-line);

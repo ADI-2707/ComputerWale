@@ -32,7 +32,7 @@ export default function TrackOrder() {
           Check real-time fulfillment status, inspection milestone, and rider dispatch updates.
         </p>
 
-        {/* Search Input */}
+        {}
         <form onSubmit={handleSearch} className={styles.searchBar}>
           <input
             type="text"
@@ -57,7 +57,7 @@ export default function TrackOrder() {
             <div className={styles.orderStatusBadge}>Out for Delivery</div>
           </div>
 
-          {/* Timeline */}
+          {}
           <div className={styles.timeline}>
             <div className={`${styles.timelineStep} ${styles.stepDone}`}>
               <div className={styles.stepDot}>✓</div>
@@ -96,7 +96,7 @@ export default function TrackOrder() {
             </div>
           </div>
 
-          {/* Rider Box */}
+          {}
           <div className={styles.riderBox}>
             <div className={styles.riderAvatar}>👨🏽‍💼</div>
             <div className={styles.riderDetails}>
@@ -108,7 +108,7 @@ export default function TrackOrder() {
             </a>
           </div>
 
-          {/* Package Details */}
+          {}
           <div className={styles.packageSummary}>
             <h3 className={styles.packageHeading}>Package Contents:</h3>
             <div className={styles.packageItem}>

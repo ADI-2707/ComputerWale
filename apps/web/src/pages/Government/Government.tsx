@@ -4,7 +4,7 @@ import { RFQForm } from '../../components/forms/RFQForm'
 export default function Government() {
   return (
     <div className={styles.container}>
-      {/* Hero Header */}
+      {}
       <section className={styles.hero}>
         <span className={styles.tag}>GeM & Institutional Procurement</span>
         <h1 className={styles.title}>Government & PSU Laptop Supply</h1>
@@ -14,7 +14,7 @@ export default function Government() {
         </p>
       </section>
 
-      {/* Compliance & Credentials Strip */}
+      {}
       <section className={styles.credentialsGrid}>
         <div className={styles.credCard}>
           <div className={styles.credIcon}>🏛️</div>
@@ -38,7 +38,7 @@ export default function Government() {
         </div>
       </section>
 
-      {/* Specification & Tender Compliance Table */}
+      {}
       <section className={styles.complianceSection}>
         <h2 className={styles.sectionHeading}>Standard Tender Compliance Matrix</h2>
         <div className={styles.tableWrapper}>
@@ -81,7 +81,7 @@ export default function Government() {
         </div>
       </section>
 
-      {/* Tender RFQ Form */}
+      {}
       <section className={styles.formSection}>
         <div className={styles.formCard}>
           <div className={styles.formHeader}>
@@ -95,7 +95,7 @@ export default function Government() {
         </div>
       </section>
 
-      {/* Nodal Officer Contact */}
+      {}
       <section className={styles.nodalCard}>
         <div className={styles.nodalInfo}>
           <h3 className={styles.nodalTitle}>Nodal Officer — Institutional & Government Tenders</h3>

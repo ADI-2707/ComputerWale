@@ -22,7 +22,6 @@ export default function ProductDetail() {
   const [addedToast, setAddedToast] = useState(false)
   const [activeImgIndex, setActiveImgIndex] = useState(0)
 
-  // Similar products in same condition or brand
   const similarProducts = MOCK_PRODUCTS.filter(
     (p) => p.id !== product.id && (p.brand === product.brand || p.condition === product.condition)
   ).slice(0, 3)
@@ -40,7 +39,7 @@ export default function ProductDetail() {
 
   return (
     <div className={styles.container}>
-      {/* Toast */}
+      {}
       {addedToast && (
         <div className={styles.toast}>
           <span>✓ Added {quantity} item(s) to cart!</span>
@@ -50,7 +49,7 @@ export default function ProductDetail() {
         </div>
       )}
 
-      {/* Breadcrumbs */}
+      {}
       <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
         <Link to="/">Home</Link>
         <span>/</span>
@@ -62,7 +61,7 @@ export default function ProductDetail() {
       </nav>
 
       <div className={styles.grid}>
-        {/* Left Column: Image Gallery */}
+        {}
         <div className={styles.galleryCol}>
           <div className={styles.mainImageWrapper}>
             <img
@@ -70,7 +69,7 @@ export default function ProductDetail() {
               alt={`${product.brand} ${product.model}`}
               className={styles.mainImage}
               onError={(e) => {
-                // Fallback to hero image if asset is missing
+                
                 ;(e.target as HTMLImageElement).src = '/hero-laptops.jpg'
               }}
             />
@@ -92,7 +91,7 @@ export default function ProductDetail() {
             ))}
           </div>
 
-          {/* Local Raipur dispatch trust card */}
+          {}
           <div className={styles.trustCard}>
             <div className={styles.trustIcon}>🏢</div>
             <div>
@@ -104,7 +103,7 @@ export default function ProductDetail() {
           </div>
         </div>
 
-        {/* Right Column: Details & Actions */}
+        {}
         <div className={styles.infoCol}>
           <div className={styles.titleSection}>
             <div className={styles.brandSubtitle}>{product.brand}</div>
@@ -127,12 +126,12 @@ export default function ProductDetail() {
             <span className={styles.gstNote}>Includes GST & 6-Month Store Warranty</span>
           </div>
 
-          {/* Pincode Raipur checker */}
+          {}
           <div className={styles.pincodeSection}>
             <PincodeChecker />
           </div>
 
-          {/* Purchase Controls */}
+          {}
           <div className={styles.actionSection}>
             <div className={styles.qtyRow}>
               <span className={styles.qtyLabel}>Quantity:</span>
@@ -165,7 +164,7 @@ export default function ProductDetail() {
             </div>
           </div>
 
-          {/* Warranty & Inclusions Box */}
+          {}
           <div className={styles.warrantyBox}>
             <h3 className={styles.warrantyTitle}>What is included:</h3>
             <ul className={styles.warrantyList}>
@@ -183,7 +182,7 @@ export default function ProductDetail() {
         </div>
       </div>
 
-      {/* Specifications Section */}
+      {}
       <section className={styles.specsSection}>
         <h2 className={styles.sectionHeading}>Technical Specifications</h2>
         <div className={styles.specTableWrap}>
@@ -196,7 +195,7 @@ export default function ProductDetail() {
         </div>
       </section>
 
-      {/* Cosmetic Details Section */}
+      {}
       {product.cosmeticDetails && (
         <section className={styles.cosmeticSection}>
           <h2 className={styles.sectionHeading}>Condition & Cosmetic Assessment</h2>
@@ -210,7 +209,7 @@ export default function ProductDetail() {
         </section>
       )}
 
-      {/* Similar Products */}
+      {}
       {similarProducts.length > 0 && (
         <section className={styles.similarSection}>
           <h2 className={styles.sectionHeading}>Similar Laptops You Might Like</h2>

@@ -1,13 +1,7 @@
-// =============================================================
-// COMPUTER WALE — Shared TypeScript Types
-// Used across components, pages, state stores, and mock data.
-// =============================================================
-
-// ── Product / Catalog ─────────────────────────────────────────
 
 export type Condition = 'new' | 'refurbished' | 'second-hand'
 
-export type Grade = 'A' | 'B' | 'C' | null // null = new (ungraded)
+export type Grade = 'A' | 'B' | 'C' | null 
 
 export interface Product {
   id: string
@@ -16,19 +10,19 @@ export interface Product {
   model: string
   condition: Condition
   grade: Grade
-  /** One-line spec summary for card display */
+  
   specSummary: string
   specs: ProductSpecs
-  mrp: number        // Maximum Retail Price (₹)
-  price: number      // Selling price (₹)
-  stock: number      // Units available in Raipur
-  images: string[]   // URL array, first image is primary
+  mrp: number        
+  price: number      
+  stock: number      
+  images: string[]   
   warrantyMonths: number
-  warrantyIncludes: string[]  // e.g. ["Windows 11 Pro licensed", "Battery replacement warranty"]
-  batteryHealth?: number      // Percentage, only for refurbished
-  cosmeticDetails?: string    // Grade detail description
-  deliveryEligible: boolean   // true = Raipur delivery, false = walk-in only
-  featured: boolean           // CMS-driven, shown on homepage
+  warrantyIncludes: string[]  
+  batteryHealth?: number      
+  cosmeticDetails?: string    
+  deliveryEligible: boolean   
+  featured: boolean           
 }
 
 export interface ProductSpecs {
@@ -42,17 +36,13 @@ export interface ProductSpecs {
   batteryCapacity?: string
 }
 
-// ── Grade System ──────────────────────────────────────────────
-
 export interface GradeDefinition {
   grade: 'A' | 'B' | 'C'
   cosmeticCondition: string
-  batteryHealthMin: number   // % minimum
+  batteryHealthMin: number   
   warranty: string
-  typicalSavings: string     // e.g. "35–50% vs new"
+  typicalSavings: string     
 }
-
-// ── Cart ──────────────────────────────────────────────────────
 
 export interface CartItem {
   product: Product
@@ -65,8 +55,6 @@ export interface Cart {
   itemCount: number
 }
 
-// ── Order / Tracking ──────────────────────────────────────────
-
 export type OrderStatus =
   | 'confirmed'
   | 'packed'
@@ -78,8 +66,8 @@ export type OrderStatus =
 export interface OrderStatusStep {
   status: OrderStatus
   label: string
-  timestamp?: string   // ISO string
-  riderName?: string   // only for out_for_delivery
+  timestamp?: string   
+  riderName?: string   
   riderPhone?: string
 }
 
@@ -93,8 +81,6 @@ export interface Order {
   total: number
   createdAt: string
 }
-
-// ── Address / Delivery ────────────────────────────────────────
 
 export interface Address {
   name: string
@@ -120,8 +106,6 @@ export interface DeliveryZone {
   sameDayAvailable: boolean
 }
 
-// ── RFQ / Bulk & Govt ─────────────────────────────────────────
-
 export type EnquiryType = 'bulk' | 'government'
 
 export interface RFQLead {
@@ -138,8 +122,6 @@ export interface RFQLead {
   submittedAt?: string
 }
 
-// ── Customer / Auth ───────────────────────────────────────────
-
 export interface Customer {
   id: string
   name: string
@@ -148,8 +130,6 @@ export interface Customer {
   addresses: Address[]
 }
 
-// ── Store Locations ───────────────────────────────────────────
-
 export interface StoreLocation {
   id: string
   name: string
@@ -157,11 +137,9 @@ export interface StoreLocation {
   address: string
   phone: string
   hours: string
-  deliveryAvailable: boolean  // Raipur: true, Ambikapur: false
+  deliveryAvailable: boolean  
   mapUrl?: string
 }
-
-// ── UI State ──────────────────────────────────────────────────
 
 export type AsyncStatus = 'idle' | 'loading' | 'success' | 'empty' | 'error'
 
@@ -170,8 +148,6 @@ export interface AsyncState<T> {
   data: T | null
   error?: string
 }
-
-// ── Filter / Sort ─────────────────────────────────────────────
 
 export interface FilterState {
   condition: Condition[]

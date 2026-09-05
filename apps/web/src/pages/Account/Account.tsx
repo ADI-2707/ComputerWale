@@ -13,7 +13,6 @@ export default function Account() {
   const [loginName, setLoginName] = useState('')
   const [loginPhone, setLoginPhone] = useState('')
 
-  // Address modal/form state
   const [newStreet, setNewStreet] = useState('')
   const [newPincode, setNewPincode] = useState('492001')
 
@@ -104,7 +103,7 @@ export default function Account() {
 
   return (
     <div className={styles.container}>
-      {/* Account Header */}
+      {}
       <div className={styles.accountHeader}>
         <div className={styles.userProfileMeta}>
           <div className={styles.avatar}>{user.name.charAt(0)}</div>
@@ -120,7 +119,7 @@ export default function Account() {
         </Button>
       </div>
 
-      {/* Tabs */}
+      {}
       <div className={styles.tabs}>
         <button
           type="button"
@@ -145,11 +144,11 @@ export default function Account() {
         </button>
       </div>
 
-      {/* Tab: Orders */}
+      {}
       {activeTab === 'orders' && (
         <div className={styles.tabContent}>
           <div className={styles.ordersList}>
-            {/* Active Mock Order */}
+            {}
             <div className={styles.orderCard}>
               <div className={styles.orderCardHeader}>
                 <div>
@@ -179,7 +178,7 @@ export default function Account() {
               </div>
             </div>
 
-            {/* Past Mock Order */}
+            {}
             <div className={styles.orderCard}>
               <div className={styles.orderCardHeader}>
                 <div>
@@ -210,7 +209,7 @@ export default function Account() {
         </div>
       )}
 
-      {/* Tab: Addresses */}
+      {}
       {activeTab === 'addresses' && (
         <div className={styles.tabContent}>
           <div className={styles.addressGrid}>
@@ -226,7 +225,7 @@ export default function Account() {
               </div>
             ))}
 
-            {/* Add Address Form */}
+            {}
             <form onSubmit={handleAddAddress} className={styles.addAddressCard}>
               <h3 className={styles.addAddressTitle}>Add New Address in Raipur</h3>
               <div className={styles.inputGroup}>
@@ -258,7 +257,7 @@ export default function Account() {
         </div>
       )}
 
-      {/* Tab: Profile */}
+      {}
       {activeTab === 'profile' && (
         <div className={styles.tabContent}>
           <div className={styles.profileCard}>

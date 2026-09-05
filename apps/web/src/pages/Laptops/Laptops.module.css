@@ -107,7 +107,6 @@
   border-color: var(--color-brand);
 }
 
-/* Active filters */
 .activeBar {
   display: flex;
   align-items: center;
@@ -142,7 +141,6 @@
   padding: var(--space-1);
 }
 
-/* Content layout: Sidebar + Grid */
 .contentLayout {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -150,7 +148,6 @@
   align-items: flex-start;
 }
 
-/* Filter Rail */
 .filterRail {
   background: var(--color-surface);
   border: var(--border-width) solid var(--color-line);
@@ -263,7 +260,6 @@
   display: none;
 }
 
-/* Main Grid Area */
 .mainGridArea {
   display: flex;
   flex-direction: column;
@@ -281,7 +277,6 @@
   gap: var(--space-5);
 }
 
-/* Empty State */
 .emptyState {
   display: flex;
   flex-direction: column;
@@ -312,7 +307,6 @@
   margin: 0;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .productGrid {
     grid-template-columns: repeat(2, 1fr);

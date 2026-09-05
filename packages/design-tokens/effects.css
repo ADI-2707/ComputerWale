@@ -1,57 +1,30 @@
-/* =============================================================
-   COMPUTER WALE — EFFECTS DESIGN TOKENS
-   Radius, elevation (shadows), borders, motion.
 
-   SHADOW SYSTEM RULES:
-   - Single imaginary light source: top, slightly left, low angle
-   - All shadows: x=0, small positive y, no spread
-   - Only distance/blur/opacity change between levels
-   - Shadows are slim — low blur:offset ratio, low opacity
-   - At rest → 1 step up on hover/focus/active MAX
-   - Modals/toasts open directly at elevation-4 (no lower state)
-   ============================================================= */
 :root {
-  /* ── Border Radius ────────────────────────────────────────── */
-  --radius-sm:   4px;     /* inputs, chips */
-  --radius-md:   8px;     /* cards */
-  --radius-lg:   14px;    /* modals, hero panel */
-  --radius-pill: 999px;   /* status badges only */
+  
+  --radius-sm:   4px;     
+  --radius-md:   8px;     
+  --radius-lg:   14px;    
+  --radius-pill: 999px;   
 
   --border-width: 1px;
 
-  /* ── Elevation Scale ─────────────────────────────────────── */
-  /* Same direction (0, y, 0), same color (#0D1B4C = --blue-900) */
-  /* Only distance/opacity steps up between levels              */
-  --elevation-0: none;                                    /* flush: inputs, table rows */
-  --elevation-1: 0 1px  2px  rgba(13, 27, 76, 0.06);     /* resting card, button */
-  --elevation-2: 0 3px  8px  rgba(13, 27, 76, 0.09);     /* hovered card, dropdown */
-  --elevation-3: 0 8px  20px rgba(13, 27, 76, 0.12);     /* raised card, popover */
-  --elevation-4: 0 16px 40px rgba(13, 27, 76, 0.16);     /* modal, dialog, toast */
+  --elevation-0: none;                                    
+  --elevation-1: 0 1px  2px  rgba(13, 27, 76, 0.06);     
+  --elevation-2: 0 3px  8px  rgba(13, 27, 76, 0.09);     
+  --elevation-3: 0 8px  20px rgba(13, 27, 76, 0.12);     
+  --elevation-4: 0 16px 40px rgba(13, 27, 76, 0.16);     
 
-  /* Aliases — kept so component class names still resolve */
   --shadow-sm: var(--elevation-1);
   --shadow-md: var(--elevation-2);
   --shadow-lg: var(--elevation-4);
 
-  /* ── Motion ──────────────────────────────────────────────── */
   --ease-standard: cubic-bezier(0.2, 0.0, 0, 1);
   --duration-fast: 120ms;
   --duration-base: 200ms;
   --duration-slow: 400ms;
 
-  /* ── Breakpoints (reference only — use in @media queries) ── */
-  /* --bp-xs:  360px  */
-  /* --bp-sm:  480px  */
-  /* --bp-md:  768px  */
-  /* --bp-lg:  1024px */
-  /* --bp-xl:  1280px */
-  /* --bp-2xl: 1536px */
 }
 
-/* ── Reduced Motion override ─────────────────────────────── */
-/* Components check this when deciding to skip transforms.    */
-/* The prefers-reduced-motion class is added to <html> by     */
-/* the app's motion-detection bootstrap in main.tsx.          */
 @media (prefers-reduced-motion: reduce) {
   :root {
     --duration-fast: 0ms;

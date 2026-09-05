@@ -1,24 +1,18 @@
-/* =============================================================
-   COMPUTER WALE — SPACING DESIGN TOKENS
-   4px base scale. All layout spacing must use these tokens.
-   Never hard-code px values in component CSS Modules.
-   ============================================================= */
+
 :root {
-  --space-1:  4px;    /*  4px */
-  --space-2:  8px;    /*  8px */
-  --space-3:  12px;   /* 12px */
-  --space-4:  16px;   /* 16px */
-  --space-5:  24px;   /* 24px */
-  --space-6:  32px;   /* 32px */
-  --space-7:  48px;   /* 48px */
-  --space-8:  64px;   /* 64px */
-  --space-9:  96px;   /* 96px */
+  --space-1:  4px;    
+  --space-2:  8px;    
+  --space-3:  12px;   
+  --space-4:  16px;   
+  --space-5:  24px;   
+  --space-6:  32px;   
+  --space-7:  48px;   
+  --space-8:  64px;   
+  --space-9:  96px;   
 
-  /* Grid gutters */
-  --gutter-mobile:  var(--space-4);   /* 16px */
-  --gutter-desktop: var(--space-6);   /* 32px */
+  --gutter-mobile:  var(--space-4);   
+  --gutter-desktop: var(--space-6);   
 
-  /* Max content widths */
   --max-width-content: 1280px;
   --max-width-admin:   1440px;
   --max-width-prose:   720px;

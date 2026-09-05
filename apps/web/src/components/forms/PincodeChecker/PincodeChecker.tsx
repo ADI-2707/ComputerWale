@@ -20,7 +20,7 @@ export function PincodeChecker({ onPincodeChecked, defaultPincode = '' }: Pincod
       return
     }
     setStatus('checking')
-    // Simulate a short async check (real: API call)
+    
     setTimeout(() => {
       const res = checkPincode(trimmed)
       if (!res.valid) { setStatus('invalid-format'); return }

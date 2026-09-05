@@ -1,4 +1,4 @@
-/* ── Header shell ────────────────────────────────────────────── */
+
 .header {
   position: sticky;
   top: 0;
@@ -22,7 +22,6 @@
   gap: var(--space-6);
 }
 
-/* ── Logo ────────────────────────────────────────────────────── */
 .logo {
   display: flex;
   align-items: center;
@@ -58,7 +57,6 @@
   font-weight: var(--weight-bold);
 }
 
-/* ── Desktop nav ─────────────────────────────────────────────── */
 .desktopNav {
   display: flex;
   align-items: center;
@@ -99,7 +97,6 @@
   transform: rotate(180deg);
 }
 
-/* ── Mega menu ───────────────────────────────────────────────── */
 .megaTriggerWrap {
   position: relative;
 }
@@ -215,7 +212,6 @@
   border-color: var(--color-primary);
 }
 
-/* ── Right side ───────────────────────────────────────────────── */
 .rightSide {
   display: flex;
   align-items: center;
@@ -223,7 +219,6 @@
   margin-left: auto;
 }
 
-/* Raipur delivery pill */
 .deliveryPill {
   display: inline-flex;
   align-items: center;
@@ -284,7 +279,6 @@
   justify-content: center;
 }
 
-/* ── Hamburger ───────────────────────────────────────────────── */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -315,7 +309,6 @@
 .barHidden  { opacity: 0; transform: scaleX(0); }
 .bar3Active { transform: translateY(-7px) rotate(-45deg); }
 
-/* ── Mobile drawer ───────────────────────────────────────────── */
 .mobileDrawerOverlay {
   display: none;
   position: fixed;
@@ -413,7 +406,6 @@
   border-top: var(--border-width) solid var(--color-line);
 }
 
-/* ── Mobile bottom bar ───────────────────────────────────────── */
 .mobileBottomBar {
   display: none;
   position: fixed;
@@ -466,7 +458,6 @@
   justify-content: center;
 }
 
-/* ── Responsive breakpoints ───────────────────────────────────── */
 @media (max-width: 1023px) {
   .desktopNav { display: none; }
   .signInLink { display: none; }

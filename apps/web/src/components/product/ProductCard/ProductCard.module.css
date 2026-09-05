@@ -1,4 +1,4 @@
-/* ── Card shell ──────────────────────────────────────────────── */
+
 .card {
   position: relative;
   background: var(--color-bg);
@@ -10,17 +10,14 @@
   display: flex;
   flex-direction: column;
 
-  /* 3D lift transition — 150ms, runs separately from content expansion */
   transition:
     transform 150ms var(--ease-standard),
     box-shadow 150ms var(--ease-standard),
     border-color 150ms var(--ease-standard);
 
-  /* Contain so expansion doesn't shift neighbours */
   overflow: visible;
 }
 
-/* ── 3D hover lift (desktop / pointer devices only) ─────────── */
 @media (hover: hover) and (pointer: fine) {
   .card:hover,
   .card:focus-visible {
@@ -43,12 +40,10 @@
   outline-offset: 2px;
 }
 
-/* Out of stock */
 .outOfStock {
   opacity: 0.72;
 }
 
-/* ── Image ───────────────────────────────────────────────────── */
 .imageWrap {
   position: relative;
   border-radius: var(--radius-md) var(--radius-md) 0 0;
@@ -107,7 +102,6 @@
   border-radius: var(--radius-pill);
 }
 
-/* ── Card body ───────────────────────────────────────────────── */
 .body {
   padding: var(--space-4);
   display: flex;
@@ -177,13 +171,11 @@
   background: var(--color-primary-tint);
 }
 
-/* ── Expansion panel ─────────────────────────────────────────── */
 .expandPanel {
   overflow: hidden;
   max-height: 0;
   opacity: 0;
 
-  /* Content expansion: 300-400ms, separate from the lift transform */
   transition:
     max-height 350ms var(--ease-standard),
     opacity 300ms var(--ease-standard);
@@ -197,7 +189,6 @@
   }
 }
 
-/* Reduced motion: expansion still happens, but no transform */
 @media (prefers-reduced-motion: reduce) {
   .expandPanel {
     transition: opacity 200ms ease;
@@ -263,7 +254,6 @@
 
 .conditionReportLink:hover { color: var(--color-primary-hover); }
 
-/* ── List variant ────────────────────────────────────────────── */
 .listVariant {
   flex-direction: row;
 }

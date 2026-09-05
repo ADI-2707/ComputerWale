@@ -4,7 +4,6 @@ import { Button } from '../../components/ui/Button'
 import { ProductCard } from '../../components/product/ProductCard'
 import { FEATURED_PRODUCTS, GRADE_DEFINITIONS } from '../../lib/mockData'
 
-// ── Animated counter hook ──────────────────────────────────────
 function useCountUp(target: number, duration = 1400) {
   const [count, setCount] = useState(0)
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -24,7 +23,6 @@ function useCountUp(target: number, duration = 1400) {
   return count
 }
 
-// ── Track selector card ────────────────────────────────────────
 interface TrackCardProps {
   icon: string
   title: string
@@ -48,7 +46,6 @@ function TrackCard({ icon, title, description, cta, href, highlight }: TrackCard
   )
 }
 
-// ── Proof strip item ───────────────────────────────────────────
 interface ProofItemProps {
   units: number
   client: string
@@ -65,7 +62,6 @@ function ProofItem({ units, client, location, year }: ProofItemProps) {
   )
 }
 
-// ── Home page ──────────────────────────────────────────────────
 export default function Home() {
   const statsRef = useRef<HTMLDivElement>(null)
   const [statsVisible, setStatsVisible] = useState(false)
@@ -84,7 +80,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
 
-      {/* ── 1. HERO ─────────────────────────────────────────── */}
+      {}
       <section className={styles.hero} aria-label="Hero">
         <div className={styles.heroContent}>
           <div className={styles.heroText}>

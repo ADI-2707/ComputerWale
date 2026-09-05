@@ -4,7 +4,7 @@ import { RFQForm } from '../../components/forms/RFQForm'
 export default function Bulk() {
   return (
     <div className={styles.container}>
-      {/* Hero Header */}
+      {}
       <section className={styles.hero}>
         <span className={styles.tag}>B2B & Commercial Sales</span>
         <h1 className={styles.title}>Bulk Laptop Procurement for Businesses</h1>
@@ -14,7 +14,7 @@ export default function Bulk() {
         </p>
       </section>
 
-      {/* 3 Pillars Grid */}
+      {}
       <section className={styles.featuresGrid}>
         <div className={styles.featureCard}>
           <div className={styles.featureIcon}>📄</div>
@@ -41,7 +41,7 @@ export default function Bulk() {
         </div>
       </section>
 
-      {/* Tier Pricing Table */}
+      {}
       <section className={styles.tierSection}>
         <h2 className={styles.sectionHeading}>Volume Discount Structure</h2>
         <div className={styles.tableWrapper}>
@@ -78,7 +78,7 @@ export default function Bulk() {
         </div>
       </section>
 
-      {/* Form Section */}
+      {}
       <section className={styles.formSection}>
         <div className={styles.formCard}>
           <div className={styles.formHeader}>
@@ -92,7 +92,7 @@ export default function Bulk() {
         </div>
       </section>
 
-      {/* FAQs */}
+      {}
       <section className={styles.faqSection}>
         <h2 className={styles.sectionHeading}>Frequently Asked Questions</h2>
         <div className={styles.faqList}>

@@ -13,7 +13,6 @@
   gap: var(--space-8);
 }
 
-/* ── Top row ─────────────────────────────────────────────────── */
 .topRow {
   display: grid;
   grid-template-columns: 240px 1fr;
@@ -21,7 +20,6 @@
   align-items: start;
 }
 
-/* Brand */
 .brand {
   display: flex;
   align-items: flex-start;
@@ -62,7 +60,6 @@
   line-height: var(--leading-normal);
 }
 
-/* Nav columns */
 .navColumns {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -99,7 +96,6 @@
   color: #fff;
 }
 
-/* ── Stores row ──────────────────────────────────────────────── */
 .storesRow {
   border-top: var(--border-width) solid var(--color-dark-line);
   padding-top: var(--space-7);
@@ -194,7 +190,6 @@
   font-style: italic;
 }
 
-/* ── Bottom bar ──────────────────────────────────────────────── */
 .bottomBar {
   border-top: var(--border-width) solid var(--color-dark-line);
   padding-top: var(--space-5);
@@ -213,7 +208,6 @@
   margin: 0;
 }
 
-/* ── Responsive ──────────────────────────────────────────────── */
 @media (max-width: 1023px) {
   .topRow {
     grid-template-columns: 1fr;

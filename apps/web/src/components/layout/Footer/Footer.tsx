@@ -8,10 +8,10 @@ export function Footer() {
     <footer className={styles.footer} role="contentinfo">
       <div className={styles.inner}>
 
-        {/* Top row */}
+        {}
         <div className={styles.topRow}>
 
-          {/* Brand */}
+          {}
           <div className={styles.brand}>
             <div className={styles.logoMark}>CW</div>
             <div>
@@ -20,7 +20,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Nav columns */}
+          {}
           <div className={styles.navColumns}>
             <div className={styles.navCol}>
               <p className={styles.colHeading}>Laptops</p>
@@ -64,7 +64,7 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Store listings */}
+        {}
         <div className={styles.storesRow}>
           <p className={styles.storesHeading}>Our Stores</p>
           <div className={styles.storesGrid}>
@@ -91,7 +91,7 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
+        {}
         <div className={styles.bottomBar}>
           <p className={styles.copyright}>
             © {year} Computer Wale · GSTIN 22AAAAA0000A1Z5

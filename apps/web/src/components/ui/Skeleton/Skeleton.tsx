@@ -7,7 +7,7 @@ interface SkeletonProps {
   variant?: SkeletonVariant
   width?: string
   height?: string
-  lines?: number   // for 'text' variant — number of lines
+  lines?: number   
   className?: string
 }
 

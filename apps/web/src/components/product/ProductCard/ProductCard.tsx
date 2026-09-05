@@ -24,14 +24,13 @@ export function ProductCard({ product, variant = 'grid', defaultPincode }: Produ
     ? 'Delivers to Raipur by tomorrow'
     : 'Check delivery → enter your pincode'
 
-  // Touch devices: navigate on tap, don't expand
   const handleClick = (e: React.MouseEvent) => {
     const isTouchDevice = window.matchMedia('(hover: none)').matches
     if (isTouchDevice) {
       window.location.href = `/laptops/${product.slug}`
       return
     }
-    // Keyboard / desktop click on card body → toggle expand
+    
     e.preventDefault()
   }
 
@@ -61,7 +60,7 @@ export function ProductCard({ product, variant = 'grid', defaultPincode }: Produ
       role="article"
       aria-label={`${product.brand} ${product.model} — ₹${product.price.toLocaleString('en-IN')}`}
     >
-      {/* Product image */}
+      {}
       <div className={styles.imageWrap}>
         {!imgError ? (
           <img
@@ -82,12 +81,12 @@ export function ProductCard({ product, variant = 'grid', defaultPincode }: Produ
           </div>
         )}
 
-        {/* Grade badge overlay */}
+        {}
         <div className={styles.badgeOverlay}>
           <GradeBadge grade={product.grade} condition={product.condition} />
         </div>
 
-        {/* Low stock warning */}
+        {}
         {isLowStock && (
           <div className={styles.lowStockOverlay}>
             Only {product.stock} left
@@ -95,7 +94,7 @@ export function ProductCard({ product, variant = 'grid', defaultPincode }: Produ
         )}
       </div>
 
-      {/* Card body */}
+      {}
       <div className={styles.body}>
         <p className={styles.brand}>{product.brand}</p>
         <h3 className={styles.model}>{product.model}</h3>
@@ -123,7 +122,7 @@ export function ProductCard({ product, variant = 'grid', defaultPincode }: Produ
         )}
       </div>
 
-      {/* Expansion panel — desktop hover only */}
+      {}
       <div className={styles.expandPanel} aria-hidden={!expanded}>
         <div className={styles.expandInner}>
           {product.batteryHealth && (

@@ -1,6 +1,2 @@
-/* =============================================================
-   COMPUTER WALE — tokens.css
-   Re-exports design tokens for the web app.
-   Imported ONCE in main.tsx — cascades everywhere.
-   ============================================================= */
+
 @import '../../../../packages/design-tokens/index.css';

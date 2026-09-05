@@ -24,12 +24,10 @@ export function Modal({ open, onClose, title, children, size = 'md', className }
     }
   }, [open])
 
-  // Close on backdrop click
   const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
     if (e.target === dialogRef.current) onClose()
   }
 
-  // Close on ESC (native dialog handles this, but we sync state)
   useEffect(() => {
     const dialog = dialogRef.current
     if (!dialog) return

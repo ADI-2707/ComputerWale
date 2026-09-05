@@ -119,7 +119,7 @@ export default function App() {
 
   return (
     <div className="admin-shell">
-      {/* Sidebar */}
+      {}
       <aside className="sidebar">
         <div className="sidebar-brand">
           <span className="brand-logo">CW</span>
@@ -164,7 +164,7 @@ export default function App() {
         </div>
       </aside>
 
-      {/* Main Content */}
+      {}
       <main className="main-viewport">
         <header className="topbar">
           <div>
@@ -182,10 +182,10 @@ export default function App() {
           </div>
         </header>
 
-        {/* Dashboard Tab */}
+        {}
         {activeTab === 'dashboard' && (
           <div className="content-wrap">
-            {/* KPI Metric Cards */}
+            {}
             <div className="metrics-grid">
               <div className="metric-card">
                 <span className="metric-label">Today's Orders</span>
@@ -209,7 +209,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Quick Orders Stream */}
+            {}
             <div className="card-panel">
               <div className="panel-header">
                 <h2>Live Raipur Dispatches</h2>
@@ -250,7 +250,7 @@ export default function App() {
           </div>
         )}
 
-        {/* Orders Tab */}
+        {}
         {activeTab === 'orders' && (
           <div className="content-wrap">
             <div className="card-panel">
@@ -302,7 +302,7 @@ export default function App() {
           </div>
         )}
 
-        {/* Inventory Tab */}
+        {}
         {activeTab === 'inventory' && (
           <div className="content-wrap">
             <div className="card-panel">
@@ -367,7 +367,7 @@ export default function App() {
           </div>
         )}
 
-        {/* RFQ Leads Tab */}
+        {}
         {activeTab === 'leads' && (
           <div className="content-wrap">
             <div className="card-panel">

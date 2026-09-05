@@ -1,4 +1,4 @@
-/* ── Page shell ──────────────────────────────────────────────── */
+
 .main {
   min-height: 100vh;
   display: flex;
@@ -12,7 +12,6 @@
   width: 100%;
 }
 
-/* ── Section skeleton ─────────────────────────────────────────── */
 .section {
   padding: var(--space-9) 0;
 }
@@ -53,7 +52,6 @@
 
 .sectionLink:hover { color: var(--color-primary-hover); }
 
-/* ── Hero ─────────────────────────────────────────────────────── */
 .hero {
   background: var(--color-bg);
   padding: var(--space-9) 0;
@@ -70,7 +68,6 @@
   align-items: center;
 }
 
-/* Left col */
 .heroText {
   display: flex;
   flex-direction: column;
@@ -123,7 +120,6 @@
   flex-wrap: wrap;
 }
 
-/* Stats row */
 .heroStats {
   display: flex;
   align-items: center;
@@ -162,7 +158,6 @@
   flex-shrink: 0;
 }
 
-/* Right col */
 .heroImageCol {
   display: flex;
   justify-content: center;
@@ -178,7 +173,6 @@
   object-fit: cover;
 }
 
-/* ── Track selector ───────────────────────────────────────────── */
 .trackGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -265,14 +259,12 @@
 
 .trackCard:hover .trackCta { color: var(--color-primary-hover); }
 
-/* ── Product grid ─────────────────────────────────────────────── */
 .productGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-5);
 }
 
-/* ── Grade explainer table ────────────────────────────────────── */
 .gradeTableWrap {
   overflow-x: auto;
   border: var(--border-width) solid var(--color-line);
@@ -356,7 +348,6 @@
   line-height: var(--leading-relaxed);
 }
 
-/* ── Delivery strip ───────────────────────────────────────────── */
 .deliveryStrip {
   background: var(--color-primary-dark);
   padding: var(--space-7) 0;
@@ -430,7 +421,6 @@
   color: var(--color-dark-text);
 }
 
-/* ── Proof strip ──────────────────────────────────────────────── */
 .proofGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -467,7 +457,6 @@
   justify-content: flex-start;
 }
 
-/* ── Responsive ───────────────────────────────────────────────── */
 @media (max-width: 1279px) {
   .productGrid { grid-template-columns: repeat(3, 1fr); }
 }
@@ -497,6 +486,6 @@
 @media (max-width: 479px) {
   .productGrid { grid-template-columns: 1fr; }
   .trackCard { padding: var(--space-5); }
-  /* Add bottom padding for the mobile sticky bottom bar */
+  
   .main { padding-bottom: 70px; }
 }

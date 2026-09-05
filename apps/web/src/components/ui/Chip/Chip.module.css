@@ -30,7 +30,6 @@
   outline-offset: 2px;
 }
 
-/* Selected state */
 .selected {
   background-color: var(--color-primary);
   color: #fff;
@@ -42,7 +41,6 @@
   border-color: var(--color-primary-hover);
 }
 
-/* Disabled state */
 .disabled {
   opacity: 0.45;
   cursor: not-allowed;
@@ -50,7 +48,6 @@
   color: var(--blue-300);
 }
 
-/* Remove button inside chip */
 .removeBtn {
   display: inline-flex;
   align-items: center;

@@ -38,7 +38,7 @@ export function RFQForm({ enquiryType }: RFQFormProps) {
   const onSubmit = async (data: FormData) => {
     setSubmitStatus('submitting')
     try {
-      // Mock submission — replace with real API call
+      
       await new Promise(res => setTimeout(res, 1200))
       const ref = `CW-${enquiryType.toUpperCase().slice(0, 1)}-${Date.now().toString().slice(-6)}`
       setRefNumber(ref)

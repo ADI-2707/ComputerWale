@@ -1,13 +1,5 @@
-// =============================================================
-// COMPUTER WALE — Mock Catalog (10 laptops per spec §11)
-// Used by all pages in demo mode.
-// Covers: all conditions, all grades, low-stock item (MacBook),
-//         bulk-friendly item (VivoBook), filter edge cases.
-// =============================================================
 
 import type { Product, GradeDefinition, DeliveryZone, StoreLocation } from '../types'
-
-// ── Mock Products ─────────────────────────────────────────────
 
 export const MOCK_PRODUCTS: Product[] = [
   {
@@ -188,7 +180,7 @@ export const MOCK_PRODUCTS: Product[] = [
     },
     mrp: 74900,
     price: 52999,
-    stock: 2,  // LOW STOCK — exercises "Only 2 left" state
+    stock: 2,  
     images: ['/assets/products/apple-macbook-air-m1.jpg'],
     warrantyMonths: 6,
     warrantyIncludes: ['Battery health ≥85%', 'Original charger included', 'macOS clean install'],
@@ -241,7 +233,7 @@ export const MOCK_PRODUCTS: Product[] = [
     },
     mrp: 34990,
     price: 34990,
-    stock: 12,  // HIGH STOCK — bulk / govt favourite
+    stock: 12,  
     images: ['/assets/products/asus-vivobook-15.jpg'],
     warrantyMonths: 12,
     warrantyIncludes: ['Asus manufacturer warranty (1 year)', 'Windows 11 Home'],
@@ -277,8 +269,6 @@ export const MOCK_PRODUCTS: Product[] = [
   },
 ]
 
-// ── Grade Definitions (displayed in Grade Explainer section) ──
-
 export const GRADE_DEFINITIONS: GradeDefinition[] = [
   {
     grade: 'A',
@@ -303,8 +293,6 @@ export const GRADE_DEFINITIONS: GradeDefinition[] = [
   },
 ]
 
-// ── Raipur Delivery Zones ─────────────────────────────────────
-
 export const RAIPUR_PINCODES: DeliveryZone[] = [
   { pincode: '492001', area: 'Raipur Central', city: 'Raipur', sameDayAvailable: true },
   { pincode: '492002', area: 'Pandri', city: 'Raipur', sameDayAvailable: true },
@@ -317,8 +305,6 @@ export const RAIPUR_PINCODES: DeliveryZone[] = [
   { pincode: '492010', area: 'Fafadih', city: 'Raipur', sameDayAvailable: false },
   { pincode: '492099', area: 'Raipur Outskirts', city: 'Raipur', sameDayAvailable: false },
 ]
-
-// ── Store Locations ───────────────────────────────────────────
 
 export const STORES: StoreLocation[] = [
   {
@@ -342,11 +328,7 @@ export const STORES: StoreLocation[] = [
   },
 ]
 
-// ── Helper: get featured products ─────────────────────────────
-
 export const FEATURED_PRODUCTS = MOCK_PRODUCTS.filter(p => p.featured)
-
-// ── Helper: check Raipur pincode ──────────────────────────────
 
 export function checkPincode(pincode: string): {
   valid: boolean
@@ -365,8 +347,6 @@ export function checkPincode(pincode: string): {
   return { valid: true, deliverable: true, sameDay: zone.sameDayAvailable, area: zone.area }
 }
 
-// ── Helper: format price in Indian Rupees ─────────────────────
-
 export function formatPrice(amount: number): string {
   return new Intl.NumberFormat('en-IN', {
     style: 'currency',
@@ -374,8 +354,6 @@ export function formatPrice(amount: number): string {
     maximumFractionDigits: 0,
   }).format(amount)
 }
-
-// ── Helper: discount percentage ──────────────────────────────
 
 export function discountPercent(mrp: number, price: number): number {
   return Math.round(((mrp - price) / mrp) * 100)

@@ -9,7 +9,7 @@ export interface ToastData {
   variant: ToastVariant
   title: string
   message?: string
-  duration?: number  // ms, default 5000
+  duration?: number  
 }
 
 interface ToastProps extends ToastData {

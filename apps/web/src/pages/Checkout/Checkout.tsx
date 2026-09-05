@@ -8,7 +8,6 @@ import { Button } from '../../components/ui/Button'
 export default function Checkout() {
   const { items, getSubtotal, clearCart } = useCartStore()
 
-  // Form State
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
@@ -34,7 +33,6 @@ export default function Checkout() {
       return
     }
 
-    // Generate Order ID
     const generatedId = `CW-${Math.floor(100000 + Math.random() * 900000)}`
     setOrderSuccessId(generatedId)
     clearCart()
@@ -120,9 +118,9 @@ export default function Checkout() {
       {errorMsg && <div className={styles.errorAlert}>{errorMsg}</div>}
 
       <form onSubmit={handleSubmitOrder} className={styles.checkoutGrid}>
-        {/* Left Side: Forms */}
+        {}
         <div className={styles.formCol}>
-          {/* Step 1: Customer Info */}
+          {}
           <div className={styles.sectionCard}>
             <h2 className={styles.cardHeading}>1. Contact Information</h2>
             <div className={styles.formGrid}>
@@ -161,7 +159,7 @@ export default function Checkout() {
             </div>
           </div>
 
-          {/* Step 2: Delivery vs Pickup */}
+          {}
           <div className={styles.sectionCard}>
             <h2 className={styles.cardHeading}>2. Delivery Option</h2>
             <div className={styles.deliveryToggle}>
@@ -234,7 +232,7 @@ export default function Checkout() {
                   </div>
                 </div>
 
-                {/* Delivery Slot Selection */}
+                {}
                 <div className={styles.slotPicker}>
                   <label className={styles.label}>Preferred Delivery Slot:</label>
                   <div className={styles.slotOptions}>
@@ -272,7 +270,7 @@ export default function Checkout() {
             )}
           </div>
 
-          {/* Step 3: Payment Method */}
+          {}
           <div className={styles.sectionCard}>
             <h2 className={styles.cardHeading}>3. Payment Method</h2>
             <div className={styles.paymentMethods}>
@@ -321,7 +319,7 @@ export default function Checkout() {
           </div>
         </div>
 
-        {/* Right Side: Order Review */}
+        {}
         <div className={styles.orderSummaryCol}>
           <div className={styles.reviewCard}>
             <h2 className={styles.reviewHeading}>Order Summary</h2>

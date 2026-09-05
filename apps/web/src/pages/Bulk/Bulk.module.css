@@ -43,7 +43,6 @@
   margin: 0;
 }
 
-/* Features grid */
 .featuresGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -78,7 +77,6 @@
   margin: 0;
 }
 
-/* Tier section */
 .tierSection {
   display: flex;
   flex-direction: column;
@@ -124,7 +122,6 @@
   border-bottom: none;
 }
 
-/* Form section */
 .formSection {
   max-width: 800px;
   margin: 0 auto;
@@ -156,7 +153,6 @@
   margin: 0;
 }
 
-/* FAQ section */
 .faqSection {
   max-width: 800px;
   margin: 0 auto;
@@ -192,7 +188,6 @@
   margin: 0;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .featuresGrid {
     grid-template-columns: 1fr;

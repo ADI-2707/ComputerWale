@@ -42,7 +42,7 @@ export default function Cart() {
       </div>
 
       <div className={styles.cartGrid}>
-        {/* Items List */}
+        {}
         <div className={styles.itemsList}>
           {items.map(({ product, quantity }) => (
             <div key={product.id} className={styles.cartItem}>
@@ -99,7 +99,7 @@ export default function Cart() {
             </div>
           ))}
 
-          {/* Raipur Local Delivery Strip */}
+          {}
           <div className={styles.deliveryNotice}>
             <div className={styles.deliveryIcon}>🛵</div>
             <div>
@@ -112,7 +112,7 @@ export default function Cart() {
           </div>
         </div>
 
-        {/* Order Summary Sidebar */}
+        {}
         <div className={styles.summaryCol}>
           <div className={styles.summaryCard}>
             <h2 className={styles.summaryTitle}>Order Summary</h2>
