@@ -50,6 +50,18 @@
   font-size: 16px;
 }
 
+.toastCount {
+  color: #cbd5e1;
+  font-size: var(--text-xs);
+  margin-left: 4px;
+}
+
+.toastActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .toastLink {
   color: #fb923c;
   text-decoration: underline;
@@ -59,6 +71,22 @@
 
 .toastLink:hover {
   color: #fdba74;
+}
+
+.toastClose {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 2px 4px;
+  line-height: 1;
+  border-radius: 4px;
+  transition: color 150ms ease;
+}
+
+.toastClose:hover {
+  color: #ffffff;
 }
 
 .breadcrumbs {

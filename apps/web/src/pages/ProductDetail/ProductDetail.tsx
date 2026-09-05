@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router'
 import styles from './ProductDetail.module.css'
 import { MOCK_PRODUCTS } from '../../lib/mockData'
@@ -16,20 +16,43 @@ export default function ProductDetail() {
   const { slug } = useParams<{ slug: string }>()
   const navigate = useNavigate()
   const addItem = useCartStore((s) => s.addItem)
+  const cartItems = useCartStore((s) => s.items)
 
   const product = MOCK_PRODUCTS.find((p) => p.slug === slug) ?? MOCK_PRODUCTS[0]
   const [quantity, setQuantity] = useState(1)
   const [addedToast, setAddedToast] = useState(false)
+  const [isAdding, setIsAdding] = useState(false)
   const [activeImgIndex, setActiveImgIndex] = useState(0)
+  const toastTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const similarProducts = MOCK_PRODUCTS.filter(
     (p) => p.id !== product.id && (p.brand === product.brand || p.condition === product.condition)
   ).slice(0, 3)
 
+  useEffect(() => {
+    return () => {
+      if (toastTimeoutRef.current) {
+        clearTimeout(toastTimeoutRef.current)
+      }
+    }
+  }, [])
+
   const handleAddToCart = () => {
+    if (isAdding) return
+    setIsAdding(true)
     addItem(product, quantity)
+
+    if (toastTimeoutRef.current) {
+      clearTimeout(toastTimeoutRef.current)
+    }
     setAddedToast(true)
-    setTimeout(() => setAddedToast(false), 3000)
+    toastTimeoutRef.current = setTimeout(() => {
+      setAddedToast(false)
+    }, 5000)
+
+    setTimeout(() => {
+      setIsAdding(false)
+    }, 350)
   }
 
   const handleBuyNow = () => {
@@ -37,17 +60,38 @@ export default function ProductDetail() {
     navigate('/checkout')
   }
 
+  const existingInCart = cartItems.find((i) => i.product.id === product.id)?.quantity || 0
+
   return (
     <div className={styles.container}>
-      {}
+      {/* Toast Notification */}
       {addedToast && (
         <div className={styles.toast} role="status" aria-live="polite">
-          <span className={styles.toastMessage}>
-            <span className={styles.toastCheck}>✓</span> Added {quantity} item(s) to cart!
-          </span>
-          <Link to="/cart" className={styles.toastLink}>
-            View Cart
-          </Link>
+          <div className={styles.toastMessage}>
+            <span className={styles.toastCheck}>✓</span>
+            <span>
+              Added {quantity} item(s) to cart!
+              {existingInCart > quantity && (
+                <span className={styles.toastCount}> ({existingInCart} total in cart)</span>
+              )}
+            </span>
+          </div>
+          <div className={styles.toastActions}>
+            <Link to="/cart" className={styles.toastLink}>
+              View Cart
+            </Link>
+            <button
+              type="button"
+              className={styles.toastClose}
+              onClick={() => {
+                if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current)
+                setAddedToast(false)
+              }}
+              aria-label="Dismiss notification"
+            >
+              ✕
+            </button>
+          </div>
         </div>
       )}
 
