@@ -39,6 +39,15 @@
   cursor: not-allowed;
 }
 
+.btnDelete {
+  color: #ef4444;
+}
+
+.btnDelete:hover:not(:disabled) {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
 .input {
   width: 56px;
   height: 44px;

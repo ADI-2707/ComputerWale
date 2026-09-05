@@ -1,13 +1,16 @@
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import styles from './Cart.module.css'
 import { useCartStore } from '../../state/cartStore'
 import { QuantityStepper } from '../../components/forms/QuantityStepper'
 import { GradeBadge } from '../../components/product/GradeBadge'
 import { Button } from '../../components/ui/Button'
+import { TrashIcon } from '../../components/ui/TrashIcon'
 import { formatPrice } from '../../lib/mockData'
 
 export default function Cart() {
   const navigate = useNavigate()
+  const [hoveredDeleteId, setHoveredDeleteId] = useState<string | null>(null)
   const { items, updateQuantity, removeItem, clearCart, getSubtotal, getItemCount } = useCartStore()
 
   const subtotal = getSubtotal()
@@ -89,10 +92,13 @@ export default function Cart() {
                   <button
                     type="button"
                     onClick={() => removeItem(product.id)}
+                    onMouseEnter={() => setHoveredDeleteId(product.id)}
+                    onMouseLeave={() => setHoveredDeleteId(null)}
                     className={styles.removeBtn}
                     aria-label={`Delete ${product.model} from cart`}
                   >
-                    🗑 Delete
+                    <TrashIcon size={16} open={hoveredDeleteId === product.id} />
+                    <span>Delete</span>
                   </button>
                 </div>
               </div>

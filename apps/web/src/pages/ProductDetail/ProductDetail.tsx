@@ -9,6 +9,7 @@ import { StockIndicator } from '../../components/product/StockIndicator'
 import { SpecTable } from '../../components/product/SpecTable'
 import { PincodeChecker } from '../../components/forms/PincodeChecker'
 import { Button } from '../../components/ui/Button'
+import { TrashIcon } from '../../components/ui/TrashIcon'
 import { ProductCard } from '../../components/product/ProductCard'
 import { useCartStore } from '../../state/cartStore'
 
@@ -24,6 +25,7 @@ export default function ProductDetail() {
   const removeItem = useCartStore((s) => s.removeItem)
 
   const [addedToast, setAddedToast] = useState(false)
+  const [isBinHovered, setIsBinHovered] = useState(false)
   const [activeImgIndex, setActiveImgIndex] = useState(0)
   const toastTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const isAddingRef = useRef(false)
@@ -218,13 +220,19 @@ export default function ProductDetail() {
                 >
                   <button
                     type="button"
-                    className={styles.inlineStepBtn}
+                    className={clsx(styles.inlineStepBtn, cartQuantity === 1 && styles.inlineStepDelete)}
                     onClick={handleDecrement}
+                    onMouseEnter={() => setIsBinHovered(true)}
+                    onMouseLeave={() => setIsBinHovered(false)}
                     disabled={cartQuantity === 0}
                     aria-label={cartQuantity === 1 ? 'Remove from cart' : 'Decrease quantity'}
                     title={cartQuantity === 1 ? 'Remove from cart' : 'Decrease quantity'}
                   >
-                    <span className={styles.stepSymbol}>{cartQuantity === 1 ? '🗑' : '−'}</span>
+                    {cartQuantity === 1 ? (
+                      <TrashIcon size={17} open={isBinHovered} />
+                    ) : (
+                      <span className={styles.stepSymbol}>−</span>
+                    )}
                   </button>
 
                   <div className={styles.qtyDisplay}>

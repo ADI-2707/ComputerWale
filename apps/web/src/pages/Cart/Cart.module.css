@@ -176,12 +176,34 @@
 }
 
 .removeBtn {
-  background: none;
-  border: none;
-  color: var(--color-error);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: transparent;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius-sm);
+  color: #ef4444;
   font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
   cursor: pointer;
-  padding: var(--space-1);
+  padding: 4px 8px;
+  line-height: 1;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    border-color 150ms ease,
+    transform 100ms ease;
+}
+
+.removeBtn:hover {
+  background-color: #fee2e2;
+  color: #dc2626;
+  border-color: #ef4444;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.2);
+}
+
+.removeBtn:active {
+  transform: scale(0.96);
 }
 
 .deliveryNotice {

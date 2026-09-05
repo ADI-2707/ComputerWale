@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
+import { clsx } from 'clsx'
 import styles from './QuantityStepper.module.css'
+import { TrashIcon } from '../../ui/TrashIcon'
 
 interface QuantityStepperProps {
   value: number
@@ -61,13 +63,13 @@ export function QuantityStepper({
       <div className={styles.stepper} role="group" aria-label="Quantity">
         <button
           type="button"
-          className={styles.btn}
+          className={clsx(styles.btn, allowZero && value === 1 && styles.btnDelete)}
           onClick={() => handleStep(value - 1)}
           disabled={!allowZero && value <= min}
           aria-label={allowZero && value <= 1 ? 'Remove item' : 'Decrease quantity'}
           title={allowZero && value <= 1 ? 'Remove item' : 'Decrease quantity'}
         >
-          {allowZero && value === 1 ? '🗑' : '−'}
+          {allowZero && value === 1 ? <TrashIcon size={16} /> : '−'}
         </button>
         <input
           type="number"
