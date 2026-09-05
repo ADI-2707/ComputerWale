@@ -12,12 +12,23 @@ interface CartStore {
   getSubtotal: () => number
 }
 
+let lastAddProductTime = 0
+let lastAddProductId = ''
+
 export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
       items: [],
 
       addItem: (product: Product, quantity = 1) => {
+        const now = Date.now()
+        // Prevent rapid double-invocation (e.g. trackpad bounce, synthetic events, StrictMode)
+        if (product.id === lastAddProductId && now - lastAddProductTime < 500) {
+          return
+        }
+        lastAddProductId = product.id
+        lastAddProductTime = now
+
         set((state) => {
           const existing = state.items.find((i) => i.product.id === product.id)
           if (existing) {

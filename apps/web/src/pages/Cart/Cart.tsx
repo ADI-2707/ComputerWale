@@ -76,7 +76,6 @@ export default function Cart() {
                       value={quantity}
                       min={1}
                       max={product.stock}
-                      allowZero
                       onChange={(newQty) => updateQuantity(product.id, newQty)}
                       bulkThreshold={5}
                     />
@@ -91,9 +90,9 @@ export default function Cart() {
                     type="button"
                     onClick={() => removeItem(product.id)}
                     className={styles.removeBtn}
-                    aria-label="Remove item from cart"
+                    aria-label={`Delete ${product.model} from cart`}
                   >
-                    Remove item
+                    🗑 Delete
                   </button>
                 </div>
               </div>

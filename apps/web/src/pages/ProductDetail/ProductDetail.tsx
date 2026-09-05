@@ -16,14 +16,15 @@ export default function ProductDetail() {
   const { slug } = useParams<{ slug: string }>()
   const navigate = useNavigate()
   const addItem = useCartStore((s) => s.addItem)
-  const cartItems = useCartStore((s) => s.items)
 
   const product = MOCK_PRODUCTS.find((p) => p.slug === slug) ?? MOCK_PRODUCTS[0]
   const [quantity, setQuantity] = useState(1)
   const [addedToast, setAddedToast] = useState(false)
-  const [isAdding, setIsAdding] = useState(false)
+  const [justAdded, setJustAdded] = useState(false)
   const [activeImgIndex, setActiveImgIndex] = useState(0)
   const toastTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const isAddingRef = useRef(false)
+  const lastAddRef = useRef(0)
 
   const similarProducts = MOCK_PRODUCTS.filter(
     (p) => p.id !== product.id && (p.brand === product.brand || p.condition === product.condition)
@@ -38,9 +39,13 @@ export default function ProductDetail() {
   }, [])
 
   const handleAddToCart = () => {
-    if (isAdding) return
-    setIsAdding(true)
+    const now = Date.now()
+    if (isAddingRef.current || now - lastAddRef.current < 700) return
+    isAddingRef.current = true
+    lastAddRef.current = now
+
     addItem(product, quantity)
+    setJustAdded(true)
 
     if (toastTimeoutRef.current) {
       clearTimeout(toastTimeoutRef.current)
@@ -48,11 +53,12 @@ export default function ProductDetail() {
     setAddedToast(true)
     toastTimeoutRef.current = setTimeout(() => {
       setAddedToast(false)
-    }, 5000)
+    }, 4500)
 
     setTimeout(() => {
-      setIsAdding(false)
-    }, 350)
+      setJustAdded(false)
+      isAddingRef.current = false
+    }, 1200)
   }
 
   const handleBuyNow = () => {
@@ -60,38 +66,16 @@ export default function ProductDetail() {
     navigate('/checkout')
   }
 
-  const existingInCart = cartItems.find((i) => i.product.id === product.id)?.quantity || 0
-
   return (
     <div className={styles.container}>
       {/* Toast Notification */}
       {addedToast && (
         <div className={styles.toast} role="status" aria-live="polite">
-          <div className={styles.toastMessage}>
-            <span className={styles.toastCheck}>✓</span>
-            <span>
-              Added {quantity} item(s) to cart!
-              {existingInCart > quantity && (
-                <span className={styles.toastCount}> ({existingInCart} total in cart)</span>
-              )}
-            </span>
-          </div>
-          <div className={styles.toastActions}>
-            <Link to="/cart" className={styles.toastLink}>
-              View Cart
-            </Link>
-            <button
-              type="button"
-              className={styles.toastClose}
-              onClick={() => {
-                if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current)
-                setAddedToast(false)
-              }}
-              aria-label="Dismiss notification"
-            >
-              ✕
-            </button>
-          </div>
+          <span className={styles.toastCheck}>✓</span>
+          <span className={styles.toastText}>Added {quantity} item(s) to cart!</span>
+          <Link to="/cart" className={styles.toastLink}>
+            View Cart →
+          </Link>
         </div>
       )}
 
@@ -199,10 +183,17 @@ export default function ProductDetail() {
                 </Link>
               ) : (
                 <>
-                  <Button variant="outline" size="lg" onClick={handleAddToCart} style={{ flex: 1 }}>
-                    Add to Cart
+                  <Button
+                    type="button"
+                    variant={justAdded ? "primary" : "outline"}
+                    size="lg"
+                    onClick={handleAddToCart}
+                    disabled={justAdded}
+                    style={{ flex: 1 }}
+                  >
+                    {justAdded ? '✓ Added to Cart!' : 'Add to Cart'}
                   </Button>
-                  <Button variant="primary" size="lg" onClick={handleBuyNow} style={{ flex: 1 }}>
+                  <Button type="button" variant="primary" size="lg" onClick={handleBuyNow} style={{ flex: 1 }}>
                     Buy Now
                   </Button>
                 </>
