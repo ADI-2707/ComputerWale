@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router'
+import { clsx } from 'clsx'
 import styles from './ProductDetail.module.css'
 import { MOCK_PRODUCTS } from '../../lib/mockData'
 import { GradeBadge } from '../../components/product/GradeBadge'
@@ -183,20 +184,59 @@ export default function ProductDetail() {
           {}
           <div className={styles.actionSection}>
             <div className={styles.btnRow}>
-              {cartQuantity > 0 ? (
-                <div className={styles.inlineStepper} style={{ flex: 1 }}>
+              <div className={clsx(styles.cartActionWrapper, cartQuantity > 0 && styles.isStepper)}>
+                {/* 1. Add to Cart View */}
+                <button
+                  type="button"
+                  className={clsx(styles.addToCartBtn, cartQuantity > 0 && styles.addToCartHidden)}
+                  onClick={handleAddToCart}
+                  disabled={cartQuantity > 0}
+                  aria-hidden={cartQuantity > 0}
+                >
+                  <svg
+                    className={styles.cartIcon}
+                    width="19"
+                    height="19"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="9" cy="21" r="1" />
+                    <circle cx="20" cy="21" r="1" />
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                  </svg>
+                  <span>Add to Cart</span>
+                </button>
+
+                {/* 2. Stepper Controls View */}
+                <div
+                  className={clsx(styles.stepperContent, cartQuantity > 0 && styles.stepperVisible)}
+                  aria-hidden={cartQuantity === 0}
+                >
                   <button
                     type="button"
                     className={styles.inlineStepBtn}
                     onClick={handleDecrement}
+                    disabled={cartQuantity === 0}
                     aria-label={cartQuantity === 1 ? 'Remove from cart' : 'Decrease quantity'}
                     title={cartQuantity === 1 ? 'Remove from cart' : 'Decrease quantity'}
                   >
-                    {cartQuantity === 1 ? '🗑' : '−'}
+                    <span className={styles.stepSymbol}>{cartQuantity === 1 ? '🗑' : '−'}</span>
                   </button>
-                  <span className={styles.inlineStepQty} aria-label={`Quantity in cart: ${cartQuantity}`}>
-                    {cartQuantity} in Cart
-                  </span>
+
+                  <div className={styles.qtyDisplay}>
+                    <span
+                      key={cartQuantity}
+                      className={styles.inlineStepQty}
+                      aria-label={`Quantity in cart: ${cartQuantity}`}
+                    >
+                      {cartQuantity} in Cart
+                    </span>
+                  </div>
+
                   <button
                     type="button"
                     className={styles.inlineStepBtn}
@@ -205,27 +245,18 @@ export default function ProductDetail() {
                     aria-label="Increase quantity"
                     title="Increase quantity"
                   >
-                    +
+                    <span className={styles.stepSymbol}>+</span>
                   </button>
                 </div>
-              ) : (
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="lg"
-                  onClick={handleAddToCart}
-                  style={{ flex: 1 }}
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 6 }}>
-                    <circle cx="9" cy="21" r="1" />
-                    <circle cx="20" cy="21" r="1" />
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                  </svg>
-                  Add to Cart
-                </Button>
-              )}
+              </div>
 
-              <Button type="button" variant="primary" size="lg" onClick={handleBuyNow} style={{ flex: 1 }}>
+              <Button
+                type="button"
+                variant="primary"
+                size="lg"
+                onClick={handleBuyNow}
+                className={styles.buyNowBtn}
+              >
                 Buy Now
               </Button>
             </div>
