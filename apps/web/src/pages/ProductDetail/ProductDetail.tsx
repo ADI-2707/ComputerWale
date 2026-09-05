@@ -7,7 +7,6 @@ import { PriceBlock } from '../../components/product/PriceBlock'
 import { StockIndicator } from '../../components/product/StockIndicator'
 import { SpecTable } from '../../components/product/SpecTable'
 import { PincodeChecker } from '../../components/forms/PincodeChecker'
-import { QuantityStepper } from '../../components/forms/QuantityStepper'
 import { Button } from '../../components/ui/Button'
 import { ProductCard } from '../../components/product/ProductCard'
 import { useCartStore } from '../../state/cartStore'
@@ -15,12 +14,15 @@ import { useCartStore } from '../../state/cartStore'
 export default function ProductDetail() {
   const { slug } = useParams<{ slug: string }>()
   const navigate = useNavigate()
-  const addItem = useCartStore((s) => s.addItem)
-
   const product = MOCK_PRODUCTS.find((p) => p.slug === slug) ?? MOCK_PRODUCTS[0]
-  const [quantity, setQuantity] = useState(1)
+
+  const cartItem = useCartStore((s) => s.items.find((i) => i.product.id === product.id))
+  const cartQuantity = cartItem?.quantity || 0
+  const addItem = useCartStore((s) => s.addItem)
+  const updateQuantity = useCartStore((s) => s.updateQuantity)
+  const removeItem = useCartStore((s) => s.removeItem)
+
   const [addedToast, setAddedToast] = useState(false)
-  const [justAdded, setJustAdded] = useState(false)
   const [activeImgIndex, setActiveImgIndex] = useState(0)
   const toastTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const isAddingRef = useRef(false)
@@ -40,12 +42,11 @@ export default function ProductDetail() {
 
   const handleAddToCart = () => {
     const now = Date.now()
-    if (isAddingRef.current || now - lastAddRef.current < 700) return
+    if (isAddingRef.current || now - lastAddRef.current < 500) return
     isAddingRef.current = true
     lastAddRef.current = now
 
-    addItem(product, quantity)
-    setJustAdded(true)
+    addItem(product, 1)
 
     if (toastTimeoutRef.current) {
       clearTimeout(toastTimeoutRef.current)
@@ -56,13 +57,31 @@ export default function ProductDetail() {
     }, 4500)
 
     setTimeout(() => {
-      setJustAdded(false)
       isAddingRef.current = false
-    }, 1200)
+    }, 400)
+  }
+
+  const handleIncrement = () => {
+    if (cartQuantity >= product.stock) return
+    updateQuantity(product.id, cartQuantity + 1)
+  }
+
+  const handleDecrement = () => {
+    if (cartQuantity > 1) {
+      updateQuantity(product.id, cartQuantity - 1)
+    } else {
+      removeItem(product.id)
+      if (toastTimeoutRef.current) {
+        clearTimeout(toastTimeoutRef.current)
+      }
+      setAddedToast(false)
+    }
   }
 
   const handleBuyNow = () => {
-    addItem(product, quantity)
+    if (cartQuantity === 0) {
+      addItem(product, 1)
+    }
     navigate('/checkout')
   }
 
@@ -72,7 +91,7 @@ export default function ProductDetail() {
       {addedToast && (
         <div className={styles.toast} role="status" aria-live="polite">
           <span className={styles.toastCheck}>✓</span>
-          <span className={styles.toastText}>Added {quantity} item(s) to cart!</span>
+          <span className={styles.toastText}>Added to cart!</span>
           <Link to="/cart" className={styles.toastLink}>
             View Cart →
           </Link>
@@ -163,42 +182,62 @@ export default function ProductDetail() {
 
           {}
           <div className={styles.actionSection}>
-            <div className={styles.qtyRow}>
-              <span className={styles.qtyLabel}>Quantity:</span>
-              <QuantityStepper
-                value={quantity}
-                min={1}
-                max={product.stock}
-                onChange={setQuantity}
-                bulkThreshold={5}
-              />
+            <div className={styles.btnRow}>
+              {cartQuantity > 0 ? (
+                <div className={styles.inlineStepper} style={{ flex: 1 }}>
+                  <button
+                    type="button"
+                    className={styles.inlineStepBtn}
+                    onClick={handleDecrement}
+                    aria-label={cartQuantity === 1 ? 'Remove from cart' : 'Decrease quantity'}
+                    title={cartQuantity === 1 ? 'Remove from cart' : 'Decrease quantity'}
+                  >
+                    {cartQuantity === 1 ? '🗑' : '−'}
+                  </button>
+                  <span className={styles.inlineStepQty} aria-label={`Quantity in cart: ${cartQuantity}`}>
+                    {cartQuantity} in Cart
+                  </span>
+                  <button
+                    type="button"
+                    className={styles.inlineStepBtn}
+                    onClick={handleIncrement}
+                    disabled={cartQuantity >= product.stock}
+                    aria-label="Increase quantity"
+                    title="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
+              ) : (
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="lg"
+                  onClick={handleAddToCart}
+                  style={{ flex: 1 }}
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 6 }}>
+                    <circle cx="9" cy="21" r="1" />
+                    <circle cx="20" cy="21" r="1" />
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                  </svg>
+                  Add to Cart
+                </Button>
+              )}
+
+              <Button type="button" variant="primary" size="lg" onClick={handleBuyNow} style={{ flex: 1 }}>
+                Buy Now
+              </Button>
             </div>
 
-            <div className={styles.btnRow}>
-              {quantity > 5 ? (
-                <Link to={`/bulk?product=${encodeURIComponent(product.model)}&qty=${quantity}`} style={{ flex: 1 }}>
-                  <Button variant="primary" size="lg" fullWidth>
-                    Request Bulk Quote ({quantity} units)
-                  </Button>
+            {cartQuantity >= 5 && (
+              <div className={styles.bulkCallout}>
+                <span>Ordering {cartQuantity}+ units?</span>
+                <Link to={`/bulk?product=${encodeURIComponent(product.model)}&qty=${cartQuantity}`} className={styles.bulkCalloutLink}>
+                  Request Bulk Quote →
                 </Link>
-              ) : (
-                <>
-                  <Button
-                    type="button"
-                    variant={justAdded ? "primary" : "outline"}
-                    size="lg"
-                    onClick={handleAddToCart}
-                    disabled={justAdded}
-                    style={{ flex: 1 }}
-                  >
-                    {justAdded ? '✓ Added to Cart!' : 'Add to Cart'}
-                  </Button>
-                  <Button type="button" variant="primary" size="lg" onClick={handleBuyNow} style={{ flex: 1 }}>
-                    Buy Now
-                  </Button>
-                </>
-              )}
-            </div>
+              </div>
+            )}
           </div>
 
           {}

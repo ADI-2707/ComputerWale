@@ -252,24 +252,88 @@
 .actionSection {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-}
-
-.qtyRow {
-  display: flex;
-  align-items: center;
   gap: var(--space-3);
-}
-
-.qtyLabel {
-  font-size: var(--text-sm);
-  font-weight: var(--weight-medium);
-  color: var(--color-ink);
 }
 
 .btnRow {
   display: flex;
   gap: var(--space-3);
+  align-items: stretch;
+}
+
+.inlineStepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 52px;
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  padding: 0 var(--space-2);
+  box-shadow: var(--elevation-1);
+  box-sizing: border-box;
+}
+
+.inlineStepBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: none;
+  background-color: #f1f5f9;
+  color: var(--color-primary);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  cursor: pointer;
+  line-height: 1;
+  transition: background-color var(--duration-base) var(--ease-standard),
+              color var(--duration-base) var(--ease-standard),
+              transform 100ms ease;
+}
+
+.inlineStepBtn:hover:not(:disabled) {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.inlineStepBtn:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.inlineStepBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.inlineStepQty {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  color: var(--color-primary);
+  letter-spacing: -0.01em;
+  user-select: none;
+  padding: 0 var(--space-2);
+}
+
+.bulkCallout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+  padding: var(--space-2) var(--space-3);
+  background-color: var(--color-surface-subtle);
+  border: 1px dashed var(--color-line);
+  border-radius: var(--radius-sm);
+}
+
+.bulkCalloutLink {
+  color: var(--color-primary);
+  font-weight: var(--weight-semibold);
+  text-decoration: underline;
 }
 
 .warrantyBox {
