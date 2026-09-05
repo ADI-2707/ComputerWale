@@ -358,6 +358,12 @@ body {
   margin-top: 2px;
 }
 
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .topbar-user {
   display: flex;
   align-items: center;
@@ -376,6 +382,27 @@ body {
 .user-name {
   font-size: 13px;
   font-weight: 600;
+}
+
+.topbar-logout-btn {
+  display: none;
+  background: #ffffff;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #dc2626;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.topbar-logout-btn:hover {
+  background: #fee2e2;
+  border-color: #ef4444;
 }
 
 .content-wrap {
@@ -1272,6 +1299,17 @@ body {
 
 /* SMARTPHONES & SMALL TABLETS (<= 768px) */
 @media (max-width: 768px) {
+  /* On small screens where bottom navigation bar is present, completely remove the hamburger button and sidebar */
+  .mobile-menu-toggle-btn,
+  .sidebar,
+  .mobile-sidebar-overlay {
+    display: none !important;
+  }
+
+  .topbar-logout-btn {
+    display: inline-flex;
+  }
+
   .admin-shell {
     flex-direction: column;
     width: 100%;
@@ -1288,7 +1326,7 @@ body {
   }
 
   .topbar-left {
-    gap: 10px;
+    gap: 0;
   }
 
   .topbar-title {

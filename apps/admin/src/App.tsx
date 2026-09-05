@@ -658,9 +658,20 @@ export default function App() {
               <div className="topbar-meta">Pandri Dispatch Desk · Raipur, CG</div>
             </div>
           </div>
-          <div className="topbar-user">
-            <span className="user-badge">Store Manager</span>
-            <span className="user-name">Rajesh Sharma</span>
+          <div className="topbar-right">
+            <div className="topbar-user">
+              <span className="user-badge">Store Manager</span>
+              <span className="user-name">Rajesh Sharma</span>
+            </div>
+            <button
+              type="button"
+              className="topbar-logout-btn"
+              onClick={() => setIsLoggedIn(false)}
+              title="Sign Out"
+              aria-label="Sign Out"
+            >
+              <DoorIcon size={14} />
+            </button>
           </div>
         </header>
 
