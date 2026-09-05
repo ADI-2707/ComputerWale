@@ -211,38 +211,84 @@
 @media (max-width: 1023px) {
   .topRow {
     grid-template-columns: 1fr;
-    gap: var(--space-7);
+    gap: var(--space-6);
   }
 
   .navColumns {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .inner {
-    padding: var(--space-7) var(--space-4) var(--space-5);
-    gap: var(--space-7);
+    padding: var(--space-7) var(--space-4) calc(var(--space-6) + 68px);
+    gap: var(--space-6);
   }
 
   .navColumns {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-5);
+    gap: var(--space-5) var(--space-4);
+  }
+
+  .colList {
+    gap: var(--space-2);
+  }
+
+  .colLink {
+    font-size: var(--text-xs);
+    padding: 2px 0;
   }
 
   .storesGrid {
     grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .storeCard {
+    padding: var(--space-3) var(--space-4);
+    gap: var(--space-2);
+  }
+
+  .storeAddress,
+  .storeHours {
+    font-size: var(--text-xs);
   }
 
   .bottomBar {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-2);
+    padding-top: var(--space-4);
   }
 }
 
-@media (max-width: 479px) {
+@media (max-width: 480px) {
+  .inner {
+    padding: var(--space-6) var(--space-4) calc(var(--space-6) + 72px);
+    gap: var(--space-5);
+  }
+
   .navColumns {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4) var(--space-3);
+  }
+
+  .brand {
+    gap: var(--space-2);
+  }
+
+  .logoMark {
+    width: 34px;
+    height: 34px;
+    font-size: var(--text-xs);
+  }
+
+  .brandName {
+    font-size: var(--text-sm);
+  }
+
+  .brandTagline {
+    font-size: var(--text-xs);
   }
 }
