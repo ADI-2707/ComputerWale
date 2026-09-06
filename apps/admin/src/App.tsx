@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function PencilIcon({ size = 13 }: { size?: number }) {
@@ -226,6 +226,27 @@ type ModalType =
   | null
 
 export default function App() {
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    try {
+      const saved = localStorage.getItem('cw_admin_theme')
+      if (saved === 'dark' || saved === 'light') return saved
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    } catch {
+      return 'light'
+    }
+  })
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    try {
+      localStorage.setItem('cw_admin_theme', theme)
+    } catch {}
+  }, [theme])
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'))
+  }
+
   const [isLoggedIn, setIsLoggedIn] = useState(true)
   const [activeTab, setActiveTab] = useState<'dashboard' | 'orders' | 'inventory' | 'leads'>('dashboard')
 
@@ -459,7 +480,7 @@ export default function App() {
 
   if (!isLoggedIn) {
     return (
-      <div className="login-screen">
+      <div className="login-screen" data-theme={theme}>
         <div className="login-card">
           <div className="login-brand">
             <div className="login-logo-wrap">
@@ -493,7 +514,7 @@ export default function App() {
   }
 
   return (
-    <div className="admin-shell">
+    <div className="admin-shell" data-theme={theme}>
 
       {notification && <div className="admin-toast">{notification}</div>}
 
@@ -650,6 +671,21 @@ export default function App() {
             </div>
           </div>
           <div className="topbar-right">
+            <div className="theme-switch-wrapper">
+              <button
+                type="button"
+                role="switch"
+                aria-checked={theme === 'dark'}
+                aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                className={`theme-switch ${theme === 'dark' ? 'active' : ''}`}
+                onClick={toggleTheme}
+              >
+                <span className="theme-switch-track">
+                  <span className="theme-switch-thumb" />
+                </span>
+              </button>
+            </div>
             <div className="topbar-user">
               <span className="user-badge">Store Manager</span>
               <span className="user-name">Rajesh Sharma</span>
