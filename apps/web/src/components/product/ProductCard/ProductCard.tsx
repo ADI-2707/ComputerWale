@@ -58,7 +58,7 @@ export function ProductCard({ product, variant = 'grid' }: ProductCardProps) {
       role="article"
       aria-label={`${product.brand} ${product.model} — ₹${product.price.toLocaleString('en-IN')}`}
     >
-      {/* 1. IMAGE WRAPPER */}
+
       <div className={styles.imageWrap}>
         {!imgError ? (
           <img
@@ -79,12 +79,10 @@ export function ProductCard({ product, variant = 'grid' }: ProductCardProps) {
           </div>
         )}
 
-        {/* Grade Badge */}
         <div className={styles.badgeOverlay}>
           <GradeBadge grade={product.grade} condition={product.condition} />
         </div>
 
-        {/* Low Stock Indicator */}
         {isLowStock && (
           <div className={styles.lowStockOverlay}>
             Only {product.stock} left
@@ -92,7 +90,6 @@ export function ProductCard({ product, variant = 'grid' }: ProductCardProps) {
         )}
       </div>
 
-      {/* 2. BODY: Visible by default (Company, Model, Stock, Price) */}
       <div className={styles.body}>
         <div className={styles.headerMeta}>
           <p className={styles.brand}>{product.brand}</p>
@@ -104,7 +101,6 @@ export function ProductCard({ product, variant = 'grid' }: ProductCardProps) {
         <PriceBlock mrp={product.mrp} price={product.price} condition={product.condition} />
       </div>
 
-      {/* 3. HOVER DRAWER: Expands on hover without breaking grid rows */}
       <div className={styles.hoverDrawer} aria-hidden={!expanded}>
         <div className={styles.specsWrap}>
           <span className={styles.specsDot}>⚙</span>
@@ -136,3 +132,4 @@ export function ProductCard({ product, variant = 'grid' }: ProductCardProps) {
     </div>
   )
 }
+

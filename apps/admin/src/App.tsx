@@ -229,12 +229,10 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true)
   const [activeTab, setActiveTab] = useState<'dashboard' | 'orders' | 'inventory' | 'leads'>('dashboard')
 
-  // Core collections
   const [orders, setOrders] = useState<Order[]>(INITIAL_ORDERS)
   const [inventory, setInventory] = useState<InventoryItem[]>(INITIAL_INVENTORY)
   const [leads, setLeads] = useState<Lead[]>(INITIAL_LEADS)
 
-  // Filters & searches
   const [orderSearch, setOrderSearch] = useState('')
   const [orderStatusFilter, setOrderStatusFilter] = useState('All')
 
@@ -244,7 +242,6 @@ export default function App() {
   const [leadSearch, setLeadSearch] = useState('')
   const [leadTypeFilter, setLeadTypeFilter] = useState('All')
 
-  // Notification message
   const [notification, setNotification] = useState<string | null>(null)
 
   const showNotification = (msg: string) => {
@@ -252,11 +249,9 @@ export default function App() {
     setTimeout(() => setNotification(null), 3000)
   }
 
-  // Modals
   const [activeModal, setActiveModal] = useState<ModalType>(null)
   const [editingItem, setEditingItem] = useState<any>(null)
 
-  // Sidebar collapse with localStorage
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(() => {
     try {
       return localStorage.getItem('cw_admin_sidebar_collapsed') === 'true'
@@ -265,7 +260,6 @@ export default function App() {
     }
   })
 
-  // Mobile sidebar open state
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const switchTab = (tab: 'dashboard' | 'orders' | 'inventory' | 'leads') => {
@@ -284,7 +278,6 @@ export default function App() {
     })
   }
 
-  // Inventory Handlers
   const handleSaveInventory = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const form = e.currentTarget
@@ -337,7 +330,6 @@ export default function App() {
     )
   }
 
-  // Order Handlers
   const handleSaveOrder = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const form = e.currentTarget
@@ -386,7 +378,6 @@ export default function App() {
     showNotification(`Order #${orderId} status changed to ${newStatus}`)
   }
 
-  // Lead Handlers
   const handleSaveLead = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const form = e.currentTarget
@@ -434,7 +425,6 @@ export default function App() {
     showNotification(`Lead #${id} status updated to ${newStatus}`)
   }
 
-  // Filtered queries
   const filteredOrders = orders.filter((o) => {
     const matchesSearch =
       o.id.toLowerCase().includes(orderSearch.toLowerCase()) ||
@@ -504,17 +494,15 @@ export default function App() {
 
   return (
     <div className="admin-shell">
-      {/* Toast Notification Pill */}
+
       {notification && <div className="admin-toast">{notification}</div>}
 
-      {/* Mobile Sidebar Backdrop Overlay */}
       <div
         className={`mobile-sidebar-overlay ${isMobileMenuOpen ? 'active' : ''}`}
         onClick={() => setIsMobileMenuOpen(false)}
         aria-hidden="true"
       />
 
-      {/* Collapsible Admin Sidebar */}
       <aside className={`sidebar ${isSidebarCollapsed ? 'collapsed' : ''} ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
         <div className="sidebar-brand">
           <div
@@ -637,7 +625,6 @@ export default function App() {
         </div>
       </aside>
 
-      {/* Main Viewport */}
       <main className="main-viewport">
         <header className="topbar">
           <div className="topbar-left">
@@ -679,7 +666,6 @@ export default function App() {
           </div>
         </header>
 
-        {/* TAB 1: OPERATIONS DASHBOARD */}
         {activeTab === 'dashboard' && (
           <div className="content-wrap">
             <div className="metrics-grid">
@@ -747,7 +733,6 @@ export default function App() {
           </div>
         )}
 
-        {/* TAB 2: ORDERS MANAGEMENT */}
         {activeTab === 'orders' && (
           <div className="content-wrap">
             <div className="card-panel">
@@ -876,7 +861,6 @@ export default function App() {
           </div>
         )}
 
-        {/* TAB 3: INVENTORY MANAGEMENT */}
         {activeTab === 'inventory' && (
           <div className="content-wrap">
             <div className="card-panel">
@@ -1021,7 +1005,6 @@ export default function App() {
           </div>
         )}
 
-        {/* TAB 4: BULK & TENDER RFQ LEADS MANAGEMENT */}
         {activeTab === 'leads' && (
           <div className="content-wrap">
             <div className="card-panel">
@@ -1147,7 +1130,6 @@ export default function App() {
           </div>
         )}
 
-        {/* Mobile Quick Thumb Navigation Bar */}
         <nav className="mobile-admin-bottom-nav" aria-label="Mobile navigation">
           <button
             type="button"
@@ -1189,7 +1171,6 @@ export default function App() {
         </nav>
       </main>
 
-      {/* POPUP MODAL DIALOGS */}
       {activeModal && (
         <div className="modal-backdrop" onClick={() => { setActiveModal(null); setEditingItem(null) }}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
@@ -1211,7 +1192,6 @@ export default function App() {
               </button>
             </div>
 
-            {/* INVENTORY FORM */}
             {(activeModal === 'add-inventory' || activeModal === 'edit-inventory') && (
               <form onSubmit={handleSaveInventory} className="modal-form">
                 <div className="form-row">
@@ -1302,7 +1282,6 @@ export default function App() {
               </form>
             )}
 
-            {/* ORDER FORM */}
             {(activeModal === 'add-order' || activeModal === 'edit-order') && (
               <form onSubmit={handleSaveOrder} className="modal-form">
                 <div className="form-row">
@@ -1404,7 +1383,6 @@ export default function App() {
               </form>
             )}
 
-            {/* LEAD FORM */}
             {(activeModal === 'add-lead' || activeModal === 'edit-lead') && (
               <form onSubmit={handleSaveLead} className="modal-form">
                 <div className="form-group">
@@ -1490,3 +1468,4 @@ export default function App() {
     </div>
   )
 }
+

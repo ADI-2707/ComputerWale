@@ -92,7 +92,7 @@ export default function ProductDetail() {
 
   return (
     <div className={styles.container}>
-      {/* Toast Notification */}
+
       {addedToast && (
         <div className={styles.toast} role="status" aria-live="polite">
           <span className={styles.toastCheck}>✓</span>
@@ -103,7 +103,6 @@ export default function ProductDetail() {
         </div>
       )}
 
-      {/* Breadcrumb Navigation */}
       <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
         <Link to="/">Home</Link>
         <span className={styles.crumbSep}>/</span>
@@ -115,7 +114,7 @@ export default function ProductDetail() {
       </nav>
 
       <div className={styles.grid}>
-        {/* Left Column: Image Gallery & Trust Card */}
+
         <div className={styles.galleryCol}>
           <div className={styles.mainImageWrapper}>
             <img
@@ -147,7 +146,6 @@ export default function ProductDetail() {
             </div>
           )}
 
-          {/* Local Experience Center Trust Card */}
           <div className={styles.trustCard}>
             <div className={styles.trustIconWrap}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -167,7 +165,6 @@ export default function ProductDetail() {
           </div>
         </div>
 
-        {/* Right Column: Information, Pricing & Purchase Actions */}
         <div className={styles.infoCol}>
           <div className={styles.titleSection}>
             <div className={styles.brandBadge}>
@@ -195,16 +192,14 @@ export default function ProductDetail() {
             </span>
           </div>
 
-          {/* Delivery & Pincode Checker */}
           <div className={styles.pincodeSection}>
             <PincodeChecker />
           </div>
 
-          {/* CTA & Quantity Actions */}
           <div className={styles.actionSection}>
             <div className={styles.btnRow}>
               <div className={clsx(styles.cartActionWrapper, cartQuantity > 0 && styles.isStepper)}>
-                {/* 1. Add to Cart View */}
+
                 <button
                   type="button"
                   className={clsx(styles.addToCartBtn, cartQuantity > 0 && styles.addToCartHidden)}
@@ -230,7 +225,6 @@ export default function ProductDetail() {
                   <span>Add to Cart</span>
                 </button>
 
-                {/* 2. Stepper Controls View */}
                 <div
                   className={clsx(styles.stepperContent, cartQuantity > 0 && styles.stepperVisible)}
                   aria-hidden={cartQuantity === 0}
@@ -286,7 +280,6 @@ export default function ProductDetail() {
               </Button>
             </div>
 
-            {/* Quick Guarantees Strip */}
             <div className={styles.guaranteeRow}>
               <div className={styles.guaranteeItem}>
                 <svg className={styles.guaranteeIcon} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -319,7 +312,6 @@ export default function ProductDetail() {
             )}
           </div>
 
-          {/* Warranty & Inclusions Box */}
           <div className={styles.warrantyBox}>
             <h3 className={styles.warrantyTitle}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -354,7 +346,6 @@ export default function ProductDetail() {
         </div>
       </div>
 
-      {/* Technical Specifications Section */}
       <section className={styles.specsSection}>
         <h2 className={styles.sectionHeading}>Technical Specifications</h2>
         <div className={styles.specTableWrap}>
@@ -367,7 +358,6 @@ export default function ProductDetail() {
         </div>
       </section>
 
-      {/* Condition & Cosmetic Assessment Section */}
       {product.cosmeticDetails && (
         <section className={styles.cosmeticSection}>
           <h2 className={styles.sectionHeading}>Condition &amp; Cosmetic Assessment</h2>
@@ -383,7 +373,6 @@ export default function ProductDetail() {
         </section>
       )}
 
-      {/* Similar Products */}
       {similarProducts.length > 0 && (
         <section className={styles.similarSection}>
           <h2 className={styles.sectionHeading}>Similar Laptops You Might Like</h2>
@@ -397,3 +386,4 @@ export default function ProductDetail() {
     </div>
   )
 }
+

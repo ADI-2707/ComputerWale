@@ -41,7 +41,6 @@
   white-space: nowrap;
 }
 
-/* ── Responsive Input & Button Row ── */
 .inputRow {
   display: flex;
   gap: var(--space-2);
@@ -52,7 +51,7 @@
 .inputWrapper {
   position: relative;
   flex: 1;
-  min-width: 0; /* CRITICAL: prevents flex child from overflowing parent */
+  min-width: 0;
   display: flex;
   align-items: center;
 }
@@ -64,7 +63,7 @@
   border: var(--border-width) solid var(--color-line);
   border-radius: var(--radius-sm);
   font-family: var(--font-body);
-  font-size: 16px; /* Prevents auto-zoom on mobile browsers */
+  font-size: 16px;
   color: var(--color-ink);
   background: var(--color-bg);
   min-height: 42px;
@@ -171,7 +170,6 @@
   to { transform: rotate(360deg); }
 }
 
-/* ── Quick Sample Chips ── */
 .sampleRow {
   display: flex;
   align-items: center;
@@ -201,7 +199,6 @@
   border-color: var(--color-primary);
 }
 
-/* ── Result Notification Cards ── */
 .resultContainer {
   margin-top: 2px;
 }
@@ -330,7 +327,6 @@
   background: none;
 }
 
-/* ── Screen Width Adaptations ── */
 @media (max-width: 380px) {
   .inputRow {
     flex-direction: column;
@@ -342,3 +338,4 @@
     height: 40px;
   }
 }
+

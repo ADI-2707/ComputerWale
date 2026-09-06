@@ -67,7 +67,7 @@ export default function Account() {
     return (
       <div className={styles.authContainer}>
         <div className={styles.authCard}>
-          {/* Segmented Tab Navigation for Sign In / Sign Up */}
+
           <div className={styles.authNav} role="tablist" aria-label="Authentication navigation">
             <button
               type="button"
@@ -234,7 +234,7 @@ export default function Account() {
 
   return (
     <div className={styles.container}>
-      {}
+
       <div className={styles.accountHeader}>
         <div className={styles.userProfileMeta}>
           <div className={styles.avatar}>{user.name.charAt(0)}</div>
@@ -250,7 +250,6 @@ export default function Account() {
         </Button>
       </div>
 
-      {}
       <div className={styles.tabs}>
         <button
           type="button"
@@ -275,11 +274,10 @@ export default function Account() {
         </button>
       </div>
 
-      {}
       {activeTab === 'orders' && (
         <div className={styles.tabContent}>
           <div className={styles.ordersList}>
-            {}
+
             <div className={styles.orderCard}>
               <div className={styles.orderCardHeader}>
                 <div>
@@ -309,7 +307,6 @@ export default function Account() {
               </div>
             </div>
 
-            {}
             <div className={styles.orderCard}>
               <div className={styles.orderCardHeader}>
                 <div>
@@ -340,7 +337,6 @@ export default function Account() {
         </div>
       )}
 
-      {}
       {activeTab === 'addresses' && (
         <div className={styles.tabContent}>
           <div className={styles.addressGrid}>
@@ -356,7 +352,6 @@ export default function Account() {
               </div>
             ))}
 
-            {}
             <form onSubmit={handleAddAddress} className={styles.addAddressCard}>
               <h3 className={styles.addAddressTitle}>Add New Address in Raipur</h3>
               <div className={styles.inputGroup}>
@@ -388,7 +383,6 @@ export default function Account() {
         </div>
       )}
 
-      {}
       {activeTab === 'profile' && (
         <div className={styles.tabContent}>
           <div className={styles.profileCard}>
@@ -422,3 +416,4 @@ export default function Account() {
     </div>
   )
 }
+

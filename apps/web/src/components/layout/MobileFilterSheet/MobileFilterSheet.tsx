@@ -23,10 +23,9 @@ export function MobileFilterSheet({ open, onClose, onApply, onClear, children, a
         aria-modal="true"
         aria-label="Filter laptops"
       >
-        {}
+
         <div className={styles.handle} />
 
-        {}
         <div className={styles.header}>
           <h2 className={styles.title}>Filters</h2>
           {activeFilterCount > 0 && (
@@ -37,10 +36,8 @@ export function MobileFilterSheet({ open, onClose, onApply, onClear, children, a
           <button className={styles.closeBtn} onClick={onClose} aria-label="Close filters">×</button>
         </div>
 
-        {}
         <div className={styles.body}>{children}</div>
 
-        {}
         <div className={styles.footer}>
           <button className={styles.applyBtn} onClick={() => { onApply(); onClose() }}>
             Apply Filters{activeFilterCount > 0 ? ` (${activeFilterCount})` : ''}
@@ -50,3 +47,4 @@ export function MobileFilterSheet({ open, onClose, onApply, onClear, children, a
     </>
   )
 }
+

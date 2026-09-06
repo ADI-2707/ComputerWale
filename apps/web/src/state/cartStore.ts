@@ -22,7 +22,7 @@ export const useCartStore = create<CartStore>()(
 
       addItem: (product: Product, quantity = 1) => {
         const now = Date.now()
-        // Prevent rapid double-invocation (e.g. trackpad bounce, synthetic events, StrictMode)
+
         if (product.id === lastAddProductId && now - lastAddProductTime < 500) {
           return
         }
@@ -82,3 +82,4 @@ export const useCartStore = create<CartStore>()(
     }
   )
 )
+

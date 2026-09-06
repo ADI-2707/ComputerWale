@@ -36,26 +36,26 @@ export default function Laptops() {
 
   const filteredProducts = useMemo(() => {
     return MOCK_PRODUCTS.filter((product) => {
-      
+
       if (condition.length > 0 && !condition.includes(product.condition)) {
         return false
       }
-      
+
       if (brands.length > 0 && !brands.includes(product.brand)) {
         return false
       }
-      
+
       if (grades.length > 0) {
         if (!product.grade || !grades.includes(product.grade)) {
           return false
         }
       }
-      
+
       if (ramOptions.length > 0) {
         const matchesRam = ramOptions.some((r) => product.specs.ram.includes(r.replace(' ', '')))
         if (!matchesRam) return false
       }
-      
+
       if (product.price < priceRange[0] || product.price > priceRange[1]) {
         return false
       }
@@ -67,7 +67,7 @@ export default function Laptops() {
         const gradeWeight = { A: 1, B: 2, C: 3, null: 0 }
         return (gradeWeight[a.grade ?? 'null'] ?? 9) - (gradeWeight[b.grade ?? 'null'] ?? 9)
       }
-      
+
       return 0
     })
   }, [condition, brands, grades, ramOptions, priceRange, sort])
@@ -76,7 +76,7 @@ export default function Laptops() {
 
   return (
     <div className={styles.container}>
-      {}
+
       <div className={styles.header}>
         <div className={styles.breadcrumbs}>
           <Link to="/">Home</Link>
@@ -122,7 +122,6 @@ export default function Laptops() {
           </div>
         </div>
 
-        {}
         {activeCount > 0 && (
           <div className={styles.activeBar}>
             <span className={styles.activeLabel}>Active Filters:</span>
@@ -156,7 +155,7 @@ export default function Laptops() {
       </div>
 
       <div className={styles.contentLayout}>
-        {}
+
         <aside className={`${styles.filterRail} ${mobileFiltersOpen ? styles.mobileOpen : ''}`}>
           <div className={styles.railHeader}>
             <h2 className={styles.railTitle}>Filters</h2>
@@ -175,7 +174,6 @@ export default function Laptops() {
             </button>
           </div>
 
-          {}
           <div className={styles.filterSection}>
             <h3 className={styles.filterHeading}>Condition Tier</h3>
             <div className={styles.optionList}>
@@ -195,7 +193,6 @@ export default function Laptops() {
             </div>
           </div>
 
-          {}
           <div className={styles.filterSection}>
             <h3 className={styles.filterHeading}>Refurbished Grade</h3>
             <div className={styles.optionList}>
@@ -213,7 +210,6 @@ export default function Laptops() {
             </div>
           </div>
 
-          {}
           <div className={styles.filterSection}>
             <h3 className={styles.filterHeading}>Brand</h3>
             <div className={styles.optionList}>
@@ -231,7 +227,6 @@ export default function Laptops() {
             </div>
           </div>
 
-          {}
           <div className={styles.filterSection}>
             <h3 className={styles.filterHeading}>RAM</h3>
             <div className={styles.optionList}>
@@ -249,7 +244,6 @@ export default function Laptops() {
             </div>
           </div>
 
-          {}
           <div className={styles.filterSection}>
             <div className={styles.priceHeadingRow}>
               <h3 className={styles.filterHeading}>Max Price</h3>
@@ -277,7 +271,6 @@ export default function Laptops() {
           </div>
         </aside>
 
-        {}
         <main className={styles.mainGridArea}>
           <div className={styles.resultsInfo}>
             <span>
@@ -308,3 +301,4 @@ export default function Laptops() {
     </div>
   )
 }
+

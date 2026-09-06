@@ -118,9 +118,9 @@ export default function Checkout() {
       {errorMsg && <div className={styles.errorAlert}>{errorMsg}</div>}
 
       <form onSubmit={handleSubmitOrder} className={styles.checkoutGrid}>
-        {}
+
         <div className={styles.formCol}>
-          {}
+
           <div className={styles.sectionCard}>
             <h2 className={styles.cardHeading}>1. Contact Information</h2>
             <div className={styles.formGrid}>
@@ -159,7 +159,6 @@ export default function Checkout() {
             </div>
           </div>
 
-          {}
           <div className={styles.sectionCard}>
             <h2 className={styles.cardHeading}>2. Delivery Option</h2>
             <div className={styles.deliveryToggle}>
@@ -232,7 +231,6 @@ export default function Checkout() {
                   </div>
                 </div>
 
-                {}
                 <div className={styles.slotPicker}>
                   <label className={styles.label}>Preferred Delivery Slot:</label>
                   <div className={styles.slotOptions}>
@@ -270,7 +268,6 @@ export default function Checkout() {
             )}
           </div>
 
-          {}
           <div className={styles.sectionCard}>
             <h2 className={styles.cardHeading}>3. Payment Method</h2>
             <div className={styles.paymentMethods}>
@@ -319,7 +316,6 @@ export default function Checkout() {
           </div>
         </div>
 
-        {}
         <div className={styles.orderSummaryCol}>
           <div className={styles.reviewCard}>
             <h2 className={styles.reviewHeading}>Order Summary</h2>
@@ -369,3 +365,4 @@ export default function Checkout() {
     </div>
   )
 }
+

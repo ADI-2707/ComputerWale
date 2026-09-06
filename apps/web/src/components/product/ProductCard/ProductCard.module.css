@@ -140,7 +140,6 @@
   min-height: 24px;
 }
 
-/* 3. HOVER DRAWER */
 .hoverDrawer {
   display: flex;
   flex-direction: column;
@@ -290,3 +289,4 @@
   flex-shrink: 0;
   aspect-ratio: unset;
 }
+

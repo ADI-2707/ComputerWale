@@ -54,7 +54,7 @@ export default function Cart() {
       </div>
 
       <div className={styles.cartGrid}>
-        {}
+
         <div className={styles.itemsList}>
           {items.map(({ product, quantity }) => (
             <div key={product.id} className={styles.cartItem}>
@@ -114,7 +114,6 @@ export default function Cart() {
             </div>
           ))}
 
-          {}
           <div className={styles.deliveryNotice}>
             <div className={styles.deliveryIcon}>🛵</div>
             <div>
@@ -127,7 +126,6 @@ export default function Cart() {
           </div>
         </div>
 
-        {}
         <div className={styles.summaryCol}>
           <div className={styles.summaryCard}>
             <h2 className={styles.summaryTitle}>Order Summary</h2>
@@ -175,3 +173,4 @@ export default function Cart() {
     </div>
   )
 }
+

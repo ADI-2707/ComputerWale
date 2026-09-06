@@ -9,10 +9,8 @@ export function Footer() {
     <footer className={styles.footer} role="contentinfo">
       <div className={styles.inner}>
 
-        {}
         <div className={styles.topRow}>
 
-          {/* Brand */}
           <div className={styles.brand}>
             <div className={styles.logoMark}>
               <img src="/logo-mark.png" alt="Computer Wale" className={styles.logoMarkImg} />
@@ -23,7 +21,6 @@ export function Footer() {
             </div>
           </div>
 
-          {}
           <div className={styles.navColumns}>
             <div className={styles.navCol}>
               <p className={styles.colHeading}>Laptops</p>
@@ -67,7 +64,6 @@ export function Footer() {
           </div>
         </div>
 
-        {}
         <div className={styles.storesRow}>
           <p className={styles.storesHeading}>Our Stores</p>
           <div className={styles.storesGrid}>
@@ -94,7 +90,6 @@ export function Footer() {
           </div>
         </div>
 
-        {}
         <div className={styles.bottomBar}>
           <p className={styles.copyright}>
             © {year} Computer Wale · GSTIN 22AAAAA0000A1Z5
@@ -108,3 +103,4 @@ export function Footer() {
     </footer>
   )
 }
+

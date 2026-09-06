@@ -78,7 +78,6 @@ export default function Stores() {
         ))}
       </div>
 
-      {}
       <div className={styles.benchBanner}>
         <div className={styles.bannerIcon}>🔬</div>
         <div className={styles.bannerContent}>
@@ -92,3 +91,4 @@ export default function Stores() {
     </div>
   )
 }
+

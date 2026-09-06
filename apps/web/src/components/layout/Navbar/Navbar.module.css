@@ -1,4 +1,3 @@
-
 .header {
   position: sticky;
   top: 0;
@@ -52,7 +51,6 @@
   transform: scale(1.06);
 }
 
-/* Hidden during intro animation — PNG replaced by flying SVG */
 .logoMarkHidden {
   opacity: 0;
 }
@@ -69,13 +67,12 @@
   font-weight: var(--weight-bold);
 }
 
-/* Logo text visibility states for intro animation */
 .logoTextHidden {
   opacity: 0;
 }
 
 .logoTextVisible {
-  /* Fade in with a short delay after the logo has landed in the navbar */
+
   animation: text-fade-in 0.45s ease 0.12s forwards;
 }
 
@@ -518,3 +515,4 @@
 @media (max-width: 480px) {
   .logoText { display: none; }
 }
+

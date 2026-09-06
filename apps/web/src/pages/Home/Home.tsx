@@ -82,7 +82,6 @@ export default function Home() {
   return (
     <main className={styles.main}>
 
-      {}
       <section className={styles.hero} aria-label="Hero">
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
@@ -135,7 +134,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 2. 3-TRACK SELECTOR ─────────────────────────────── */}
       <section className={styles.section} aria-label="Who are you buying for?">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
@@ -172,7 +170,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 3. FEATURED LISTINGS ────────────────────────────── */}
       <section className={`${styles.section} ${styles.sectionAlt}`} aria-label="Featured laptops">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
@@ -187,7 +184,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 4. GRADE EXPLAINER ──────────────────────────────── */}
       <section className={styles.section} aria-label="Refurbished grade system">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
@@ -232,7 +228,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 5. DELIVERY STRIP ───────────────────────────────── */}
       <section className={styles.deliveryStrip} aria-label="Delivery information">
         <div className={styles.container}>
           <div className={styles.deliveryInner}>
@@ -268,7 +263,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 6. PROOF STRIP ──────────────────────────────────── */}
       <section className={`${styles.section} ${styles.sectionAlt}`} aria-label="Past supply proof">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
@@ -296,3 +290,4 @@ export default function Home() {
     </main>
   )
 }
+

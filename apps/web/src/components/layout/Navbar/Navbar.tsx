@@ -29,13 +29,8 @@ export function Navbar({ cartCount }: NavbarProps) {
   const [megaOpen, setMegaOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
-  // ── Logo intro animation ─────────────────────────────────────────────────
-  // logoMarkRef: target for the "fly to" transition
   const logoMarkRef = useRef<HTMLSpanElement>(null)
 
-  // Synchronously check sessionStorage so there is no flash on return visits.
-  // On first visit: false (logo hidden, intro plays).
-  // On return visits: true (logo immediately visible, no intro).
   const [logoReady, setLogoReady] = useState<boolean>(
     () => typeof window !== 'undefined' && !!sessionStorage.getItem('cw-logo-animated')
   )
@@ -66,7 +61,7 @@ export function Navbar({ cartCount }: NavbarProps) {
 
   return (
     <>
-      {/* Logo intro — renders only on first visit; unmounts itself when done */}
+
       {showIntro && (
         <LogoIntro logoMarkRef={logoMarkRef} onComplete={onIntroComplete} />
       )}
@@ -77,19 +72,16 @@ export function Navbar({ cartCount }: NavbarProps) {
         role="banner"
       >
         <div className={styles.inner}>
-          {/* Brand Logo */}
+
           <Link to="/" className={styles.logo} aria-label="Computer Wale — Home">
-            {/*
-              logoMark: invisible during intro (the flying SVG replaces it visually).
-              Fades in when onIntroComplete() fires (→ logoReady = true).
-            */}
+
             <span
               ref={logoMarkRef}
               className={clsx(styles.logoMark, !logoReady && styles.logoMarkHidden)}
             >
               <img src="/logo-mark.png" alt="Computer Wale" className={styles.logoMarkImg} />
             </span>
-            {/* Text: hidden during intro, fades in after logo lands */}
+
             <span
               className={clsx(
                 styles.logoText,
@@ -101,7 +93,6 @@ export function Navbar({ cartCount }: NavbarProps) {
             </span>
           </Link>
 
-          {/* Desktop Nav */}
           <nav className={styles.desktopNav} aria-label="Main navigation">
             <div className={styles.megaTriggerWrap}>
               <button
@@ -154,7 +145,6 @@ export function Navbar({ cartCount }: NavbarProps) {
             <Link to="/track" className={styles.navLink}>Track Order</Link>
           </nav>
 
-          {/* Right Controls */}
           <div className={styles.rightSide}>
             <span className={styles.deliveryPill} aria-label="Delivering to Raipur">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -175,7 +165,6 @@ export function Navbar({ cartCount }: NavbarProps) {
               {effectiveCartCount > 0 && <span className={styles.cartBadge}>{effectiveCartCount}</span>}
             </Link>
 
-            {/* Mobile Hamburger Toggle */}
             <button
               className={styles.hamburger}
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
@@ -190,7 +179,6 @@ export function Navbar({ cartCount }: NavbarProps) {
         </div>
       </header>
 
-      {/* Mobile Drawer */}
       {mobileOpen && (
         <div className={styles.mobileDrawerOverlay} onClick={() => setMobileOpen(false)} aria-hidden="true" />
       )}
@@ -233,7 +221,6 @@ export function Navbar({ cartCount }: NavbarProps) {
         </div>
       </nav>
 
-      {/* Mobile Bottom Bar (Client-Side Routing) */}
       <div className={styles.mobileBottomBar} role="navigation" aria-label="Quick actions">
         <Link to="/laptops" className={styles.bottomBarItem}>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -261,3 +248,4 @@ export function Navbar({ cartCount }: NavbarProps) {
     </>
   )
 }
+
