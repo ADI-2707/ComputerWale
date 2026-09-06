@@ -1,17 +1,16 @@
-/* ═══════════════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════════════════════════════
    LogoIntro.module.css
-   Full-screen brand intro animation for Computer Wale.
-   No prefers-reduced-motion override — every visitor sees it.
-═══════════════════════════════════════════════════════════════════ */
+   First-visit logo intro animation for Computer Wale.
+   No prefers-reduced-motion override — every visitor sees it (Option 1).
+════════════════════════════════════════════════════════════════════════ */
 
-/* ── Full-screen overlay ────────────────────────────────────────── */
+/* ── Full-screen overlay ───────────────────────────────────────────── */
 .overlay {
   position: fixed;
   inset: 0;
   z-index: 9000;
   background: var(--color-bg, #ffffff);
   pointer-events: none;
-  /* Starts fully opaque; fades out when logo starts flying */
   opacity: 1;
   transition: opacity 0.45s ease 0.05s;
 }
@@ -20,66 +19,60 @@
   opacity: 0;
 }
 
-/* ── Animated SVG — positioned fixed, centered on screen ────────── */
+/* ── Animated SVG — fixed, centred on viewport ─────────────────────── */
 .logoSvg {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 9001;
-  /* Center the 160×112 svg in the viewport */
-  transform: translate(calc(50vw - 80px), calc(50vh - 56px));
-  transform-origin: top left;
-  /* Will transition transform when flying to navbar */
-  transition: transform 0.44s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity  0.35s ease;
+  /* SVG is 180×180 px; offset by half each to centre it */
+  transform: translate(calc(50vw - 90px), calc(50vh - 90px));
+  transform-origin: center center;
+  transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity   0.35s ease;
   pointer-events: none;
 }
 
-.logoFlying {
-  /* transform overridden by inline style — just ensure transition is active */
+.logoMoving {
+  /* transition on .logoSvg handles translation & scale */
 }
 
 .logoFading {
   opacity: 0;
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   DRAWING ANIMATIONS
-   All animated elements start invisible (stroke hidden via dashoffset,
-   stand/nodes at opacity 0 / scale 0). The `.animate` class added by
-   JS to the <svg> element triggers all child animations.
-═══════════════════════════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════════════════════
+   INITIAL STATES
+   All animated elements are hidden before .animate fires.
+════════════════════════════════════════════════════════════════════════ */
 
-/* ── Phase 1 : Monitor bezel ───────────────────────────────────── */
 .bezel {
-  /* stroke-dasharray + stroke-dashoffset set by JS via getTotalLength() */
+  /* stroke-dashoffset set by JS to total length */
 }
 
-.animate .bezel {
-  animation: draw-stroke 0.58s cubic-bezier(0.4, 0, 0.2, 1) 0s forwards;
-}
-
-/* ── Phase 2 : Monitor stand ───────────────────────────────────── */
 .stand {
   opacity: 0;
-  transform: translateY(6px);
+  transform: translateY(8px);
 }
 
-.animate .stand {
-  animation: stand-in 0.28s ease-out 0.30s forwards;
+.powerDot {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
 }
 
-/* ── Phase 3 + 4 : Circuit wires ──────────────────────────────── */
 .wire {
-  /* stroke-dasharray + stroke-dashoffset set by JS */
+  /* stroke-dashoffset set by JS to total length */
 }
 
-.animate .wire {
-  animation: draw-stroke 0.22s linear forwards;
-  /* animation-delay set via inline style on each path element */
+.innerNode {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+  opacity: 0;
 }
 
-/* ── Phase 5 : Endpoint nodes ──────────────────────────────────── */
 .node {
   transform-box: fill-box;
   transform-origin: center;
@@ -87,31 +80,60 @@
   opacity: 0;
 }
 
-.animate .node {
-  animation: node-pop 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  /* animation-delay set via inline style on each g element */
+/* ════════════════════════════════════════════════════════════════════════
+   ANIMATION TRIGGERS
+   Activated by JS adding .animate to the <svg> root.
+════════════════════════════════════════════════════════════════════════ */
+
+/* Phase 1: Monitor Bezel (t = 0.0s - 0.55s) */
+.animate .bezel {
+  animation: draw-stroke 0.55s cubic-bezier(0.35, 0, 0.2, 1) 0s forwards;
 }
 
-/* Individual wire / node classes (kept for keyof typeof styles lookup in TSX) */
-.wire1, .wire2, .wire3, .wire4, .wire5,
-.node1, .node2, .node3, .node4, .node5 { }
+/* Phase 2: Stand appears as bezel nears completion */
+.animate .stand {
+  animation: stand-in 0.32s ease-out 0.35s forwards;
+}
 
-/* ═══════════════════════════════════════════════════════════════════
+/* Phase 2b: Power dot on bottom bezel */
+.animate .powerDot {
+  animation: dot-in 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) 0.45s forwards;
+}
+
+/* Phase 3: Inner-screen origin nodes pop in */
+.animate .innerNode {
+  animation: node-pop 0.30s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Phase 4: Circuit wires draw outward */
+.animate .wire {
+  animation: draw-stroke 0.32s linear forwards;
+}
+
+/* Phase 5: Endpoint ring-nodes pop in */
+.animate .node {
+  animation: node-pop 0.36s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Type-check helper classes */
+.wire0, .wire1, .wire2, .wire3, .wire4 { }
+.innerNode0, .innerNode1 { }
+.node0, .node1, .node2, .node3, .node4 { }
+
+/* ════════════════════════════════════════════════════════════════════════
    KEYFRAMES
-═══════════════════════════════════════════════════════════════════ */
+════════════════════════════════════════════════════════════════════════ */
 
-/* Stroke draws itself (dashoffset set by JS, target is 0) */
 @keyframes draw-stroke {
   to {
     stroke-dashoffset: 0;
   }
 }
 
-/* Stand fades up into position */
 @keyframes stand-in {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -119,9 +141,28 @@
   }
 }
 
-/* Node elastic pop */
+@keyframes dot-in {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @keyframes node-pop {
-  0%   { transform: scale(0);    opacity: 0; }
-  60%  { transform: scale(1.18); opacity: 1; }
-  100% { transform: scale(1);    opacity: 1; }
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.25);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
