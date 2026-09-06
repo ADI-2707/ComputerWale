@@ -23,11 +23,6 @@ export function ProductCard({ product, variant = 'grid' }: ProductCardProps) {
   const isOutOfStock = product.stock === 0
 
   const handleClick = (e: React.MouseEvent) => {
-    const isTouchDevice = window.matchMedia('(hover: none)').matches
-    if (isTouchDevice) {
-      navigate(`/laptops/${product.slug}`)
-      return
-    }
     e.preventDefault()
     navigate(`/laptops/${product.slug}`)
   }
@@ -58,7 +53,6 @@ export function ProductCard({ product, variant = 'grid' }: ProductCardProps) {
       role="article"
       aria-label={`${product.brand} ${product.model} — ₹${product.price.toLocaleString('en-IN')}`}
     >
-
       <div className={styles.imageWrap}>
         {!imgError ? (
           <img
@@ -132,4 +126,3 @@ export function ProductCard({ product, variant = 'grid' }: ProductCardProps) {
     </div>
   )
 }
-

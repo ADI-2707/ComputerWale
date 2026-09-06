@@ -17,17 +17,15 @@
   z-index: 1;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .card:hover,
-  .card:focus-visible,
-  .card.expanded {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.12), 0 4px 8px -2px rgba(0, 0, 0, 0.05);
-    border-color: var(--color-brand);
-    z-index: 25;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
+.card:hover,
+.card:focus-visible,
+.card.expanded {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px -4px rgba(0, 0, 0, 0.14), 0 6px 14px -2px rgba(0, 0, 0, 0.06);
+  border-color: var(--color-brand);
+  z-index: 30;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -63,15 +61,16 @@
   transition: transform 250ms var(--ease-standard);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .card:hover .image,
-  .card:focus-visible .image {
-    transform: scale(1.03);
-  }
+.card:hover .image,
+.card:focus-visible .image,
+.card.expanded .image {
+  transform: scale(1.03);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .image { transition: none; }
+  .image {
+    transition: none;
+  }
 }
 
 .imageFallback {
@@ -141,64 +140,50 @@
 }
 
 .hoverDrawer {
+  position: absolute;
+  top: calc(100% - 1px);
+  left: -1px;
+  right: -1px;
+  background: var(--color-bg);
+  border: var(--border-width) solid var(--color-brand);
+  border-top: 1px dashed var(--color-line);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  padding: 0 var(--space-4);
+  max-height: 0;
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+  box-shadow: 0 20px 32px -4px rgba(0, 0, 0, 0.16), 0 8px 14px -4px rgba(0, 0, 0, 0.06);
+  transform: translateY(-4px);
+  transform-origin: top center;
+  transition:
+    max-height 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    padding 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 240ms ease,
+    transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 280ms;
+  pointer-events: none;
+  z-index: 35;
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .hoverDrawer {
-    position: absolute;
-    top: 100%;
-    left: -1px;
-    right: -1px;
-    background: var(--color-bg);
-    border: var(--border-width) solid transparent;
-    border-top: 1px dashed transparent;
-    border-radius: 0 0 var(--radius-md) var(--radius-md);
-    padding: 0 var(--space-4);
-    max-height: 0;
-    opacity: 0;
-    visibility: hidden;
-    overflow: hidden;
-    box-shadow: 0 18px 32px -4px rgba(0, 0, 0, 0.16), 0 8px 14px -4px rgba(0, 0, 0, 0.06);
-    transform: translateY(-2px);
-    transform-origin: top center;
-    transition:
-      max-height 280ms cubic-bezier(0.16, 1, 0.3, 1),
-      padding 280ms cubic-bezier(0.16, 1, 0.3, 1),
-      opacity 220ms ease,
-      transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
-      border-color 280ms cubic-bezier(0.16, 1, 0.3, 1),
-      visibility 280ms;
-    pointer-events: none;
-    z-index: 30;
-  }
-
-  .card:hover .hoverDrawer,
-  .card:focus-visible .hoverDrawer,
-  .card.expanded .hoverDrawer {
-    max-height: 160px;
-    padding: var(--space-3) var(--space-4) var(--space-4);
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    border-color: var(--color-brand);
-    border-top-color: var(--color-line);
-    pointer-events: auto;
-  }
+.card:hover .hoverDrawer,
+.card:focus-visible .hoverDrawer,
+.card.expanded .hoverDrawer {
+  max-height: 180px;
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
-@media (hover: none) {
+@media (prefers-reduced-motion: reduce) {
   .hoverDrawer {
-    position: static;
-    opacity: 1;
-    visibility: visible;
+    transition: opacity 150ms ease;
     transform: none;
-    padding: 0 var(--space-4) var(--space-4);
-    border-top: 1px solid var(--color-line);
-    padding-top: var(--space-3);
-    margin-top: auto;
   }
 }
 
@@ -290,3 +275,38 @@
   aspect-ratio: unset;
 }
 
+.listVariant .hoverDrawer {
+  position: static;
+  max-height: none;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  border: none;
+  box-shadow: none;
+  padding: 0 var(--space-4) var(--space-4);
+  pointer-events: auto;
+}
+
+@media (max-width: 640px) {
+  .hoverDrawer {
+    position: static;
+    max-height: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    border: none;
+    border-top: 1px solid var(--color-line);
+    border-radius: 0;
+    box-shadow: none;
+    padding: var(--space-3) var(--space-4) var(--space-4);
+    margin-top: auto;
+    pointer-events: auto;
+  }
+
+  .card:hover,
+  .card:focus-visible,
+  .card.expanded {
+    border-radius: var(--radius-md);
+    transform: none;
+  }
+}
