@@ -12,9 +12,11 @@ export function Footer() {
         {}
         <div className={styles.topRow}>
 
-          {}
+          {/* Brand */}
           <div className={styles.brand}>
-            <div className={styles.logoMark}>CW</div>
+            <div className={styles.logoMark}>
+              <img src="/logo-mark.png" alt="Computer Wale" className={styles.logoMarkImg} />
+            </div>
             <div>
               <p className={styles.brandName}>Computer<strong>Wale</strong></p>
               <p className={styles.brandTagline}>Audited laptops. Raipur delivery.</p>

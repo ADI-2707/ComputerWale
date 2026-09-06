@@ -27,18 +27,23 @@
 }
 
 .logoMark {
-  width: 40px;
-  height: 40px;
-  background: var(--color-primary);
+  width: 44px;
+  height: 44px;
+  background: #ffffff;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-display);
-  font-weight: var(--weight-bold);
-  font-size: var(--text-sm);
-  color: #fff;
+  padding: 4px;
   flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.logoMarkImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .brandName {
@@ -279,9 +284,9 @@
   }
 
   .logoMark {
-    width: 34px;
-    height: 34px;
-    font-size: var(--text-xs);
+    width: 36px;
+    height: 36px;
+    padding: 3px;
   }
 
   .brandName {

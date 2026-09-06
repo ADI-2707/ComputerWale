@@ -472,7 +472,9 @@ export default function App() {
       <div className="login-screen">
         <div className="login-card">
           <div className="login-brand">
-            <span className="logo-badge">CW</span>
+            <div className="login-logo-wrap">
+              <img src="/logo-transparent.png" alt="Computer Wale" className="login-logo-img" />
+            </div>
             <h1>Computer Wale Admin</h1>
             <p>Store & Fulfillment Operations · Raipur Portal</p>
           </div>
@@ -524,7 +526,9 @@ export default function App() {
             tabIndex={isSidebarCollapsed ? 0 : undefined}
             onKeyDown={isSidebarCollapsed ? (e) => e.key === 'Enter' && toggleSidebar() : undefined}
           >
-            <span className="brand-logo">CW</span>
+            <div className="brand-logo">
+              <img src="/logo-mark.png" alt="Computer Wale" className="brand-logo-img" />
+            </div>
             <div className="brand-text">
               <div className="brand-title">Computer Wale</div>
               <div className="brand-sub">Raipur Hub Portal</div>

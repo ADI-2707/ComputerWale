@@ -59,7 +59,9 @@ export function Navbar({ cartCount }: NavbarProps) {
         <div className={styles.inner}>
           {/* Brand Logo */}
           <Link to="/" className={styles.logo} aria-label="Computer Wale — Home">
-            <span className={styles.logoMark}>CW</span>
+            <span className={styles.logoMark}>
+              <img src="/logo-mark.png" alt="Computer Wale" className={styles.logoMarkImg} />
+            </span>
             <span className={styles.logoText}>Computer<strong>Wale</strong></span>
           </Link>
 
