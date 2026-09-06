@@ -37,7 +37,8 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: transform var(--duration-fast) var(--ease-standard);
+  transition: transform var(--duration-fast) var(--ease-standard),
+              opacity 0.3s ease;
 }
 
 .logoMarkImg {
@@ -51,6 +52,11 @@
   transform: scale(1.06);
 }
 
+/* Hidden during intro animation — PNG replaced by flying SVG */
+.logoMarkHidden {
+  opacity: 0;
+}
+
 .logoText {
   font-family: var(--font-display);
   font-size: var(--text-md);
@@ -61,6 +67,21 @@
 .logoText strong {
   color: var(--color-primary);
   font-weight: var(--weight-bold);
+}
+
+/* Logo text visibility states for intro animation */
+.logoTextHidden {
+  opacity: 0;
+}
+
+.logoTextVisible {
+  /* Fade in with a short delay after the logo has landed in the navbar */
+  animation: text-fade-in 0.45s ease 0.12s forwards;
+}
+
+@keyframes text-fade-in {
+  from { opacity: 0; transform: translateX(-4px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 .desktopNav {

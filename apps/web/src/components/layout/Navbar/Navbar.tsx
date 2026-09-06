@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { clsx } from 'clsx'
 import styles from './Navbar.module.css'
 import { Button } from '../../ui/Button'
 import { useCartStore } from '../../../state/cartStore'
+import { LogoIntro } from './LogoIntro'
 
 interface NavbarProps {
   cartCount?: number
@@ -28,6 +29,20 @@ export function Navbar({ cartCount }: NavbarProps) {
   const [megaOpen, setMegaOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
+  // ── Logo intro animation ─────────────────────────────────────────────────
+  // logoMarkRef: target for the "fly to" transition
+  const logoMarkRef = useRef<HTMLSpanElement>(null)
+
+  // Synchronously check sessionStorage so there is no flash on return visits.
+  // On first visit: false (logo hidden, intro plays).
+  // On return visits: true (logo immediately visible, no intro).
+  const [logoReady, setLogoReady] = useState<boolean>(
+    () => typeof window !== 'undefined' && !!sessionStorage.getItem('cw-logo-animated')
+  )
+  const showIntro = !logoReady
+
+  const onIntroComplete = useCallback(() => setLogoReady(true), [])
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -51,6 +66,11 @@ export function Navbar({ cartCount }: NavbarProps) {
 
   return (
     <>
+      {/* Logo intro — renders only on first visit; unmounts itself when done */}
+      {showIntro && (
+        <LogoIntro logoMarkRef={logoMarkRef} onComplete={onIntroComplete} />
+      )}
+
       <header
         id="cw-navbar"
         className={clsx(styles.header, scrolled && styles.scrolled)}
@@ -59,10 +79,26 @@ export function Navbar({ cartCount }: NavbarProps) {
         <div className={styles.inner}>
           {/* Brand Logo */}
           <Link to="/" className={styles.logo} aria-label="Computer Wale — Home">
-            <span className={styles.logoMark}>
+            {/*
+              logoMark: invisible during intro (the flying SVG replaces it visually).
+              Fades in when onIntroComplete() fires (→ logoReady = true).
+            */}
+            <span
+              ref={logoMarkRef}
+              className={clsx(styles.logoMark, !logoReady && styles.logoMarkHidden)}
+            >
               <img src="/logo-mark.png" alt="Computer Wale" className={styles.logoMarkImg} />
             </span>
-            <span className={styles.logoText}>Computer<strong>Wale</strong></span>
+            {/* Text: hidden during intro, fades in after logo lands */}
+            <span
+              className={clsx(
+                styles.logoText,
+                !logoReady && styles.logoTextHidden,
+                logoReady  && styles.logoTextVisible,
+              )}
+            >
+              Computer<strong>Wale</strong>
+            </span>
           </Link>
 
           {/* Desktop Nav */}
