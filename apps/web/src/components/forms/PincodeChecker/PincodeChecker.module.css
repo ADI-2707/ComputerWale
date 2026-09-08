@@ -170,34 +170,6 @@
   to { transform: rotate(360deg); }
 }
 
-.sampleRow {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-top: 2px;
-}
-
-.sampleLabel {
-  font-size: 11px;
-  color: var(--color-graphite);
-}
-
-.sampleChip {
-  font-size: 11px;
-  color: var(--color-primary);
-  background: var(--color-surface);
-  border: 1px solid var(--color-line);
-  padding: 2px 7px;
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  transition: all var(--duration-fast);
-}
-
-.sampleChip:hover {
-  background: var(--color-primary-tint);
-  border-color: var(--color-primary);
-}
 
 .resultContainer {
   margin-top: 2px;

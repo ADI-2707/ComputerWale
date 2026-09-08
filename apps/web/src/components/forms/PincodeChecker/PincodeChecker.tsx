@@ -9,11 +9,6 @@ interface PincodeCheckerProps {
   defaultPincode?: string
 }
 
-const SAMPLE_PINCODES = [
-  { code: '492001', name: 'Civil Lines' },
-  { code: '492002', name: 'Pandri' },
-  { code: '492004', name: 'Shankar Nagar' },
-]
 
 export function PincodeChecker({ onPincodeChecked, defaultPincode = '' }: PincodeCheckerProps) {
   const [pincode, setPincode] = useState(defaultPincode)
@@ -48,12 +43,6 @@ export function PincodeChecker({ onPincodeChecked, defaultPincode = '' }: Pincod
 
   const handleCheck = () => {
     verifyPincode(pincode)
-  }
-
-  const handleSelectSample = (code: string) => {
-    setPincode(code)
-    setStatus('idle')
-    verifyPincode(code)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -124,22 +113,6 @@ export function PincodeChecker({ onPincodeChecked, defaultPincode = '' }: Pincod
           )}
         </button>
       </div>
-
-      {status === 'idle' && (
-        <div className={styles.sampleRow}>
-          <span className={styles.sampleLabel}>Quick check:</span>
-          {SAMPLE_PINCODES.map(s => (
-            <button
-              key={s.code}
-              type="button"
-              className={styles.sampleChip}
-              onClick={() => handleSelectSample(s.code)}
-            >
-              {s.name} ({s.code})
-            </button>
-          ))}
-        </div>
-      )}
 
       <div id="pincode-result" aria-live="polite" className={styles.resultContainer}>
         {status === 'invalid-format' && (
