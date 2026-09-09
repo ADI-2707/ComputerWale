@@ -226,7 +226,13 @@ export default function ProductDetail() {
                   disabled={cartQuantity > 0 || isConverting}
                   aria-hidden={cartQuantity > 0 && !isConverting}
                 >
-                  <div className={clsx(styles.cartIconWrapper, isConverting && styles.cartDriving)}>
+                  <div
+                    className={clsx(
+                      styles.cartIconWrapper,
+                      isConverting && styles.cartDriving,
+                      cartQuantity > 0 && !isConverting && styles.iconHidden
+                    )}
+                  >
                     <svg
                       className={styles.cartIcon}
                       width="19"
@@ -247,7 +253,13 @@ export default function ProductDetail() {
                       <span className={styles.trailLine} />
                     </span>
                   </div>
-                  <span className={clsx(styles.addToCartText, isConverting && styles.textErasing)}>
+                  <span
+                    className={clsx(
+                      styles.addToCartText,
+                      isConverting && styles.textErasing,
+                      cartQuantity > 0 && !isConverting && styles.textHidden
+                    )}
+                  >
                     Add to Cart
                   </span>
                 </button>
