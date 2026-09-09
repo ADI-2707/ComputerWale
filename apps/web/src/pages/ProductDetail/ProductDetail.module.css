@@ -419,6 +419,7 @@
   box-shadow: var(--shadow-sm);
   overflow: hidden;
   box-sizing: border-box;
+  container-type: inline-size;
   transition:
     background-color 240ms var(--ease-standard),
     border-color 240ms var(--ease-standard),
@@ -431,6 +432,12 @@
 }
 
 .cartActionWrapper.isStepper {
+  background-color: #f8fafc;
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 14px -3px rgba(30, 63, 209, 0.2);
+}
+
+.cartActionWrapper.isConverting {
   background-color: #f8fafc;
   border-color: var(--color-primary);
   box-shadow: 0 4px 14px -3px rgba(30, 63, 209, 0.2);
@@ -477,10 +484,80 @@
   pointer-events: none;
 }
 
+.addToCartConverting {
+  opacity: 1;
+  pointer-events: none;
+}
+
+.cartIconWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 3;
+}
+
 .cartIcon {
   flex-shrink: 0;
   display: inline-block;
   vertical-align: middle;
+}
+
+.cartDriving {
+  animation: cartDriveNatural 750ms cubic-bezier(0.42, 0, 0.25, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.cartWheel {
+  transform-origin: center;
+}
+
+.cartDriving .cartWheel {
+  animation: wheelSpin 750ms linear forwards;
+}
+
+.cartSpeedTrail {
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  pointer-events: none;
+  opacity: 0;
+  padding-right: 3px;
+}
+
+.trailLine {
+  display: block;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-primary));
+  border-radius: 2px;
+}
+
+.trailLine:nth-child(1) {
+  width: 13px;
+}
+
+.trailLine:nth-child(2) {
+  width: 8px;
+  margin-left: 5px;
+}
+
+.cartDriving .cartSpeedTrail {
+  animation: speedTrailPulse 750ms ease-in-out forwards;
+}
+
+.addToCartText {
+  display: inline-block;
+  transition: color var(--duration-fast) ease;
+}
+
+.textErasing {
+  animation: eraseTextMask 750ms cubic-bezier(0.42, 0, 0.25, 1) forwards;
+  will-change: clip-path, opacity;
 }
 
 .stepperContent {
@@ -505,6 +582,150 @@
   opacity: 1;
   transform: scale(1) translateY(0);
   pointer-events: auto;
+}
+
+.stepperRevealing {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: none;
+  animation: revealStepperMask 750ms cubic-bezier(0.42, 0, 0.25, 1) forwards;
+  will-change: clip-path;
+}
+
+.stepItemRevealing {
+  animation: stepperItemPop 380ms cubic-bezier(0.34, 1.35, 0.64, 1) both;
+}
+
+.qtyRevealing {
+  animation: stepperItemPop 380ms cubic-bezier(0.34, 1.35, 0.64, 1) 180ms both;
+}
+
+/* Natural Vehicle Motion Physics Keyframes */
+@keyframes cartDriveNatural {
+  0% {
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  /* Stage 1: Soft start / inertia break - slow initial roll */
+  18% {
+    transform: translateX(calc((50cqw + 32px) * 0.10)) rotate(1.2deg);
+    opacity: 1;
+  }
+  /* Stage 2: Peak acceleration - fast sweep across center with dynamic pitch */
+  48% {
+    transform: translateX(calc((50cqw + 32px) * 0.55)) rotate(2.5deg);
+    opacity: 1;
+  }
+  /* Stage 3: Controlled deceleration - brakes apply smoothly approaching right edge */
+  75% {
+    transform: translateX(calc((50cqw + 32px) * 0.86)) rotate(1deg);
+    opacity: 1;
+  }
+  90% {
+    transform: translateX(calc((50cqw + 32px) * 0.96)) rotate(0.2deg);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateX(calc(50cqw + 32px)) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+@keyframes wheelSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(720deg);
+  }
+}
+
+@keyframes speedTrailPulse {
+  0%, 15% {
+    opacity: 0;
+    transform: translateY(-50%) scaleX(0.2);
+  }
+  35%, 68% {
+    opacity: 0.85;
+    transform: translateY(-50%) scaleX(1);
+  }
+  82%, 100% {
+    opacity: 0;
+    transform: translateY(-50%) scaleX(0.2);
+  }
+}
+
+@keyframes eraseTextMask {
+  0% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  18% {
+    clip-path: inset(0 0 0 4%);
+    opacity: 1;
+  }
+  35% {
+    clip-path: inset(0 0 0 35%);
+    opacity: 1;
+  }
+  52% {
+    clip-path: inset(0 0 0 78%);
+    opacity: 1;
+  }
+  65% {
+    clip-path: inset(0 0 0 100%);
+    opacity: 0;
+  }
+  100% {
+    clip-path: inset(0 0 0 100%);
+    opacity: 0;
+  }
+}
+
+@keyframes revealStepperMask {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  18% {
+    clip-path: inset(0 75% 0 0);
+  }
+  48% {
+    clip-path: inset(0 35% 0 0);
+  }
+  75% {
+    clip-path: inset(0 8% 0 0);
+  }
+  90%, 100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes stepperItemPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cartDriving,
+  .textErasing,
+  .stepperRevealing,
+  .stepItemRevealing,
+  .qtyRevealing,
+  .cartDriving .cartWheel,
+  .cartDriving .cartSpeedTrail {
+    animation: none !important;
+    clip-path: none !important;
+  }
 }
 
 .inlineStepBtn {

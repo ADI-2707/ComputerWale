@@ -25,9 +25,11 @@ export default function ProductDetail() {
   const removeItem = useCartStore((s) => s.removeItem)
 
   const [addedToast, setAddedToast] = useState(false)
+  const [isConverting, setIsConverting] = useState(false)
   const [isBinHovered, setIsBinHovered] = useState(false)
   const [activeImgIndex, setActiveImgIndex] = useState(0)
   const toastTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const convertingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const isAddingRef = useRef(false)
   const lastAddRef = useRef(0)
 
@@ -40,15 +42,19 @@ export default function ProductDetail() {
       if (toastTimeoutRef.current) {
         clearTimeout(toastTimeoutRef.current)
       }
+      if (convertingTimeoutRef.current) {
+        clearTimeout(convertingTimeoutRef.current)
+      }
     }
   }, [])
 
   const handleAddToCart = () => {
     const now = Date.now()
-    if (isAddingRef.current || now - lastAddRef.current < 500) return
+    if (isAddingRef.current || isConverting || now - lastAddRef.current < 600) return
     isAddingRef.current = true
     lastAddRef.current = now
 
+    setIsConverting(true)
     addItem(product, 1)
 
     if (toastTimeoutRef.current) {
@@ -59,9 +65,13 @@ export default function ProductDetail() {
       setAddedToast(false)
     }, 4500)
 
-    setTimeout(() => {
+    if (convertingTimeoutRef.current) {
+      clearTimeout(convertingTimeoutRef.current)
+    }
+    convertingTimeoutRef.current = setTimeout(() => {
+      setIsConverting(false)
       isAddingRef.current = false
-    }, 400)
+    }, 750)
   }
 
   const handleIncrement = () => {
@@ -198,44 +208,69 @@ export default function ProductDetail() {
 
           <div className={styles.actionSection}>
             <div className={styles.btnRow}>
-              <div className={clsx(styles.cartActionWrapper, cartQuantity > 0 && styles.isStepper)}>
-
+              <div
+                className={clsx(
+                  styles.cartActionWrapper,
+                  (cartQuantity > 0 || isConverting) && styles.isStepper,
+                  isConverting && styles.isConverting
+                )}
+              >
                 <button
                   type="button"
-                  className={clsx(styles.addToCartBtn, cartQuantity > 0 && styles.addToCartHidden)}
+                  className={clsx(
+                    styles.addToCartBtn,
+                    cartQuantity > 0 && !isConverting && styles.addToCartHidden,
+                    isConverting && styles.addToCartConverting
+                  )}
                   onClick={handleAddToCart}
-                  disabled={cartQuantity > 0}
-                  aria-hidden={cartQuantity > 0}
+                  disabled={cartQuantity > 0 || isConverting}
+                  aria-hidden={cartQuantity > 0 && !isConverting}
                 >
-                  <svg
-                    className={styles.cartIcon}
-                    width="19"
-                    height="19"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <circle cx="9" cy="21" r="1" />
-                    <circle cx="20" cy="21" r="1" />
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                  </svg>
-                  <span>Add to Cart</span>
+                  <div className={clsx(styles.cartIconWrapper, isConverting && styles.cartDriving)}>
+                    <svg
+                      className={styles.cartIcon}
+                      width="19"
+                      height="19"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <circle cx="9" cy="21" r="1" className={styles.cartWheel} />
+                      <circle cx="20" cy="21" r="1" className={styles.cartWheel} />
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                    </svg>
+                    <span className={styles.cartSpeedTrail} aria-hidden="true">
+                      <span className={styles.trailLine} />
+                      <span className={styles.trailLine} />
+                    </span>
+                  </div>
+                  <span className={clsx(styles.addToCartText, isConverting && styles.textErasing)}>
+                    Add to Cart
+                  </span>
                 </button>
 
                 <div
-                  className={clsx(styles.stepperContent, cartQuantity > 0 && styles.stepperVisible)}
-                  aria-hidden={cartQuantity === 0}
+                  className={clsx(
+                    styles.stepperContent,
+                    cartQuantity > 0 && !isConverting && styles.stepperVisible,
+                    isConverting && styles.stepperRevealing
+                  )}
+                  aria-hidden={cartQuantity === 0 && !isConverting}
                 >
                   <button
                     type="button"
-                    className={clsx(styles.inlineStepBtn, cartQuantity === 1 && styles.inlineStepDelete)}
+                    className={clsx(
+                      styles.inlineStepBtn,
+                      cartQuantity === 1 && styles.inlineStepDelete,
+                      isConverting && styles.stepItemRevealing
+                    )}
                     onClick={handleDecrement}
                     onMouseEnter={() => setIsBinHovered(true)}
                     onMouseLeave={() => setIsBinHovered(false)}
-                    disabled={cartQuantity === 0}
+                    disabled={cartQuantity === 0 || isConverting}
                     aria-label={cartQuantity === 1 ? 'Remove from cart' : 'Decrease quantity'}
                     title={cartQuantity === 1 ? 'Remove from cart' : 'Decrease quantity'}
                   >
@@ -246,7 +281,7 @@ export default function ProductDetail() {
                     )}
                   </button>
 
-                  <div className={styles.qtyDisplay}>
+                  <div className={clsx(styles.qtyDisplay, isConverting && styles.qtyRevealing)}>
                     <span
                       key={cartQuantity}
                       className={styles.inlineStepQty}
@@ -258,9 +293,9 @@ export default function ProductDetail() {
 
                   <button
                     type="button"
-                    className={styles.inlineStepBtn}
+                    className={clsx(styles.inlineStepBtn, isConverting && styles.stepItemRevealing)}
                     onClick={handleIncrement}
-                    disabled={cartQuantity >= product.stock}
+                    disabled={cartQuantity >= product.stock || isConverting}
                     aria-label="Increase quantity"
                     title="Increase quantity"
                   >
